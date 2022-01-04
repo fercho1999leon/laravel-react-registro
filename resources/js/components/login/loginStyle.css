@@ -1,0 +1,95 @@
+*{
+    /*border: solid 1px #000;*/
+    margin: 0;
+    padding: 0;
+}
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+body{
+    background-color: #d4dde7
+}
+.BodyLogin{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    background-color: #d4dde7;
+}
+.content-login{
+    width: 28%;
+    height: 50%;
+    text-align: center;
+    min-width: 220px;
+    max-width: 380px;
+    min-height: 320px;
+}
+/****************Contenedor izquierdo************/
+.content-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px 0 0 15px;
+    background-color: rgb(38,52,107);
+    color: white;
+}
+.titulo{
+    font-size: 150%;
+    font-weight: bold;
+}
+/*****************Contenedor derecho****************/
+.content-right{
+    background-color: white;
+    color: rgb(38,52,107);
+    border-radius: 0 15px 15px 0;
+}
+main{
+    min-height: 65%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.txtBox{
+    width: 60%;
+    height: 2.2rem;
+    border-radius: 15px;
+    border: solid 2px #D5D6D6;
+    color: #8F8F8F;
+    font-size: 80%;
+    padding-left:10px;
+    outline: none;
+}
+.txtBox:focus{
+    padding-left: 10px;
+    color: #656565;
+    font-weight: bold;
+}
+/*********************Ventana de recuperacin de contraseña***********/
+
+/*******************Version movil****************/
+@media screen and (max-width: 900px){
+    .BodyLogin{
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .content-left{
+        border-radius: 15px 15px 0 0;
+        
+    }
+    .content-login{
+        width: 80%;
+        height: 10%;
+    }
+    .content-right{
+        background-color: white;
+        color: rgb(38,52,107);
+        border-radius: 0 0 15px 15px;
+    }
+}
