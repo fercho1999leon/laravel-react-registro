@@ -18,6 +18,7 @@ class CreateUserTable extends Migration
             $table->text('passwordLogin');
             $table->string('fisrtname')->nullable(true);
             $table->string('lastname')->nullable(true);
+            $table->string('correo');
             $table->timestamps();
             $table->primary('id');
         });

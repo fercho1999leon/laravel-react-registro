@@ -6,8 +6,9 @@ import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
-import './loginStyle.css';
-import logoSPS from "./LOGO-SPS.svg";
+import '../../css/loginStyle.css';
+import logoSPS from "../media/LOGO-SPS.svg";
+import HeaderSite from '../components/HeaderSite';
 const styleBX = {
     position: 'absolute',
     top: '50%',
@@ -86,29 +87,32 @@ function loginDB(handleClose){
 }
 export default function Login(props) {
     return (
-        <div className="BodyLogin">
-            <div className="content-login content-left">
-                <img src={logoSPS} style={{ "width": "40%", "height": "200px" }} />
-                <p className="titulo">INSTITUTO SUPERIOR</p>
-                <p className="titulo">REY DAVID</p>
-                <p id="descripcion" style={{ fontSize: "90%", "margin": "0 5%", marginTop: "5%" }}>
-                    Sistema de registro del Instituto Superior Tecnico Rey David
-                </p>
+        <>
+            <HeaderSite></HeaderSite>
+            <div className="BodyLogin">
+                <div className="content-login content-left">
+                    <img src={logoSPS} style={{ "width": "40%", "height": "200px" }} />
+                    <p className="titulo">INSTITUTO SUPERIOR</p>
+                    <p className="titulo">REY DAVID</p>
+                    <p id="descripcion" style={{ fontSize: "90%", "margin": "0 5%", marginTop: "5%" }}>
+                        Sistema de registro del Instituto Superior Tecnico Rey David
+                    </p>
+                </div>
+                <div className="content-login content-right">
+                    <header>
+                        <h1 style={{ marginTop: "6%", fontSize: "160%" }}>Inicio de Sesión del Sistema ISTRED</h1>
+                        <p style={{ fontSize: "80%" }}>Digital tus credenciales</p>
+                    </header>
+                    <main>
+                        <TextField id="user" label="Cedula/Pasaporte" variant="standard" />
+                        <TextField type="password" id="password" label="Password" variant="standard" />
+                        <p id="messageError" style={{ "color": "red", fontSize: "90%" }}></p>
+                        <BasicModal></BasicModal>
+                        <a id="btnAbrir" style={{ textDecoration: "none", alignSelf: "flex-start", marginLeft: "5%" }}>Recuperar Contraseña</a>
+                    </main>
+                </div>
             </div>
-            <div className="content-login content-right">
-                <header>
-                    <h1 style={{ marginTop: "6%", fontSize: "160%" }}>Inicio de Sesión del Sistema ISTRED</h1>
-                    <p style={{ fontSize: "80%" }}>Digital tus credenciales</p>
-                </header>
-                <main>
-                    <TextField id="user" label="Cedula/Pasaporte" variant="standard" />
-                    <TextField type="password" id="password" label="Password" variant="standard" />
-                    <p id="messageError" style={{ "color": "red", fontSize: "90%" }}></p>
-                    <BasicModal></BasicModal>
-                    <a id="btnAbrir" style={{ textDecoration: "none", alignSelf: "flex-start", marginLeft: "5%" }}>Recuperar Contraseña</a>
-                </main>
-            </div>
-        </div>
+        </>
     );
 }
 function BasicModal(props) {
