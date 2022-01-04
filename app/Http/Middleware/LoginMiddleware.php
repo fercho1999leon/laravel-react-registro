@@ -19,7 +19,6 @@ class LoginMiddleware
     {
         $usuariosLogin = new User();
         if($request->session()->has('user') && $request->session()->has('pass')){
-
             $passSession = session('pass');
             $userSession = session('user');
             $pass = $usuariosLogin::select('passwordLogin')->where('id',$userSession)->first();

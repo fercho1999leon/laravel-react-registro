@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {
-    public function Login(){
+    public function Login(Request $request){
+        if($request->session()->has('user') && $request->session()->has('pass')){
+            return redirect('/registro');
+        }
         setcookie("__token", csrf_token()); 
-        return view('welcome');
+        return view('login');
     }
     public function AuthLogin(Request $request){
         $request->pass=(md5($request->pass));

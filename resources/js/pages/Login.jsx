@@ -49,41 +49,6 @@ function loginDB(handleClose){
         handleClose();
         console.log(err);
     });
-    /*----------------------------------------------------------*/
-    /*setStateLogin({
-        estadoLogin:true,
-        dataPassLogin:pass,
-        dataUserLogin:user,
-        urlSqlConnt
-    });
-    handleClose();
-    navigate('/registerUser'); */
-    /*----------------------------------------------------------*/
-    /*
-    fetch(url,{
-        method: 'POST', 
-        body: formData, 
-    })
-    .then(res => {
-        return res.text();
-    })
-    .then(dataJson => {
-        if(dataJson.length>0 && dataJson!=0 && !dataJson.includes('<br />') && !dataJson.includes('Error') && !dataJson.includes('php')){
-            setStateLogin({
-                estadoLogin:true,
-                dataPassLogin:dataJson,
-                dataUserLogin:user,
-                urlSqlConnt
-            });
-            handleClose();
-        }else{
-            handleClose();
-        }
-    }).catch((err)=>{
-        handleClose();
-        console.log(err);
-    });
-    */
 }
 export default function Login(props) {
     return (
