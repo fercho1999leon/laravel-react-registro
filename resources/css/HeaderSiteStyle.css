@@ -14,6 +14,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     text-align: center;
+    width: inherit;
 }
 .header-title{
     background-color: var(--color-primary); 

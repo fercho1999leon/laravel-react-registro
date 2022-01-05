@@ -19239,6 +19239,8 @@ function useIsFocusVisible() {
  */
 __webpack_require__(/*! ./pages/Login */ "./resources/js/pages/Login.jsx");
 
+__webpack_require__(/*! ./components/HeaderSite */ "./resources/js/components/HeaderSite.jsx");
+
 /***/ }),
 
 /***/ "./resources/js/components/HeaderSite.jsx":
@@ -19250,12 +19252,13 @@ __webpack_require__(/*! ./pages/Login */ "./resources/js/pages/Login.jsx");
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ HeaderSite)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _css_HeaderSiteStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css/HeaderSiteStyle.css */ "./resources/css/HeaderSiteStyle.css");
-/* harmony import */ var _media_LogoC_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../media/LogoC.svg */ "./resources/js/media/LogoC.svg");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _css_HeaderSiteStyle_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../css/HeaderSiteStyle.css */ "./resources/css/HeaderSiteStyle.css");
+/* harmony import */ var _media_LogoC_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../media/LogoC.svg */ "./resources/js/media/LogoC.svg");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -19266,17 +19269,17 @@ function HeaderSite() {
   var styleH1 = {
     margin: '0.2vh'
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("header", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("header", {
     id: "header-primary",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "header-logo",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-        src: _media_LogoC_svg__WEBPACK_IMPORTED_MODULE_2__["default"],
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        src: _media_LogoC_svg__WEBPACK_IMPORTED_MODULE_3__["default"],
         alt: "logo-p"
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "header-title",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
         style: styleH1,
         children: "Sistema de Registro"
       })
@@ -19284,7 +19287,9 @@ function HeaderSite() {
   });
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeaderSite);
+if (document.getElementById('head')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(HeaderSite, {}), document.getElementById('head'));
+}
 
 /***/ }),
 
@@ -19301,16 +19306,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_material_Modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Modal */ "./node_modules/@mui/material/Modal/Modal.js");
-/* harmony import */ var _mui_material_Stack__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Stack */ "./node_modules/@mui/material/Stack/Stack.js");
-/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
-/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
+/* harmony import */ var _mui_material_Modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Modal */ "./node_modules/@mui/material/Modal/Modal.js");
+/* harmony import */ var _mui_material_Stack__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Stack */ "./node_modules/@mui/material/Stack/Stack.js");
+/* harmony import */ var _mui_material_TextField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/TextField */ "./node_modules/@mui/material/TextField/TextField.js");
+/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
 /* harmony import */ var _css_loginStyle_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../css/loginStyle.css */ "./resources/css/loginStyle.css");
 /* harmony import */ var _media_LOGO_SPS_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../media/LOGO-SPS.svg */ "./resources/js/media/LOGO-SPS.svg");
-/* harmony import */ var _components_HeaderSite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/HeaderSite */ "./resources/js/components/HeaderSite.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -19322,7 +19326,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -19380,24 +19383,24 @@ function loginDB(handleClose) {
 }
 
 function Login(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_HeaderSite__WEBPACK_IMPORTED_MODULE_4__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "BodyLogin",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "content-login content-left",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
           src: _media_LOGO_SPS_svg__WEBPACK_IMPORTED_MODULE_3__["default"],
           style: {
             "width": "40%",
             "height": "200px"
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           className: "titulo",
           children: "INSTITUTO SUPERIOR"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           className: "titulo",
           children: "REY DAVID"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           id: "descripcion",
           style: {
             fontSize: "90%",
@@ -19406,38 +19409,38 @@ function Login(props) {
           },
           children: "Sistema de registro del Instituto Superior Tecnico Rey David"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "content-login content-right",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("header", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("header", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
             style: {
               marginTop: "6%",
               fontSize: "160%"
             },
             children: "Inicio de Sesi\xF3n del Sistema ISTRED"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             style: {
               fontSize: "80%"
             },
             children: "Digital tus credenciales"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("main", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("main", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
             id: "user",
             label: "Cedula/Pasaporte",
             variant: "standard"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_TextField__WEBPACK_IMPORTED_MODULE_5__["default"], {
             type: "password",
             id: "password",
             label: "Password",
             variant: "standard"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
             id: "messageError",
             style: {
               "color": "red",
               fontSize: "90%"
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(BasicModal, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(BasicModal, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
             id: "btnAbrir",
             style: {
               textDecoration: "none",
@@ -19448,7 +19451,7 @@ function Login(props) {
           })]
         })]
       })]
-    })]
+    })
   });
 }
 
@@ -19466,11 +19469,11 @@ function BasicModal(props) {
     return setOpen(false);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_6__["default"], {
       spacing: 2,
       direction: "row",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
         sx: {
           bgcolor: '#22376D'
         },
@@ -19481,20 +19484,20 @@ function BasicModal(props) {
         variant: "contained",
         children: "Iniciar Session"
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Modal__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Modal__WEBPACK_IMPORTED_MODULE_8__["default"], {
       open: open,
       "aria-labelledby": "modal-modal-title",
       "aria-describedby": "modal-modal-description",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
         sx: styleBX,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_11__["default"], {})
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_10__["default"], {})
       })
     })]
   });
 }
 
 if (document.getElementById('Login')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Login, {}), document.getElementById('Login'));
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Login, {}), document.getElementById('Login'));
 }
 
 /***/ }),
@@ -19572,7 +19575,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@800&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    --color-primary:#22376D;\r\n    --color-secondary:#475a7e;\r\n}\r\n*,\r\n*::before,\r\n*::after{\r\n    box-sizing: border-box;\r\n    font-family: 'M PLUS 1', sans-serif;\r\n}\r\n#header-primary{\r\n    display:flex;\r\n    flex-direction: column;\r\n    flex-wrap: nowrap;\r\n    text-align: center;\r\n}\r\n.header-title{\r\n    background-color: var(--color-primary); \r\n    color: white;\r\n    border-radius: 15px;\r\n    font-size: 80%;\r\n    padding: 5px;\r\n    margin-top: 5vh;\r\n}\r\n.header-logo img{\r\n    padding-top: 20px;\r\n    width: 35%;\r\n    min-width: 40vh;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    --color-primary:#22376D;\r\n    --color-secondary:#475a7e;\r\n}\r\n*,\r\n*::before,\r\n*::after{\r\n    box-sizing: border-box;\r\n    font-family: 'M PLUS 1', sans-serif;\r\n}\r\n#header-primary{\r\n    display:flex;\r\n    flex-direction: column;\r\n    flex-wrap: nowrap;\r\n    text-align: center;\r\n    width: inherit;\r\n}\r\n.header-title{\r\n    background-color: var(--color-primary); \r\n    color: white;\r\n    border-radius: 15px;\r\n    font-size: 80%;\r\n    padding: 5px;\r\n    margin-top: 5vh;\r\n}\r\n.header-logo img{\r\n    padding-top: 20px;\r\n    width: 35%;\r\n    min-width: 40vh;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -19596,7 +19599,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*{\r\n    /*border: solid 1px #000;*/\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n*,\r\n*::before,\r\n*::after{\r\n    box-sizing: border-box;\r\n}\r\nbody{\r\n    background-color: #d4dde7\r\n}\r\n.BodyLogin{\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n    justify-content: center;\r\n    align-items: center;\r\n    height: 60vh;\r\n    background-color: #d4dde7;\r\n}\r\n.content-login{\r\n    width: 28%;\r\n    height: 50%;\r\n    text-align: center;\r\n    min-width: 220px;\r\n    max-width: 380px;\r\n    min-height: 320px;\r\n}\r\n/****************Contenedor izquierdo************/\r\n.content-left{\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    border-radius: 15px 0 0 15px;\r\n    background-color: rgb(38,52,107);\r\n    color: white;\r\n}\r\n.titulo{\r\n    font-size: 150%;\r\n    font-weight: bold;\r\n}\r\n/*****************Contenedor derecho****************/\r\n.content-right{\r\n    background-color: white;\r\n    color: rgb(38,52,107);\r\n    border-radius: 0 15px 15px 0;\r\n}\r\nmain{\r\n    min-height: 65%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    flex-wrap: wrap;\r\n    justify-content: space-evenly;\r\n    align-items: center;\r\n}\r\n.txtBox{\r\n    width: 60%;\r\n    height: 2.2rem;\r\n    border-radius: 15px;\r\n    border: solid 2px #D5D6D6;\r\n    color: #8F8F8F;\r\n    font-size: 80%;\r\n    padding-left:10px;\r\n    outline: none;\r\n}\r\n.txtBox:focus{\r\n    padding-left: 10px;\r\n    color: #656565;\r\n    font-weight: bold;\r\n}\r\n/*********************Ventana de recuperacin de contraseña***********/\r\n\r\n/*******************Version movil****************/\r\n@media screen and (max-width: 900px){\r\n    .BodyLogin{\r\n        flex-direction: column;\r\n        flex-wrap: nowrap;\r\n    }\r\n    .content-left{\r\n        border-radius: 15px 15px 0 0;\r\n        \r\n    }\r\n    .content-login{\r\n        width: 80%;\r\n        height: 10%;\r\n    }\r\n    .content-right{\r\n        background-color: white;\r\n        color: rgb(38,52,107);\r\n        border-radius: 0 0 15px 15px;\r\n    }\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "*{\r\n    /*border: solid 1px #000;*/\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n*,\r\n*::before,\r\n*::after{\r\n    box-sizing: border-box;\r\n}\r\nbody{\r\n    background-color: #d4dde7\r\n}\r\n.BodyLogin{\r\n    margin: 5% auto;\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: nowrap;\r\n    justify-content: center;\r\n    align-items: center;\r\n    background-color: #d4dde7;\r\n}\r\n.content-login{\r\n    width: 28%;\r\n    height: 50vh;\r\n    text-align: center;\r\n    min-width: 220px;\r\n    max-width: 380px;\r\n    min-height: 320px;\r\n}\r\n/****************Contenedor izquierdo************/\r\n.content-left{\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    border-radius: 15px 0 0 15px;\r\n    background-color: rgb(38,52,107);\r\n    color: white;\r\n}\r\n.titulo{\r\n    font-size: 150%;\r\n    font-weight: bold;\r\n}\r\n/*****************Contenedor derecho****************/\r\n.content-right{\r\n    background-color: white;\r\n    color: rgb(38,52,107);\r\n    border-radius: 0 15px 15px 0;\r\n}\r\n.content-login main{\r\n    min-height: 65%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    flex-wrap: wrap;\r\n    justify-content: space-evenly;\r\n    align-items: center;\r\n}\r\n.txtBox{\r\n    width: 60%;\r\n    height: 2.2rem;\r\n    border-radius: 15px;\r\n    border: solid 2px #D5D6D6;\r\n    color: #8F8F8F;\r\n    font-size: 80%;\r\n    padding-left:10px;\r\n    outline: none;\r\n}\r\n.txtBox:focus{\r\n    padding-left: 10px;\r\n    color: #656565;\r\n    font-weight: bold;\r\n}\r\n/*********************Ventana de recuperacin de contraseña***********/\r\n\r\n/*******************Version movil****************/\r\n@media screen and (max-width: 900px){\r\n    .BodyLogin{\r\n        flex-direction: column;\r\n        flex-wrap: nowrap;\r\n    }\r\n    .content-left{\r\n        border-radius: 15px 15px 0 0;\r\n        \r\n    }\r\n    .content-login{\r\n        width: 80%;\r\n        height: 10%;\r\n    }\r\n    .content-right{\r\n        background-color: white;\r\n        color: rgb(38,52,107);\r\n        border-radius: 0 0 15px 15px;\r\n    }\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

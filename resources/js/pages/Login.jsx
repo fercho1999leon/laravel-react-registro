@@ -8,7 +8,6 @@ import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import '../../css/loginStyle.css';
 import logoSPS from "../media/LOGO-SPS.svg";
-import HeaderSite from '../components/HeaderSite';
 const styleBX = {
     position: 'absolute',
     top: '50%',
@@ -53,7 +52,6 @@ function loginDB(handleClose){
 export default function Login(props) {
     return (
         <>
-            <HeaderSite></HeaderSite>
             <div className="BodyLogin">
                 <div className="content-login content-left">
                     <img src={logoSPS} style={{ "width": "40%", "height": "200px" }} />

@@ -13,3 +13,4 @@
  */
 
 require('./pages/Login');
+require('./components/HeaderSite');

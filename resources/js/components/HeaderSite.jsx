@@ -1,7 +1,8 @@
 import React from "react";
+import ReactDOM from 'react-dom';
 import "../../css/HeaderSiteStyle.css";
 import logoC from "../media/LogoC.svg";
-function HeaderSite(){
+export default function HeaderSite(){
     const styleH1 = {
         margin:'0.2vh'
     }
@@ -16,4 +17,6 @@ function HeaderSite(){
         </header>
     );
 }
-export default HeaderSite;
+if (document.getElementById('head')) {
+    ReactDOM.render(<HeaderSite />, document.getElementById('head'));
+}
