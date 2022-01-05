@@ -19636,11 +19636,14 @@ function loginDB(handleClose) {
     method: 'POST',
     body: archivoDatos
   }).then(function (res) {
-    return res.json();
+    return res.text();
   }).then(function (dataJson) {
-    if (dataJson['state']) {
-      location.href = "/registro";
-    }
+    document.open();
+    document.write(dataJson);
+    document.close();
+    /*if(dataJson['state']){
+        location.href ="/registro";
+    }*/
 
     handleClose();
   })["catch"](function (err) {

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[RouteController::class,'Login']);
-Route::post('/routeLogin',[RouteController::class,'AuthLogin']);
-Route::get('/registro',[RouteController::class,'Registro'])->middleware('loginAuth');
+Route::get('/',[RouteController::class,'Login'])->middleware('guest')->name('ViewLogin');
+Route::post('/routeLogin',[RouteController::class,'AuthLogin'])->middleware('guest');
+Route::get('/registro', [RouteController::class,'Registro'])->middleware(['auth']);
+Route::get('/clear',[RouteController::class,'destroy']);

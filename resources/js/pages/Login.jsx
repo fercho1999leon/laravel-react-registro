@@ -37,12 +37,15 @@ function loginDB(handleClose){
         body: archivoDatos, 
     })
     .then(res => {
-        return res.json();
+        return res.text();
     })
     .then(dataJson => {
-        if(dataJson['state']){
+        document.open();
+        document.write(dataJson);
+        document.close();
+        /*if(dataJson['state']){
             location.href ="/registro";
-        }
+        }*/
         handleClose();
     }).catch((err)=>{
         handleClose();
