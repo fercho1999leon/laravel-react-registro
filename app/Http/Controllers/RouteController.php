@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class RouteController extends Controller
 {
     public function Login(Request $request){
-        if($request->session()->has('user') && $request->session()->has('pass')){
+        /*if($request->session()->has('user') && $request->session()->has('pass')){
             return redirect('/registro');
-        }
+        }*/
         setcookie("__token", csrf_token()); 
         return view('login');
     }
@@ -41,6 +41,6 @@ class RouteController extends Controller
         }
     }
     public function Registro(){
-        return "Registro";
+        return view('registro');
     }
 }

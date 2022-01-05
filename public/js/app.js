@@ -19241,6 +19241,86 @@ __webpack_require__(/*! ./pages/Login */ "./resources/js/pages/Login.jsx");
 
 __webpack_require__(/*! ./components/HeaderSite */ "./resources/js/components/HeaderSite.jsx");
 
+__webpack_require__(/*! ./pages/BodyRegistro */ "./resources/js/pages/BodyRegistro.jsx");
+
+/***/ }),
+
+/***/ "./resources/js/components/BntNav.jsx":
+/*!********************************************!*\
+  !*** ./resources/js/components/BntNav.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ BntNav)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _css_BntNavStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css/BntNavStyle.css */ "./resources/css/BntNavStyle.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var BntNav = /*#__PURE__*/function (_Component) {
+  _inherits(BntNav, _Component);
+
+  var _super = _createSuper(BntNav);
+
+  function BntNav(props) {
+    _classCallCheck(this, BntNav);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(BntNav, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+          id: this.props.id,
+          className: "StyleBtn",
+          type: "button",
+          value: this.props.name,
+          onClick: this.props.eventClik
+        }, this.props.id)
+      });
+    }
+  }]);
+
+  return BntNav;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+
+BntNav.defaultProps = {
+  id: "btnDefault",
+  name: "default"
+};
+
 /***/ }),
 
 /***/ "./resources/js/components/HeaderSite.jsx":
@@ -19289,6 +19369,193 @@ function HeaderSite() {
 
 if (document.getElementById('head')) {
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(HeaderSite, {}), document.getElementById('head'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/NavMain.jsx":
+/*!*********************************************!*\
+  !*** ./resources/js/components/NavMain.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ NavMain)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _BntNav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BntNav */ "./resources/js/components/BntNav.jsx");
+/* harmony import */ var _configBtn_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../configBtn.json */ "./resources/js/configBtn.json");
+/* harmony import */ var _css_NavMainStyle_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../css/NavMainStyle.css */ "./resources/css/NavMainStyle.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
+var NavMain = /*#__PURE__*/function (_Component) {
+  _inherits(NavMain, _Component);
+
+  var _super = _createSuper(NavMain);
+
+  function NavMain(props) {
+    var _this;
+
+    _classCallCheck(this, NavMain);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      idBtnPrevious: 1
+    };
+    _this.eventBtnNav = _this.eventBtnNav.bind(_assertThisInitialized(_this));
+    _this.eventReturn = _this.eventReturn.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(NavMain, [{
+    key: "eventBtnNav",
+    value: function eventBtnNav(e) {
+      document.getElementById(this.state.idBtnPrevious).style = "";
+      document.getElementById(e.target.id).style.backgroundColor = "var(--color-forms)";
+      document.getElementById(e.target.id).style.color = "var(--color-primary)";
+      this.setState({
+        idBtnPrevious: e.target.id
+      });
+      this.props.setStateForm(e.target.id);
+    }
+  }, {
+    key: "eventReturn",
+    value: function eventReturn(e) {
+      document.getElementById(this.state.idBtnPrevious).style = "";
+      this.props.setStateForm(0);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "NavContiner",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          id: "divH3",
+          onClick: this.eventReturn,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
+            children: "Menu Principal"
+          })
+        }), _configBtn_json__WEBPACK_IMPORTED_MODULE_2__.btnDate.map(function (el) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_BntNav__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            id: el.id,
+            name: el.name,
+            eventClik: _this2.eventBtnNav
+          }, el.id);
+        })]
+      });
+    }
+  }]);
+
+  return NavMain;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/BodyRegistro.jsx":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/BodyRegistro.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ BodyRegistro)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _components_NavMain__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/NavMain */ "./resources/js/components/NavMain.jsx");
+/* harmony import */ var _css_BodyContainerStyle_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../css/BodyContainerStyle.css */ "./resources/css/BodyContainerStyle.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+function BodyRegistro() {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(0),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      stateForm = _React$useState2[0],
+      setStateForm = _React$useState2[1];
+  /*const formSelection =()=>{
+      if(stateForm==0){
+          return (<FormWelcome></FormWelcome>);
+      }else if(stateForm==1){
+          return (<FormIngreso stateBodyContainer = {this}></FormIngreso>);
+      }else if(stateForm==2){
+          return (<FormShowDate></FormShowDate>);
+      }else if(stateForm==3){
+          return (<FormDownload></FormDownload>);
+      }else if(stateForm==4){
+          return (<FormAddTyC></FormAddTyC>);
+      }else{
+          return (<FormWelcome></FormWelcome>);
+      }
+  } */
+
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("section", {
+      className: "contentMainBody",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "BodyContainer",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_NavMain__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          setStateForm: setStateForm
+        })
+      })
+    })
+  });
+}
+
+if (document.getElementById('Registro')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(BodyRegistro, {}), document.getElementById('Registro'));
 }
 
 /***/ }),
@@ -19475,7 +19742,8 @@ function BasicModal(props) {
       direction: "row",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
         sx: {
-          bgcolor: '#22376D'
+          bgcolor: '#22376D',
+          m: 1.5
         },
         onClick: function onClick(e) {
           handleOpen();
@@ -19557,6 +19825,54 @@ function toVal(mix) {
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BntNavStyle.css":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BntNavStyle.css ***!
+  \*************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".StyleBtn{\r\n    background-color: var(--color-primary);\r\n    color: white;\r\n    height: 50px;\r\n    font-size: 90%;\r\n    border: none;\r\n    /*border-top: solid 1px white;\r\n    border-bottom: solid 1px white;*/\r\n}\r\n.StyleBtn:hover{\r\n    cursor: pointer;\r\n    background-color: var(--color-secondary);\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BodyContainerStyle.css":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BodyContainerStyle.css ***!
+  \********************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    --color-primary:#22376D;\r\n    --color-secondary:#475a7e;\r\n    --color-forms:rgb(230, 230, 230);\r\n}\r\n.contentMainBody{\r\n    display:flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n}\r\n.BodyContainer{\r\n    margin-top: 2%;\r\n    margin-bottom: 2%;\r\n    display:flex;\r\n    flex-direction: row;\r\n    flex-wrap: nowrap;\r\n    align-items: stretch;\r\n    width: 80%;\r\n    min-width: 500px;\r\n    height: auto;\r\n    border: solid 3px var(--color-primary);\r\n    border-radius: 15px;\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/HeaderSiteStyle.css":
 /*!*****************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/HeaderSiteStyle.css ***!
@@ -19582,6 +19898,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    --color-primary:#22376D;
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/NavMainStyle.css":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/NavMainStyle.css ***!
+  \**************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".NavContiner{\r\n    display: flex;\r\n    flex-direction: column;\r\n    background-color: var(--color-primary);\r\n    color: white;\r\n    padding: auto;\r\n    border-radius: 10px 0 0 10px;\r\n    width: 25%;\r\n}\r\n.NavContiner > #divH3{\r\n    text-align: center;\r\n    border-bottom: solid 1px white;\r\n    padding: 30px 0 ;\r\n}\r\n.NavContiner > #divH3:hover{\r\n    cursor: pointer;\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/loginStyle.css":
 /*!************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/loginStyle.css ***!
@@ -19599,7 +19939,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*{\r\n    /*border: solid 1px #000;*/\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n*,\r\n*::before,\r\n*::after{\r\n    box-sizing: border-box;\r\n}\r\nbody{\r\n    background-color: #d4dde7\r\n}\r\n.BodyLogin{\r\n    margin: 5% auto;\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: nowrap;\r\n    justify-content: center;\r\n    align-items: center;\r\n    background-color: #d4dde7;\r\n}\r\n.content-login{\r\n    width: 28%;\r\n    height: 50vh;\r\n    text-align: center;\r\n    min-width: 220px;\r\n    max-width: 380px;\r\n    min-height: 320px;\r\n}\r\n/****************Contenedor izquierdo************/\r\n.content-left{\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    border-radius: 15px 0 0 15px;\r\n    background-color: rgb(38,52,107);\r\n    color: white;\r\n}\r\n.titulo{\r\n    font-size: 150%;\r\n    font-weight: bold;\r\n}\r\n/*****************Contenedor derecho****************/\r\n.content-right{\r\n    background-color: white;\r\n    color: rgb(38,52,107);\r\n    border-radius: 0 15px 15px 0;\r\n}\r\n.content-login main{\r\n    min-height: 65%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    flex-wrap: wrap;\r\n    justify-content: space-evenly;\r\n    align-items: center;\r\n}\r\n.txtBox{\r\n    width: 60%;\r\n    height: 2.2rem;\r\n    border-radius: 15px;\r\n    border: solid 2px #D5D6D6;\r\n    color: #8F8F8F;\r\n    font-size: 80%;\r\n    padding-left:10px;\r\n    outline: none;\r\n}\r\n.txtBox:focus{\r\n    padding-left: 10px;\r\n    color: #656565;\r\n    font-weight: bold;\r\n}\r\n/*********************Ventana de recuperacin de contraseña***********/\r\n\r\n/*******************Version movil****************/\r\n@media screen and (max-width: 900px){\r\n    .BodyLogin{\r\n        flex-direction: column;\r\n        flex-wrap: nowrap;\r\n    }\r\n    .content-left{\r\n        border-radius: 15px 15px 0 0;\r\n        \r\n    }\r\n    .content-login{\r\n        width: 80%;\r\n        height: 10%;\r\n    }\r\n    .content-right{\r\n        background-color: white;\r\n        color: rgb(38,52,107);\r\n        border-radius: 0 0 15px 15px;\r\n    }\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "*{\r\n    /*border: solid 1px #000;*/\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n*,\r\n*::before,\r\n*::after{\r\n    box-sizing: border-box;\r\n}\r\nbody{\r\n    background-color: #d4dde7\r\n}\r\n.BodyLogin{\r\n    margin: 5% auto;\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: nowrap;\r\n    justify-content: center;\r\n    align-items: center;\r\n    background-color: #d4dde7;\r\n}\r\n.content-login{\r\n    width: 28%;\r\n    height: 50vh;\r\n    text-align: center;\r\n    min-width: 220px;\r\n    max-width: 380px;\r\n    min-height: 320px;\r\n}\r\n/****************Contenedor izquierdo************/\r\n.content-left{\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\r\n    border-radius: 15px 0 0 15px;\r\n    background-color: rgb(38,52,107);\r\n    color: white;\r\n}\r\n.titulo{\r\n    font-size: 150%;\r\n    font-weight: bold;\r\n}\r\n/*****************Contenedor derecho****************/\r\n.content-right{\r\n    background-color: white;\r\n    color: rgb(38,52,107);\r\n    border-radius: 0 15px 15px 0;\r\n}\r\n.content-login main{\r\n    display: flex;\r\n    flex-direction: column;\r\n    flex-wrap: wrap;\r\n    align-items: center;\r\n}\r\n.txtBox{\r\n    width: 60%;\r\n    height: 2.2rem;\r\n    border-radius: 15px;\r\n    border: solid 2px #D5D6D6;\r\n    color: #8F8F8F;\r\n    font-size: 80%;\r\n    padding-left:10px;\r\n    outline: none;\r\n}\r\n.txtBox:focus{\r\n    padding-left: 10px;\r\n    color: #656565;\r\n    font-weight: bold;\r\n}\r\n/*********************Ventana de recuperacin de contraseña***********/\r\n\r\n/*******************Version movil****************/\r\n@media screen and (max-width: 900px){\r\n    .BodyLogin{\r\n        flex-direction: column;\r\n        flex-wrap: nowrap;\r\n    }\r\n    .content-left{\r\n        border-radius: 15px 15px 0 0;\r\n        \r\n    }\r\n    .content-login{\r\n        width: 80%;\r\n        height: 10%;\r\n    }\r\n    .content-right{\r\n        background-color: white;\r\n        color: rgb(38,52,107);\r\n        border-radius: 0 0 15px 15px;\r\n    }\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53453,6 +53793,66 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./resources/css/BntNavStyle.css":
+/*!***************************************!*\
+  !*** ./resources/css/BntNavStyle.css ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BntNavStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./BntNavStyle.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BntNavStyle.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BntNavStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BntNavStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/css/BodyContainerStyle.css":
+/*!**********************************************!*\
+  !*** ./resources/css/BodyContainerStyle.css ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BodyContainerStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./BodyContainerStyle.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/BodyContainerStyle.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BodyContainerStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_BodyContainerStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./resources/css/HeaderSiteStyle.css":
 /*!*******************************************!*\
   !*** ./resources/css/HeaderSiteStyle.css ***!
@@ -53480,6 +53880,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_HeaderSiteStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/css/NavMainStyle.css":
+/*!****************************************!*\
+  !*** ./resources/css/NavMainStyle.css ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_NavMainStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./NavMainStyle.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/NavMainStyle.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_NavMainStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_NavMainStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -54926,6 +55356,17 @@ function combine (array, callback) {
 	return array.map(callback).join('')
 }
 
+
+/***/ }),
+
+/***/ "./resources/js/configBtn.json":
+/*!*************************************!*\
+  !*** ./resources/js/configBtn.json ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"btnDate":[{"id":1,"name":"INGRESO"},{"id":2,"name":"MOSTRAR"},{"id":3,"name":"DESCARGA USER"},{"id":4,"name":"ADD T & C"}]}');
 
 /***/ })
 

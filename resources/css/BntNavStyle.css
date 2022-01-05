@@ -1,0 +1,13 @@
+.StyleBtn{
+    background-color: var(--color-primary);
+    color: white;
+    height: 50px;
+    font-size: 90%;
+    border: none;
+    /*border-top: solid 1px white;
+    border-bottom: solid 1px white;*/
+}
+.StyleBtn:hover{
+    cursor: pointer;
+    background-color: var(--color-secondary);
+}

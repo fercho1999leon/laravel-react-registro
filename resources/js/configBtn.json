@@ -1,0 +1,20 @@
+{
+    "btnDate":[
+        {
+            "id":1,
+            "name":"INGRESO"
+        },
+        {
+            "id":2,
+            "name":"MOSTRAR"
+        },
+        {
+            "id":3,
+            "name":"DESCARGA USER"
+        },
+        {
+            "id":4,
+            "name":"ADD T & C"
+        }
+    ]
+}

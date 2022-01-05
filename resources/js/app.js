@@ -14,3 +14,4 @@
 
 require('./pages/Login');
 require('./components/HeaderSite');
+require('./pages/BodyRegistro');

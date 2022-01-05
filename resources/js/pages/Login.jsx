@@ -86,7 +86,7 @@ function BasicModal(props) {
     return (
       <div>
         <Stack spacing={2} direction="row">
-            <Button sx={{bgcolor:'#22376D'}} onClick={(e)=>{
+            <Button sx={{bgcolor:'#22376D',m:1.5}} onClick={(e)=>{
                 handleOpen();
                 loginDB(handleClose);
             }} variant="contained">Iniciar Session</Button>
