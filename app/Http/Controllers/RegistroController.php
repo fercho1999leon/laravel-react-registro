@@ -24,16 +24,17 @@ class RegistroController extends Controller
         $jsonString = file_get_contents($urlJsonConfig);
         $array = json_decode($jsonStringNav, true);
         foreach($array['btnDate'] as $value ){
-            if($value['rol']===$rol['rol']){
+            if($value['rol']<=$rol['rol']){
                 $arrayExport[]=array('id'=>$value['id'],'name'=>$value['name']);
             }
         }
+        session(['__rol' => $rol['rol']]);
         session(['__confNav' => md5(json_encode($arrayExport))]);
         return json_encode(array('configNav' =>$arrayExport,'config' => json_decode($jsonString)));
     }
     public function action(Request $request,$query){
         if(md5(json_encode($request->configSate))===$request->session()->get('__confNav')){
-            if($query=='insert' && $this->findJson($request->configSate,1)){
+            if($query=='insert' && ($this->findJson($request->configSate,1)<=$request->session()->get('__rol'))){
                 $correo = $request->correo;
                 /*Cuando el correo esta vacio*/
                 $tempCorreo = $correo==''?('randon'.(Postulante::all()->count()+1).'@hotmail.com'):($correo);
@@ -72,9 +73,9 @@ class RegistroController extends Controller
     protected function findJson($json,$el){
         foreach($json as $value){
             if($value['id']==$el){
-                return true;
+                return $value['id'];
             }
         }
-        return false;
+        return null;
     }
 }

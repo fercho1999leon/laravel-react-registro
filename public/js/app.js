@@ -19749,7 +19749,7 @@ var eventBtnGuardar = function eventBtnGuardar(e, refVtnModal, handleOpen, confi
       if (respuesta['code'] == 0 && respuesta != "") {
         refVtnModal.current.textContent = "USUARIO CREADO CORRECTAMENTE";
       } else if (respuesta['code'] == 1) {
-        refVtnModal.current.textContent = "Error en insert (Usuario ya existe)";
+        refVtnModal.current.textContent = "Error en insert";
       }
     } catch (error) {
       document.open();
