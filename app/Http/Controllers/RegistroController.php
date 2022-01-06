@@ -36,6 +36,10 @@ class RegistroController extends Controller
     public function action(Request $request,$query){
         if(md5(json_encode($request->configSate))===$request->session()->get('__confNav')){  
             try { 
+                /**Nota en un midlleware se puese confirmar el rol y la no manipulacion del json
+                 * $this->findJson($request->configSate,1) en ves de 1 puede recivir el id el nav
+                 * para comprobar si esta en el json y que esa menor o igual que el rol
+                 */
                 if($query=='insert' && ($this->findJson($request->configSate,1)<=$request->session()->get('__rol'))){
                     $correo = $request->correo;
                     /*Cuando el correo esta vacio*/
