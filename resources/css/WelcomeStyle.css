@@ -1,0 +1,11 @@
+.logoWelcome{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--color-forms);
+    border-radius: 0 10px 10px 0;
+}
+.logoWelcome > img{
+    margin: 2% auto;
+    width: 35%;
+}

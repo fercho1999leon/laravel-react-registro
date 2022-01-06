@@ -16,13 +16,12 @@ class CreateRegisteractivitiTable extends Migration
         Schema::create('registeractiviti', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->unsignedBigInteger('activiti_idactiviti');
-            $table->string('user_id');
+            $table->string('users_ci');
             $table->string('postulante_correo');
             $table->timestamps();
         });
         Schema::table('registeractiviti', function (Blueprint $table) {
             $table->foreign('activiti_idactiviti')->references('idactiviti')->on('activiti');
-            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 

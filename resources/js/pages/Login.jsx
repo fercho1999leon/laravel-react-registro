@@ -28,7 +28,7 @@ function loginDB(handleClose){
         pass
     }
     archivoDatos = JSON.stringify(archivoDatos);
-    fetch('routeLogin',{
+    fetch('/',{
         headers: {
             'X-CSRF-TOKEN': token,
             'Content-Type': 'application/json'

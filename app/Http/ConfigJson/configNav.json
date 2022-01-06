@@ -1,0 +1,24 @@
+{
+    "btnDate":[
+        {
+            "id":1,
+            "name":"INGRESO",
+            "rol":1
+        },
+        {
+            "id":2,
+            "name":"MOSTRAR",
+            "rol":1
+        },
+        {
+            "id":3,
+            "name":"DESCARGA USER",
+            "rol":1
+        },
+        {
+            "id":4,
+            "name":"ADD T & C",
+            "rol":2
+        }
+    ]
+}
