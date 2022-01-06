@@ -1,0 +1,63 @@
+.FormIngresoMain *{
+    margin: 0;
+    padding: 0;
+}
+.FormIngresoMain {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: inherit;
+    color: var(--color-primary);
+}
+.FormIngreso{
+    flex-grow: 1;
+    background-color: var(--color-forms);
+}
+.FormIngresoLeftAndRight{
+    display: flex;
+    flex-direction:row;
+}
+.FormIngresoLeftAndRight > div{
+    display: flex;
+    flex-direction:column;
+    width: 50%;
+}
+.FormIngresoStyleComponents{
+    width: 80%;
+    align-self: center;
+    border-radius: 10px;
+    height: 30px;
+    color: var(--color-secondary);
+    border: solid 2px var(--color-primary);
+    outline: none;
+    padding-left: 10px;
+}
+.FormIngresoRight > textarea{
+    color: var(--color-secondary);
+    border-radius: 10px;
+    padding-left: 10px;
+    align-self: center;
+    border: solid 2px var(--color-primary);
+    width: 80%;
+}
+.FormIngresoMain > div > button{
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 20px ;
+    margin: 8px auto;
+    border-radius: 10px;
+    background-color: var(--color-primary);
+    border: solid 2px var(--color-primary);
+    color: white;
+}
+.FormIngresoMain > div > button:hover{
+    background-color: var(--color-secondary);
+    padding: 8px 25px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }

@@ -43,9 +43,6 @@ function loginDB(handleClose){
         document.open();
         document.write(dataJson);
         document.close();
-        /*if(dataJson['state']){
-            location.href ="/registro";
-        }*/
         handleClose();
     }).catch((err)=>{
         handleClose();
