@@ -20699,7 +20699,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    --color-primary:#22376D;\r\n    --color-secondary:#475a7e;\r\n    --color-forms:rgb(230, 230, 230);\r\n}\r\n.contentMainBody{\r\n    display:flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n}\r\n.BodyContainer{\r\n    margin-top: 2%;\r\n    margin-bottom: 2%;\r\n    display:flex;\r\n    flex-direction: row;\r\n    flex-wrap: nowrap;\r\n    align-items: stretch;\r\n    width: 80%;\r\n    min-width: 500px;\r\n    height: auto;\r\n    border: solid 3px var(--color-primary);\r\n    border-radius: 15px;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    --color-primary:#22376D;\r\n    --color-secondary:#475a7e;\r\n    --color-forms:rgb(230, 230, 230);\r\n}\r\n.contentMainBody{\r\n    display:flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    min-height: 60vh;\r\n}\r\n.BodyContainer{\r\n    margin-top: 2%;\r\n    margin-bottom: 2%;\r\n    display:flex;\r\n    flex-direction: row;\r\n    flex-wrap: nowrap;\r\n    align-items: stretch;\r\n    width: 80%;\r\n    min-width: 500px;\r\n    height: auto;\r\n    border: solid 3px var(--color-primary);\r\n    border-radius: 15px;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
