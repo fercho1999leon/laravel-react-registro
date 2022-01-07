@@ -50,7 +50,7 @@ export default function BodyRegistro(){
         }
         const selectNav = () =>{
             if(stateForm==1){
-                return (<FormIngreso></FormIngreso>);
+                return (<FormIngreso id={stateForm}></FormIngreso>);
             }else if(stateForm==2){
                 return (<Welcome></Welcome>);
             }else if(stateForm==3){

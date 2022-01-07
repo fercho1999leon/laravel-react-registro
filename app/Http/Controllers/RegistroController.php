@@ -26,7 +26,7 @@ class RegistroController extends Controller
         $array = json_decode($jsonStringNav, true);
         foreach($array['btnDate'] as $value ){
             if($value['rol']<=$rol['rol']){
-                $arrayExport[]=array('id'=>$value['id'],'name'=>$value['name']);
+                $arrayExport[]=array('id'=>$value['id'],'name'=>$value['name'],'rol'=>$value['rol']);
             }
         }
         session(['__rol' => $rol['rol']]);
@@ -34,17 +34,12 @@ class RegistroController extends Controller
         return json_encode(array('configNav' =>$arrayExport,'config' => json_decode($jsonString)));
     }
     public function action(Request $request,$query){
-        if(md5(json_encode($request->configSate))===$request->session()->get('__confNav')){  
+        if($query=='insert'){
             try { 
-                /**Nota en un midlleware se puese confirmar el rol y la no manipulacion del json
-                 * $this->findJson($request->configSate,1) en ves de 1 puede recivir el id el nav
-                 * para comprobar si esta en el json y que esa menor o igual que el rol
-                 */
-                if($query=='insert' && ($this->findJson($request->configSate,1)<=$request->session()->get('__rol'))){
-                    $correo = $request->correo;
-                    /*Cuando el correo esta vacio*/
+                $correo = $request->correo;
+                    //Cuando el correo esta vacio
                     $tempCorreo = $correo==''?('randon'.(Postulante::all()->count()+1).'@hotmail.com'):($correo);
-                    /*****************************/
+                    //--------------------------
                     $postulante = new Postulante();
                     $postulante->correo = $tempCorreo;
                     $postulante->nombre = $request->nombre;
@@ -72,18 +67,9 @@ class RegistroController extends Controller
                     $postulante->save();
                     $cursoHasCarrera->save();
                     return json_encode(array('code'=>0));
-                }
             } catch(QueryException $ex){ 
                 return json_encode(array('code'=>1));
             }
         }
-    }
-    protected function findJson($json,$el){
-        foreach($json as $value){
-            if($value['id']==$el){
-                return $value['id'];
-            }
-        }
-        return null;
     }
 }

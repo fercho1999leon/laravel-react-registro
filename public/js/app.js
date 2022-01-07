@@ -19706,7 +19706,7 @@ var styleRadio = {
   margin: "auto 10px"
 };
 
-var eventBtnGuardar = function eventBtnGuardar(e, refVtnModal, handleOpen, configSate) {
+var eventBtnGuardar = function eventBtnGuardar(e, refVtnModal, handleOpen, configSate, id) {
   var token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
   var arrayData = document.getElementsByClassName('dataOut');
   var estadoUsuario;
@@ -19730,7 +19730,8 @@ var eventBtnGuardar = function eventBtnGuardar(e, refVtnModal, handleOpen, confi
     observacion: arrayData[7].value,
     ciudad: arrayData[8].selectedIndex,
     estado: estadoUsuario,
-    configSate: configSate
+    configSate: configSate,
+    id: id
   };
   archivoDatos = JSON.stringify(archivoDatos);
   fetch('/registro/insert', {
@@ -19991,6 +19992,7 @@ function FormIngreso(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "FormIngreso",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(BasicModal, {
+        id: props.id,
         handlerClick: eventBtnGuardar,
         configSate: dateJson['configSate']
       })
@@ -20022,7 +20024,7 @@ function BasicModal(props) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
       sx: btn,
       onClick: function onClick(e) {
-        props.handlerClick(e, refVtnModal, handleOpen, props.configSate);
+        props.handlerClick(e, refVtnModal, handleOpen, props.configSate, props.id);
       },
       children: "GUARDAR"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Modal__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -20356,7 +20358,9 @@ function BodyRegistro() {
 
     var selectNav = function selectNav() {
       if (stateForm == 1) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_FormIngreso__WEBPACK_IMPORTED_MODULE_6__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_FormIngreso__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          id: stateForm
+        });
       } else if (stateForm == 2) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Welcome__WEBPACK_IMPORTED_MODULE_4__["default"], {});
       } else if (stateForm == 3) {

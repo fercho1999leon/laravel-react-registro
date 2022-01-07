@@ -18,5 +18,5 @@ Route::get('/',[AuthController::class,'create'])->middleware('guest')->name('Vie
 Route::post('/',[AuthController::class,'store'])->middleware('guest');
 Route::get('/registro', [RegistroController::class,'create'])->middleware(['auth'])->name('ViewRegistro');
 Route::post('/registro', [RegistroController::class,'store'])->middleware(['auth']);
-Route::post('/registro/{query}', [RegistroController::class,'action'])->middleware(['auth']);
+Route::post('/registro/{query}', [RegistroController::class,'action'])->middleware(['auth','rolAuth']);
 Route::get('/logout',[AuthController::class,'destroy'])->name('logout');

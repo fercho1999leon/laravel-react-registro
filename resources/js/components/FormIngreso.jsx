@@ -36,7 +36,7 @@ const style = {
 const styleRadio = {
     margin: "auto 10px"
 }
-const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate) =>{
+const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const arrayData = document.getElementsByClassName('dataOut');
     let estadoUsuario;
@@ -55,6 +55,7 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate) =>{
         ciudad:arrayData[8].selectedIndex,
         estado:estadoUsuario,
         configSate,
+        id,
     }
     archivoDatos = JSON.stringify(archivoDatos);
     fetch('/registro/insert',{
@@ -198,7 +199,7 @@ export default function FormIngreso(props){
                 </div>
             </div>
             <div className="FormIngreso">
-                <BasicModal handlerClick={eventBtnGuardar} configSate={dateJson['configSate']}></BasicModal>
+                <BasicModal id={props.id} handlerClick={eventBtnGuardar} configSate={dateJson['configSate']}></BasicModal>
             </div>
         </div>
     );
@@ -213,7 +214,7 @@ function BasicModal(props) {
     </ThemeProvider> va dentro del div*/
     return (
       <div>
-        <Button sx={btn} onClick={(e)=>{props.handlerClick(e,refVtnModal,handleOpen,props.configSate)}}>GUARDAR</Button>
+        <Button sx={btn} onClick={(e)=>{props.handlerClick(e,refVtnModal,handleOpen,props.configSate,props.id)}}>GUARDAR</Button>
         <Modal
           open={open}
           onClose={handleClose}
