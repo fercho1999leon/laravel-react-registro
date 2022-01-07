@@ -5,6 +5,7 @@ import "../../css/BodyContainerStyle.css";
 import Welcome from "../components/Welcome";
 import {ProviderLogin} from '../components/ContextLogin';
 import FormIngreso from "../components/FormIngreso";
+import FormShowDate from "../components/FormShowDate";
 const importConfig = (setConfigState,setDateJson) =>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     fetch('/registro',{
@@ -52,7 +53,7 @@ export default function BodyRegistro(){
             if(stateForm==1){
                 return (<FormIngreso id={stateForm}></FormIngreso>);
             }else if(stateForm==2){
-                return (<Welcome></Welcome>);
+                return (<FormShowDate id={stateForm}></FormShowDate>);
             }else if(stateForm==3){
                 return (<Welcome></Welcome>);
             }else if(stateForm==4){

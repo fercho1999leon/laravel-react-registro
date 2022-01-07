@@ -1,0 +1,13 @@
+.shearch{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.shearch > label{
+    color: var(--color-primary);
+}
+.shearch > span{
+    width: 20px;
+}

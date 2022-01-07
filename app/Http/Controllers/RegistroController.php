@@ -35,41 +35,62 @@ class RegistroController extends Controller
     }
     public function action(Request $request,$query){
         if($query=='insert'){
-            try { 
-                $correo = $request->correo;
-                    //Cuando el correo esta vacio
-                    $tempCorreo = $correo==''?('randon'.(Postulante::all()->count()+1).'@hotmail.com'):($correo);
-                    //--------------------------
-                    $postulante = new Postulante();
-                    $postulante->correo = $tempCorreo;
-                    $postulante->nombre = $request->nombre;
-                    $postulante->apellido = $request->apellido;
-                    $postulante->numero = $request->numeroContacto;
-                    $postulante->observacion = $request->observacion;
-                    $postulante->estado_idestado = $request->estado;
-                    $postulante->ciudad_idciudad = $request->ciudad;
-                    $cursoHasCarrera = new CursoHasCarrera();
-                    if($request->typeInteres==1){
-                        if($request->interes==0){
-                            $cursoHasCarrera->postulante_correo = $tempCorreo;
-                        }else{
-                            $cursoHasCarrera->postulante_correo = $tempCorreo;
-                            $cursoHasCarrera->carrera_idcarrera = $request->interes;
-                        }
-                    }else if($request->typeInteres==2){
-                        if($request->interes==0){
-                            $cursoHasCarrera->postulante_correo = $tempCorreo;
-                        }else{
-                            $cursoHasCarrera->postulante_correo = $tempCorreo;
-                            $cursoHasCarrera->curso_idcurso = $request->interes;
-                        }
+            return $this->insertRegistro($request);
+        }else if($query=='shearch'){
+            return $this->shearchRegistro($request);
+        }
+    }
+    protected function insertRegistro($request){
+        try { 
+            $correo = $request->correo;
+                //Cuando el correo esta vacio
+                $tempCorreo = $correo==''?('randon'.(Postulante::all()->count()+1).'@hotmail.com'):($correo);
+                //--------------------------
+                $postulante = new Postulante();
+                $postulante->correo = $tempCorreo;
+                $postulante->nombre = $request->nombre;
+                $postulante->apellido = $request->apellido;
+                $postulante->numero = $request->numeroContacto;
+                $postulante->observacion = $request->observacion;
+                $postulante->estado_idestado = $request->estado;
+                $postulante->ciudad_idciudad = $request->ciudad;
+                $cursoHasCarrera = new CursoHasCarrera();
+                if($request->typeInteres==1){
+                    if($request->interes==0){
+                        $cursoHasCarrera->postulante_correo = $tempCorreo;
+                    }else{
+                        $cursoHasCarrera->postulante_correo = $tempCorreo;
+                        $cursoHasCarrera->carrera_idcarrera = $request->interes;
                     }
-                    $postulante->save();
-                    $cursoHasCarrera->save();
-                    return json_encode(array('code'=>0));
-            } catch(QueryException $ex){ 
-                return json_encode(array('code'=>1));
+                }else if($request->typeInteres==2){
+                    if($request->interes==0){
+                        $cursoHasCarrera->postulante_correo = $tempCorreo;
+                    }else{
+                        $cursoHasCarrera->postulante_correo = $tempCorreo;
+                        $cursoHasCarrera->curso_idcurso = $request->interes;
+                    }
+                }
+                $postulante->save();
+                $cursoHasCarrera->save();
+                return json_encode(array('code'=>0));
+        } catch(QueryException $ex){ 
+            return json_encode(array('code'=>1));
+        }
+    }
+    protected function shearchRegistro($request){
+        $parametro = $request->parametro;
+        try{
+            if($parametro==0){
+                $result = Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.updated_at","postulante.nombre","postulante.apellido","postulante.correo","postulante.numero",
+                "postulante.observacion","postulante.estado_idestado","postulante.ciudad_idciudad","curso_has_carrera.curso_idcurso",
+                "curso_has_carrera.carrera_idcarrera")->get();
+                return json_encode($result);
+            }else{
+                return "Error";
             }
+
+        }catch(QueryException $ex){
+            return $ex;
         }
     }
 }
