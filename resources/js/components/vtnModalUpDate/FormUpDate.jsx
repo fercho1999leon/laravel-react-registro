@@ -13,20 +13,19 @@ const packageData=(dataUpDate,setSatateConsulta,configSate)=>{
     const arrayData = document.getElementsByClassName('dataOut');
     const text = document.getElementsByClassName('text-result-get');
     let estadoUsuario;
-    const typeInteres = arrayData[4].checked ? 1:2;
+    const typeInteres = arrayData[3].checked ? 1:2;
     const idUpdate=dataUpDate.correo;
-    if(arrayData[9].checked){estadoUsuario=1}
-    else if(arrayData[10].checked){estadoUsuario=2}
-    else if(arrayData[11].checked){estadoUsuario=3}
+    if(arrayData[8].checked){estadoUsuario=1}
+    else if(arrayData[9].checked){estadoUsuario=2}
+    else if(arrayData[10].checked){estadoUsuario=3}
     let archivoDatos={
         nombre:arrayData[0].value==""?dataUpDate.nombre:arrayData[0].value,
-        apellido:arrayData[1].value==""?dataUpDate.apellido:arrayData[1].value,
-        correo:arrayData[2].value==""?dataUpDate.correo:arrayData[2].value,
-        numeroContacto:arrayData[3].value==""?dataUpDate.numero:arrayData[3].value,
+        correo:arrayData[2].value==""?dataUpDate.correo:arrayData[1].value,
+        numeroContacto:arrayData[3].value==""?dataUpDate.numero:arrayData[2].value,
         typeInteres,
-        interes:arrayData[6].selectedIndex,
-        observacion:arrayData[7].value,
-        ciudad:arrayData[8].selectedIndex,
+        interes:arrayData[5].selectedIndex,
+        observacion:arrayData[6].value,
+        ciudad:arrayData[7].selectedIndex,
         estado:estadoUsuario,
         idUpdate,
         configSate,
@@ -236,8 +235,6 @@ export default function FormUpDate(props){
                         <div className="FormIngresoLeft">
                             <label htmlFor="idNombre">Nombre</label>
                             <input className="FormIngresoStyleComponents dataOut" type="text" id="idNombre" placeholder={props.dataUpDate.nombre}/>
-                            <label htmlFor="idApellido">Apellido</label>
-                            <input className="FormIngresoStyleComponents dataOut" type="text" id="idApellido" placeholder={props.dataUpDate.apellido}/>
                             <label htmlFor="idCorreo">Correo</label>
                             <input className="FormIngresoStyleComponents dataOut" type="email" id="idCorreo" placeholder={props.dataUpDate.correo}/>
                             <label htmlFor="idNumeroContacto">Numero de Contacto</label>

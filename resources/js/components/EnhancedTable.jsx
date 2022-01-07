@@ -33,11 +33,10 @@ import Box from '@mui/material/Box';
 import BasicModalUpDate from './vtnModalUpDate/BasicModalUpDate';
 import ContextLogin from './ContextLogin';
 let dateJson;
-function createData(fecha, nombre, apellido, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
+function createData(fecha, nombre, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
   return {
     fecha, 
     nombre, 
-    apellido, 
     correo,
     numero, 
     observacion, 
@@ -76,14 +75,13 @@ function translateData(idDate,opc){
   }
 }
 function insertData(data){
-  console.log(data);
   if(data.length>0){
     data.map((el)=>{
       const estado = translateData(el['estado_idestado'],1);
       const ciudad = translateData(el['ciudad_idciudad'],2);
       const curso = translateData(el['curso_idcurso'],3);
       const carrera = translateData(el['carrera_idcarrera'],4);
-      rows.push(createData(el['updated_at'], el['nombre'], el['apellido'], el['correo'], el['numero'], el['observacion'],estado, ciudad, curso, carrera));
+      rows.push(createData(el['updated_at'], el['nombre'], el['correo'], el['numero'], el['observacion'],estado, ciudad, curso, carrera));
     });
   }
 }
@@ -129,12 +127,6 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Nombre',
-  },
-  {
-    id: 'apellido',
-    numeric: false,
-    disablePadding: false,
-    label: 'Apellido',
   },
   {
     id: 'correo',
@@ -404,7 +396,6 @@ export default function EnhancedTable(props) {
                         {row.fecha}
                       </TableCell>
                       <TableCell align="right">{row.nombre}</TableCell>
-                      <TableCell align="right">{row.apellido}</TableCell>
                       <TableCell align="right">{row.correo}</TableCell>
                       <TableCell align="right">{row.numero}</TableCell>
                       <TableCell align="right">{row.observacion}</TableCell>

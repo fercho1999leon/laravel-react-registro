@@ -48,8 +48,7 @@ class RegistroController extends Controller
                 //--------------------------
                 $postulante = new Postulante();
                 $postulante->correo = $tempCorreo;
-                $postulante->nombre = $request->nombre;
-                $postulante->apellido = $request->apellido;
+                $postulante->nombre = $request->nombre.' '.$request->apellido;
                 $postulante->numero = $request->numeroContacto;
                 $postulante->observacion = $request->observacion;
                 $postulante->estado_idestado = $request->estado;
@@ -81,7 +80,7 @@ class RegistroController extends Controller
         $parametro = $request->parametro;
         try{
             if($parametro==0){
-                $result = Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.updated_at","postulante.nombre","postulante.apellido","postulante.correo","postulante.numero",
+                $result = Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.updated_at","postulante.nombre","postulante.correo","postulante.numero",
                 "postulante.observacion","postulante.estado_idestado","postulante.ciudad_idciudad","curso_has_carrera.curso_idcurso",
                 "curso_has_carrera.carrera_idcarrera")->get();
                 return json_encode($result);

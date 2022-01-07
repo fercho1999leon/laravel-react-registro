@@ -16,7 +16,6 @@ class CreatePostulanteTable extends Migration
         Schema::create('postulante', function (Blueprint $table) {
             $table->string('correo');
             $table->string('nombre')->default(null)->nullable(true);
-            $table->string('apellido')->default(null)->nullable(true);
             $table->string('numero')->default(null)->nullable(true);
             $table->text('observacion')->default(null)->nullable(true);
             $table->unsignedBigInteger('estado_idestado');

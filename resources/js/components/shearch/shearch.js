@@ -20,10 +20,7 @@ export default function shearch(e,refTextShearch,setData,setBanderaUp,configSate
         return res.text();
     })
     .then(result => {
-        const data = JSON.parse(result);
-        setData(data);
-        setBanderaUp(true);
-        /*try {
+        try {
             const data = JSON.parse(result);
             setData(data);
             setBanderaUp(true);
@@ -31,6 +28,6 @@ export default function shearch(e,refTextShearch,setData,setBanderaUp,configSate
             document.open();
             document.write(result);
             document.close();
-        }*/
+        }
     });
 }

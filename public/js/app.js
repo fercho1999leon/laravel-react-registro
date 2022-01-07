@@ -30129,11 +30129,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var dateJson;
 
-function createData(fecha, nombre, apellido, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
+function createData(fecha, nombre, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
   return {
     fecha: fecha,
     nombre: nombre,
-    apellido: apellido,
     correo: correo,
     numero: numero,
     observacion: observacion,
@@ -30175,15 +30174,13 @@ function translateData(idDate, opc) {
 }
 
 function insertData(data) {
-  console.log(data);
-
   if (data.length > 0) {
     data.map(function (el) {
       var estado = translateData(el['estado_idestado'], 1);
       var ciudad = translateData(el['ciudad_idciudad'], 2);
       var curso = translateData(el['curso_idcurso'], 3);
       var carrera = translateData(el['carrera_idcarrera'], 4);
-      rows.push(createData(el['updated_at'], el['nombre'], el['apellido'], el['correo'], el['numero'], el['observacion'], estado, ciudad, curso, carrera));
+      rows.push(createData(el['updated_at'], el['nombre'], el['correo'], el['numero'], el['observacion'], estado, ciudad, curso, carrera));
     });
   }
 }
@@ -30238,11 +30235,6 @@ var headCells = [{
   numeric: false,
   disablePadding: false,
   label: 'Nombre'
-}, {
-  id: 'apellido',
-  numeric: false,
-  disablePadding: false,
-  label: 'Apellido'
 }, {
   id: 'correo',
   numeric: true,
@@ -30539,9 +30531,6 @@ function EnhancedTable(props) {
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
                   align: "right",
                   children: row.nombre
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                  align: "right",
-                  children: row.apellido
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
                   align: "right",
                   children: row.correo
@@ -31626,18 +31615,15 @@ function shearch(e, refTextShearch, setData, setBanderaUp, configSate) {
   }).then(function (res) {
     return res.text();
   }).then(function (result) {
-    var data = JSON.parse(result);
-    setData(data);
-    setBanderaUp(true);
-    /*try {
-        const data = JSON.parse(result);
-        setData(data);
-        setBanderaUp(true);
+    try {
+      var data = JSON.parse(result);
+      setData(data);
+      setBanderaUp(true);
     } catch (error) {
-        document.open();
-        document.write(result);
-        document.close();
-    }*/
+      document.open();
+      document.write(result);
+      document.close();
+    }
   });
 }
 
@@ -31811,26 +31797,25 @@ var packageData = function packageData(dataUpDate, setSatateConsulta, configSate
   var arrayData = document.getElementsByClassName('dataOut');
   var text = document.getElementsByClassName('text-result-get');
   var estadoUsuario;
-  var typeInteres = arrayData[4].checked ? 1 : 2;
+  var typeInteres = arrayData[3].checked ? 1 : 2;
   var idUpdate = dataUpDate.correo;
 
-  if (arrayData[9].checked) {
+  if (arrayData[8].checked) {
     estadoUsuario = 1;
-  } else if (arrayData[10].checked) {
+  } else if (arrayData[9].checked) {
     estadoUsuario = 2;
-  } else if (arrayData[11].checked) {
+  } else if (arrayData[10].checked) {
     estadoUsuario = 3;
   }
 
   var archivoDatos = {
     nombre: arrayData[0].value == "" ? dataUpDate.nombre : arrayData[0].value,
-    apellido: arrayData[1].value == "" ? dataUpDate.apellido : arrayData[1].value,
-    correo: arrayData[2].value == "" ? dataUpDate.correo : arrayData[2].value,
-    numeroContacto: arrayData[3].value == "" ? dataUpDate.numero : arrayData[3].value,
+    correo: arrayData[2].value == "" ? dataUpDate.correo : arrayData[1].value,
+    numeroContacto: arrayData[3].value == "" ? dataUpDate.numero : arrayData[2].value,
     typeInteres: typeInteres,
-    interes: arrayData[6].selectedIndex,
-    observacion: arrayData[7].value,
-    ciudad: arrayData[8].selectedIndex,
+    interes: arrayData[5].selectedIndex,
+    observacion: arrayData[6].value,
+    ciudad: arrayData[7].selectedIndex,
     estado: estadoUsuario,
     idUpdate: idUpdate,
     configSate: configSate
@@ -32142,14 +32127,6 @@ function FormUpDate(props) {
             type: "text",
             id: "idNombre",
             placeholder: props.dataUpDate.nombre
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-            htmlFor: "idApellido",
-            children: "Apellido"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-            className: "FormIngresoStyleComponents dataOut",
-            type: "text",
-            id: "idApellido",
-            placeholder: props.dataUpDate.apellido
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
             htmlFor: "idCorreo",
             children: "Correo"
