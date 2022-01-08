@@ -34,12 +34,14 @@ class RegistroController extends Controller
         return json_encode(array('configNav' =>$arrayExport,'config' => json_decode($jsonString)));
     }
     public function action(Request $request,$query){
-        if($query=='insert'){
+        if($query==='insert'){
             return $this->insertRegistro($request);
-        }else if($query=='shearch'){
+        }else if($query==='shearch'){
             return $this->shearchRegistro($request);
         }else if($query==='updata'){
             return $this->upDataRegistro($request);
+        }else if($query==='filter'){
+            return $this->filterRegistro($request);
         }
     }
     protected function insertRegistro($request){
@@ -132,5 +134,11 @@ class RegistroController extends Controller
         }catch(QueryException $ex){
             return json_encode(array('status'=>1));
         }
+    }
+    protected function filterRegistro($request){
+        $result = Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.updated_at","postulante.nombre","postulante.correo","postulante.numero",
+                "postulante.observacion","postulante.estado_idestado","postulante.ciudad_idciudad","curso_has_carrera.curso_idcurso",
+                "curso_has_carrera.carrera_idcarrera")->where('postulante.estado_idestado',$request->parametro)->orderBy('postulante.correo')->get();
+        return json_encode($result);
     }
 }

@@ -30370,6 +30370,7 @@ var EnhancedTableToolbar = function EnhancedTableToolbar(props) {
       title: "Delete",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(AlertDialog, {
         selected: props.selected,
+        id: props.id,
         setSelected: props.setSelected,
         rows: rows,
         data: props.data,
@@ -30601,7 +30602,7 @@ function BasicMenu(props) {
       anchorEl = _React$useState14[0],
       setAnchorEl = _React$useState14[1];
 
-  var configSate = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_ContextLogin__WEBPACK_IMPORTED_MODULE_2__["default"]);
+  var config = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_ContextLogin__WEBPACK_IMPORTED_MODULE_2__["default"]);
   var open = Boolean(anchorEl);
 
   var handleClick = function handleClick(event) {
@@ -30609,24 +30610,30 @@ function BasicMenu(props) {
   };
 
   var handleClose = function handleClose(e, parametro, configSate) {
+    var token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     var archivoDatos = {
       parametro: parametro,
       configSate: configSate,
       id: id
     };
     archivoDatos = JSON.stringify(archivoDatos);
-    var formData = new FormData();
-    formData.append('data', archivoDatos);
-    fetch('', {
+    fetch('/registro/filter', {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json'
+      },
       method: 'POST',
-      body: formData
+      body: archivoDatos
     }).then(function (res) {
       return res.text();
-    }).then(function (dataJson) {
-      //console.log(dataJson);
-      if (dataJson.length > 0) {
-        props.setData(JSON.parse(dataJson));
+    }).then(function (response) {
+      try {
+        props.setData(JSON.parse(response));
         props.setBandera(true);
+      } catch (error) {
+        document.open();
+        document.write(response);
+        document.close();
       }
     });
     setAnchorEl(null);
@@ -30650,17 +30657,17 @@ function BasicMenu(props) {
       },
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_26__["default"], {
         onClick: function onClick(e) {
-          return handleClose(e, 1, configSate['configSate']);
+          return handleClose(e, 1, config['configSate']);
         },
         children: "Contactado"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_26__["default"], {
         onClick: function onClick(e) {
-          return handleClose(e, 2, configSate['configSate']);
+          return handleClose(e, 2, config['configSate']);
         },
         children: "Sin contactar"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_MenuItem__WEBPACK_IMPORTED_MODULE_26__["default"], {
         onClick: function onClick(e) {
-          return handleClose(e, 3, configSate['configSate']);
+          return handleClose(e, 3, config['configSate']);
         },
         children: "Cita"
       })]
@@ -30688,41 +30695,47 @@ function AlertDialog(props) {
     setOpen(true);
   };
 
-  var handleClose = function handleClose(e, configSate) {
+  var handleClose = function handleClose(e, configSate, id) {
+    var token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     var parametro = props.selected;
     var archivoDatos = {
       parametro: parametro,
-      configSate: configSate
+      configSate: configSate,
+      id: id
     };
     archivoDatos = JSON.stringify(archivoDatos);
-    var formData = new FormData();
-    formData.append('data', archivoDatos);
     setConsulta({
       estadoText: 1,
       estadoBTN: 1
     });
     fetch('', {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json'
+      },
       method: 'POST',
-      body: formData
+      body: archivoDatos
     }).then(function (res) {
       return res.text();
-    }).then(function (dataJson) {
-      if (dataJson.length > 0) {
-        if (dataJson == "ok") {
+    }).then(function (response) {
+      console.log(response);
+      /*
+      if(dataJson.length>0){
+        if(dataJson=="ok"){
           setConsulta({
-            estadoText: 2,
-            estadoBTN: 2
+            estadoText:2,
+            estadoBTN:2
           });
-          props.selected.map(function (elS) {
-            props.rows.map(function (elR, index) {
-              if (elR['correo'] == elS) {
-                props.rows.splice(index, index);
+          props.selected.map((elS)=>{
+            props.rows.map((elR,index)=>{
+              if(elR['correo']==elS){
+                props.rows.splice(index,index);
               }
             });
-          });
+          })
           props.setSelected([]);
         }
-      }
+      }*/
     });
   };
 
@@ -30759,7 +30772,7 @@ function AlertDialog(props) {
           children: "Cancelar"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_28__["default"], {
           onClick: function onClick(e) {
-            handleClose(e, configSate['configSate']);
+            handleClose(e, configSate['configSate'], props.id);
           },
           autoFocus: true,
           children: "Eliminar"

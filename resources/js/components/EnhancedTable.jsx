@@ -270,7 +270,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <AlertDialog selected={props.selected} setSelected={props.setSelected} rows={rows} data={props.data} setData={props.setData}/>
+          <AlertDialog selected={props.selected} id={props.id} setSelected={props.setSelected} rows={rows} data={props.data} setData={props.setData}/>
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
@@ -443,30 +443,36 @@ export default function EnhancedTable(props) {
 function BasicMenu(props) {
   const id = props.id;
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const configSate = React.useContext(ContextLogin);
+  const config = React.useContext(ContextLogin);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = (e,parametro,configSate) => {
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     let archivoDatos = {
       parametro,
       configSate,
       id,
     }
     archivoDatos = JSON.stringify(archivoDatos);
-    let formData = new FormData();
-    formData.append('data', archivoDatos);
-    fetch('',{
+    fetch('/registro/filter',{
+      headers:{
+        'X-CSRF-TOKEN':token,
+        'Content-Type':'application/json',
+      },
       method: 'POST', 
-      body: formData, 
+      body: archivoDatos, 
     })
     .then(res => {return res.text()})
-    .then(dataJson => {
-        //console.log(dataJson);
-        if(dataJson.length>0){
-          props.setData(JSON.parse(dataJson));
+    .then(response => {
+        try {
+          props.setData(JSON.parse(response));
           props.setBandera(true);
+        } catch (error) {
+          document.open();
+          document.write(response);
+          document.close();
         }
     })
     setAnchorEl(null);
@@ -492,9 +498,9 @@ function BasicMenu(props) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={(e)=>handleClose(e,1,configSate['configSate'])}>Contactado</MenuItem>
-        <MenuItem onClick={(e)=>handleClose(e,2,configSate['configSate'])}>Sin contactar</MenuItem>
-        <MenuItem onClick={(e)=>handleClose(e,3,configSate['configSate'])}>Cita</MenuItem>
+        <MenuItem onClick={(e)=>handleClose(e,1,config['configSate'])}>Contactado</MenuItem>
+        <MenuItem onClick={(e)=>handleClose(e,2,config['configSate'])}>Sin contactar</MenuItem>
+        <MenuItem onClick={(e)=>handleClose(e,3,config['configSate'])}>Cita</MenuItem>
       </Menu>
     </div>
   );
@@ -512,25 +518,31 @@ function AlertDialog(props) {
     setOpen(true);
   };
 
-  const handleClose = (e,configSate) => {
+  const handleClose = (e,configSate,id) => {
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const parametro = props.selected;
     let archivoDatos = {
       parametro,
       configSate,
+      id,
     }
     archivoDatos = JSON.stringify(archivoDatos);
-    let formData = new FormData();
-    formData.append('data', archivoDatos);
     setConsulta({
       estadoText:1,
       estadoBTN:1
     });
     fetch('',{
+      headers:{
+        'X-CSRF-TOKEN':token,
+        'Content-Type':'application/json',
+      },
       method: 'POST', 
-      body: formData, 
+      body: archivoDatos, 
     })
     .then(res => {return res.text()})
-    .then(dataJson => {
+    .then(response => {
+      console.log(response);
+        /*
         if(dataJson.length>0){
           if(dataJson=="ok"){
             setConsulta({
@@ -546,8 +558,8 @@ function AlertDialog(props) {
             })
             props.setSelected([]);
           }
-        }
-    })
+        }*/
+    });
   };
   const cambiosText = () =>{
     if(consulta.estadoText==0){
@@ -574,7 +586,7 @@ function AlertDialog(props) {
       <>
         <Button onClick={(e)=>{setOpen(false)}}>Cancelar</Button>
         <Button onClick={(e)=>{
-          handleClose(e,configSate['configSate']);
+          handleClose(e,configSate['configSate'],props.id);
         }} autoFocus>
           Eliminar
         </Button>
