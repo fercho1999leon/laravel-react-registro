@@ -21,8 +21,8 @@ class CreateCursoHasCarreraTable extends Migration
         });
         Schema::table('curso_has_carrera', function (Blueprint $table) {
             $table->foreign('postulante_correo')->references('correo')->on('postulante')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('curso_idcurso')->references('idcurso')->on('curso')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('carrera_idcarrera')->references('idcarrera')->on('carrera')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('curso_idcurso')->references('idcurso')->on('curso')->onUpdate('cascade');
+            $table->foreign('carrera_idcarrera')->references('idcarrera')->on('carrera')->onUpdate('cascade');
         });
     }
 

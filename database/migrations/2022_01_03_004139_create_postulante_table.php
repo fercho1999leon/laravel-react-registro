@@ -24,8 +24,8 @@ class CreatePostulanteTable extends Migration
             $table->primary('correo');
         });
         Schema::table('postulante', function (Blueprint $table) {
-            $table->foreign('estado_idestado')->references('idestado')->on('estado')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('ciudad_idciudad')->references('idciudad')->on('ciudad')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('estado_idestado')->references('idestado')->on('estado')->onUpdate('cascade');
+            $table->foreign('ciudad_idciudad')->references('idciudad')->on('ciudad')->onUpdate('cascade');
         });
         
     }
