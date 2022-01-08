@@ -42,6 +42,8 @@ class RegistroController extends Controller
             return $this->upDataRegistro($request);
         }else if($query==='filter'){
             return $this->filterRegistro($request);
+        }else if($query==='delect'){
+            return $this->deleteRegistro($request);
         }
     }
     protected function insertRegistro($request){
@@ -140,5 +142,11 @@ class RegistroController extends Controller
                 "postulante.observacion","postulante.estado_idestado","postulante.ciudad_idciudad","curso_has_carrera.curso_idcurso",
                 "curso_has_carrera.carrera_idcarrera")->where('postulante.estado_idestado',$request->parametro)->orderBy('postulante.correo')->get();
         return json_encode($result);
+    }
+    protected function deleteRegistro($request){
+        foreach($request->parametro as $value){
+            Postulante::where('correo',$value)->delete();
+        }
+        return json_encode(array('status'=>true));
     }
 }

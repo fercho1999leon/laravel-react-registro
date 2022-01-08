@@ -270,7 +270,7 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <AlertDialog selected={props.selected} id={props.id} setSelected={props.setSelected} rows={rows} data={props.data} setData={props.setData}/>
+          <AlertDialog setBandera={props.setBandera} selected={props.selected} id={props.id} setSelected={props.setSelected} rows={rows} data={props.data} setData={props.setData}/>
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
@@ -531,7 +531,7 @@ function AlertDialog(props) {
       estadoText:1,
       estadoBTN:1
     });
-    fetch('',{
+    fetch('/registro/delect',{
       headers:{
         'X-CSRF-TOKEN':token,
         'Content-Type':'application/json',
@@ -541,24 +541,28 @@ function AlertDialog(props) {
     })
     .then(res => {return res.text()})
     .then(response => {
-      console.log(response);
-        /*
-        if(dataJson.length>0){
-          if(dataJson=="ok"){
-            setConsulta({
-              estadoText:2,
-              estadoBTN:2
+      try {
+        const dataJson = JSON.parse(response);
+        if(dataJson['status']){
+          setConsulta({
+            estadoText:2,
+            estadoBTN:2
+          });
+          props.selected.map((elS)=>{
+            props.rows.map((elR,index)=>{
+              if(elR['correo']==elS){
+                props.rows.splice(index,index);
+              }
             });
-            props.selected.map((elS)=>{
-              props.rows.map((elR,index)=>{
-                if(elR['correo']==elS){
-                  props.rows.splice(index,index);
-                }
-              });
-            })
-            props.setSelected([]);
-          }
-        }*/
+          })
+          props.setSelected([]);
+          props.setBandera(true);
+        }
+      } catch (error) {
+        document.open();
+        document.write(response);
+        document.close();
+      }
     });
   };
   const cambiosText = () =>{

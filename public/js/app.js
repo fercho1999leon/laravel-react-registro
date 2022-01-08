@@ -30369,6 +30369,7 @@ var EnhancedTableToolbar = function EnhancedTableToolbar(props) {
     }), numSelected > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_15__["default"], {
       title: "Delete",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(AlertDialog, {
+        setBandera: props.setBandera,
         selected: props.selected,
         id: props.id,
         setSelected: props.setSelected,
@@ -30708,7 +30709,7 @@ function AlertDialog(props) {
       estadoText: 1,
       estadoBTN: 1
     });
-    fetch('', {
+    fetch('/registro/delect', {
       headers: {
         'X-CSRF-TOKEN': token,
         'Content-Type': 'application/json'
@@ -30718,24 +30719,29 @@ function AlertDialog(props) {
     }).then(function (res) {
       return res.text();
     }).then(function (response) {
-      console.log(response);
-      /*
-      if(dataJson.length>0){
-        if(dataJson=="ok"){
+      try {
+        var dataJson = JSON.parse(response);
+
+        if (dataJson['status']) {
           setConsulta({
-            estadoText:2,
-            estadoBTN:2
+            estadoText: 2,
+            estadoBTN: 2
           });
-          props.selected.map((elS)=>{
-            props.rows.map((elR,index)=>{
-              if(elR['correo']==elS){
-                props.rows.splice(index,index);
+          props.selected.map(function (elS) {
+            props.rows.map(function (elR, index) {
+              if (elR['correo'] == elS) {
+                props.rows.splice(index, index);
               }
             });
-          })
+          });
           props.setSelected([]);
+          props.setBandera(true);
         }
-      }*/
+      } catch (error) {
+        document.open();
+        document.write(response);
+        document.close();
+      }
     });
   };
 
