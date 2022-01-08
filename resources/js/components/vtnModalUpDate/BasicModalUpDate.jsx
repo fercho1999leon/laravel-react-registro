@@ -35,7 +35,7 @@ export default function BasicModalUpDate(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <FormUpDate dataUpDate={props.dataUpDate} setCloseParent={handleClose}></FormUpDate>
+          <FormUpDate dataUpDate={props.dataUpDate} id={props.id} setCloseParent={handleClose}></FormUpDate>
         </Box>
       </Modal>
     </div>

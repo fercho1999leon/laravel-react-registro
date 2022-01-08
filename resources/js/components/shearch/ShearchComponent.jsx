@@ -23,7 +23,7 @@ export default function ShearchComponent(props){
                     noValidate
                     autoComplete="off"
                 >
-                    <TextField ref={refTextShearch} size="small" id="outlined-basic" label="Ingrese Apellido" variant="outlined" />
+                    <TextField ref={refTextShearch} size="small" id="outlined-basic" label="Ingrese Nombre" variant="outlined" />
                 </Box>
                 <span></span>
                 <Stack direction="row" spacing={2}>

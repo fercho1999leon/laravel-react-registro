@@ -30390,12 +30390,6 @@ EnhancedTableToolbar.propTypes = {
   numSelected: (prop_types__WEBPACK_IMPORTED_MODULE_11___default().number.isRequired)
 };
 function EnhancedTable(props) {
-  if (props.bandera) {
-    rows.splice(0, rows.length);
-    insertData(props.data);
-    props.setBandera(false);
-  }
-
   dateJson = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_ContextLogin__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState('asc'),
@@ -30427,6 +30421,16 @@ function EnhancedTable(props) {
       _React$useState12 = _slicedToArray(_React$useState11, 2),
       rowsPerPage = _React$useState12[0],
       setRowsPerPage = _React$useState12[1];
+
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    if (props.bandera) {
+      rows.splice(0, rows.length);
+      insertData(props.data);
+      props.setBandera(false);
+      setSelected([]);
+      setPage(0);
+    }
+  });
 
   var handleRequestSort = function handleRequestSort(event, property) {
     var isAsc = orderBy === property && order === 'asc';
@@ -30555,7 +30559,8 @@ function EnhancedTable(props) {
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_TableCell__WEBPACK_IMPORTED_MODULE_6__["default"], {
                   align: "right",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_vtnModalUpDate_BasicModalUpDate__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    dataUpDate: row
+                    dataUpDate: row,
+                    id: props.id
                   })
                 })]
               }, row.correo);
@@ -31564,7 +31569,7 @@ function ShearchComponent(props) {
         ref: refTextShearch,
         size: "small",
         id: "outlined-basic",
-        label: "Ingrese Apellido",
+        label: "Ingrese Nombre",
         variant: "outlined"
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Stack__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -31710,6 +31715,7 @@ function BasicModalUpDate(props) {
         sx: style,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_FormUpDate__WEBPACK_IMPORTED_MODULE_1__["default"], {
           dataUpDate: props.dataUpDate,
+          id: props.id,
           setCloseParent: handleClose
         })
       })
@@ -31793,12 +31799,12 @@ var styleRadio = {
   margin: "auto 10px"
 };
 
-var packageData = function packageData(dataUpDate, setSatateConsulta, configSate) {
+var packageData = function packageData(dataUpDate, setSatateConsulta, configSate, id) {
+  var token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
   var arrayData = document.getElementsByClassName('dataOut');
   var text = document.getElementsByClassName('text-result-get');
   var estadoUsuario;
   var typeInteres = arrayData[3].checked ? 1 : 2;
-  var idUpdate = dataUpDate.correo;
 
   if (arrayData[8].checked) {
     estadoUsuario = 1;
@@ -31810,31 +31816,41 @@ var packageData = function packageData(dataUpDate, setSatateConsulta, configSate
 
   var archivoDatos = {
     nombre: arrayData[0].value == "" ? dataUpDate.nombre : arrayData[0].value,
-    correo: arrayData[2].value == "" ? dataUpDate.correo : arrayData[1].value,
-    numeroContacto: arrayData[3].value == "" ? dataUpDate.numero : arrayData[2].value,
+    correo: arrayData[1].value == "" ? dataUpDate.correo : arrayData[1].value,
+    numeroContacto: arrayData[2].value == "" ? dataUpDate.numero : arrayData[2].value,
     typeInteres: typeInteres,
     interes: arrayData[5].selectedIndex,
     observacion: arrayData[6].value,
     ciudad: arrayData[7].selectedIndex,
     estado: estadoUsuario,
-    idUpdate: idUpdate,
-    configSate: configSate
+    configSate: configSate,
+    id: id
   };
   archivoDatos = JSON.stringify(archivoDatos);
-  var formData = new FormData();
-  formData.append('data', archivoDatos);
-  fetch('', {
+  fetch('/registro/updata', {
+    headers: {
+      'X-CSRF-TOKEN': token,
+      'Content-Type': 'application/json'
+    },
     method: 'POST',
-    body: formData
+    body: archivoDatos
   }).then(function (response) {
     return response.text();
-  }).then(function (respuestaText) {
-    if (respuestaText == 0) {
-      setSatateConsulta(true);
-      text['0'].textContent = "Usuario actualizado... ";
-    } else if (respuestaText == 1) {
-      setSatateConsulta(true);
-      text['0'].textContent = "Error al actualizar... ";
+  }).then(function (response) {
+    try {
+      response = JSON.parse(response);
+
+      if (response['status'] === 0) {
+        setSatateConsulta(true);
+        text['0'].textContent = "Usuario actualizado... ";
+      } else if (response['status'] === 1) {
+        setSatateConsulta(true);
+        text['0'].textContent = "Error al actualizar... ";
+      }
+    } catch (error) {
+      document.open();
+      document.write(response);
+      document.close();
     }
   });
 };
@@ -31868,7 +31884,7 @@ function ChildModal(props) {
 
   var handleOpen = function handleOpen() {
     setOpen(true);
-    packageData(props.dataUpDate, setSatateConsulta, configSate['configSate']);
+    packageData(props.dataUpDate, setSatateConsulta, configSate['configSate'], props.id);
   };
 
   var handleClose = function handleClose() {
@@ -32220,6 +32236,7 @@ function FormUpDate(props) {
       className: "FormIngreso",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(ChildModal, {
         setCloseParent: props.setCloseParent,
+        id: props.id,
         dataUpDate: props.dataUpDate
       })
     })]

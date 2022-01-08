@@ -286,11 +286,6 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable(props) {
-  if(props.bandera){
-    rows.splice(0, rows.length);
-    insertData(props.data);
-    props.setBandera(false);
-  }
   dateJson = React.useContext(ContextLogin);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('fecha');
@@ -298,6 +293,15 @@ export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  React.useEffect(()=>{
+    if(props.bandera){
+      rows.splice(0, rows.length);
+      insertData(props.data);
+      props.setBandera(false);
+      setSelected([]);
+      setPage(0);
+    }
+  });
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -403,7 +407,7 @@ export default function EnhancedTable(props) {
                       <TableCell align="right">{row.ciudad_idciudad}</TableCell>
                       <TableCell align="right">{row.curso_idcurso}</TableCell>
                       <TableCell align="right">{row.carrera_idcarrera}</TableCell>
-                      <TableCell align="right">{<BasicModalUpDate dataUpDate={row}></BasicModalUpDate>}</TableCell>
+                      <TableCell align="right">{<BasicModalUpDate dataUpDate={row} id={props.id}></BasicModalUpDate>}</TableCell>
                     </TableRow>
                   );
                 })}

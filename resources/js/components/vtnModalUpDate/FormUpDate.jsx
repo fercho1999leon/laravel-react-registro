@@ -9,42 +9,51 @@ import ContextLogin from '../ContextLogin';
 const styleRadio = {
     margin: "auto 10px"
 }
-const packageData=(dataUpDate,setSatateConsulta,configSate)=>{
+const packageData=(dataUpDate,setSatateConsulta,configSate,id)=>{
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const arrayData = document.getElementsByClassName('dataOut');
     const text = document.getElementsByClassName('text-result-get');
     let estadoUsuario;
     const typeInteres = arrayData[3].checked ? 1:2;
-    const idUpdate=dataUpDate.correo;
     if(arrayData[8].checked){estadoUsuario=1}
     else if(arrayData[9].checked){estadoUsuario=2}
     else if(arrayData[10].checked){estadoUsuario=3}
     let archivoDatos={
         nombre:arrayData[0].value==""?dataUpDate.nombre:arrayData[0].value,
-        correo:arrayData[2].value==""?dataUpDate.correo:arrayData[1].value,
-        numeroContacto:arrayData[3].value==""?dataUpDate.numero:arrayData[2].value,
+        correo:arrayData[1].value==""?dataUpDate.correo:arrayData[1].value,
+        numeroContacto:arrayData[2].value==""?dataUpDate.numero:arrayData[2].value,
         typeInteres,
         interes:arrayData[5].selectedIndex,
         observacion:arrayData[6].value,
         ciudad:arrayData[7].selectedIndex,
         estado:estadoUsuario,
-        idUpdate,
         configSate,
+        id,
     }
     archivoDatos = JSON.stringify(archivoDatos);
-    let formData = new FormData();
-    formData.append('data', archivoDatos);
-    fetch('',{
+    fetch('/registro/updata',{
+        headers:{
+            'X-CSRF-TOKEN':token,
+            'Content-Type':'application/json',
+        },
         method: 'POST', 
-        body: formData, 
+        body: archivoDatos, 
     }).then(response => {
         return response.text();
-    }).then(respuestaText =>{
-        if(respuestaText==0){
-            setSatateConsulta(true);
-            text['0'].textContent="Usuario actualizado... ";
-        }else if(respuestaText==1){
-            setSatateConsulta(true);
-            text['0'].textContent="Error al actualizar... ";
+    }).then(response =>{
+        try {
+            response = JSON.parse(response);
+            if(response['status']===0){
+                setSatateConsulta(true);
+                text['0'].textContent="Usuario actualizado... ";
+            }else if(response['status']===1){
+                setSatateConsulta(true);
+                text['0'].textContent="Error al actualizar... ";
+            }
+        } catch (error) {
+            document.open();
+            document.write(response);
+            document.close();
         }
     });
 }
@@ -68,7 +77,7 @@ const style = {
     const [stateConsulta, setSatateConsulta] = React.useState(false);
     const handleOpen = () => {
       setOpen(true);
-      packageData(props.dataUpDate,setSatateConsulta,configSate['configSate']);
+      packageData(props.dataUpDate,setSatateConsulta,configSate['configSate'],props.id);
     };
     const handleClose = () => {
         setOpen(false);
@@ -266,7 +275,7 @@ export default function FormUpDate(props){
                     </div>
                 </div>
                 <div className="FormIngreso">
-                    <ChildModal setCloseParent={props.setCloseParent} dataUpDate={props.dataUpDate}/>
+                    <ChildModal setCloseParent={props.setCloseParent} id={props.id} dataUpDate={props.dataUpDate}/>
                 </div>
             </div>
         );

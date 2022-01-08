@@ -38,6 +38,8 @@ class RegistroController extends Controller
             return $this->insertRegistro($request);
         }else if($query=='shearch'){
             return $this->shearchRegistro($request);
+        }else if($query==='updata'){
+            return $this->upDataRegistro($request);
         }
     }
     protected function insertRegistro($request){
@@ -82,14 +84,53 @@ class RegistroController extends Controller
             if($parametro==0){
                 $result = Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.updated_at","postulante.nombre","postulante.correo","postulante.numero",
                 "postulante.observacion","postulante.estado_idestado","postulante.ciudad_idciudad","curso_has_carrera.curso_idcurso",
-                "curso_has_carrera.carrera_idcarrera")->get();
+                "curso_has_carrera.carrera_idcarrera")->orderBy('postulante.correo')->get();
                 return json_encode($result);
             }else{
-                return "Error";
+                $result = Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.updated_at","postulante.nombre","postulante.correo","postulante.numero",
+                "postulante.observacion","postulante.estado_idestado","postulante.ciudad_idciudad","curso_has_carrera.curso_idcurso",
+                "curso_has_carrera.carrera_idcarrera")->where('postulante.nombre','LIKE','%'.$parametro.'%')->orderBy('postulante.correo')->get();
+                return json_encode($result);
             }
 
         }catch(QueryException $ex){
             return $ex;
+        }
+    }
+    protected function upDataRegistro($request){
+        try{
+                Postulante::where('correo',$request->correo)->update([
+                    'correo'=>$request->correo,
+                    'nombre'=>$request->nombre,
+                    'numero'=>$request->numeroContacto,
+                    'observacion'=>$request->observacion,
+                    'estado_idestado'=>$request->estado,
+                    'ciudad_idciudad'=>$request->ciudad
+                ]);
+                if($request->typeInteres==1){
+                    if($request->interes!=0){
+                        CursoHasCarrera::where('postulante_correo',$request->correo)->update([
+                            'carrera_idcarrera'=>$request->interes
+                        ]);
+                    }else{
+                        CursoHasCarrera::where('postulante_correo',$request->correo)->update([
+                            'carrera_idcarrera'=>null
+                        ]);
+                    }
+                }else if($request->typeInteres==2){
+                    if($request->interes!=0){
+                        CursoHasCarrera::where('postulante_correo',$request->correo)->update([
+                            'curso_idcurso'=>$request->interes
+                        ]);
+                    }else{
+                        CursoHasCarrera::where('postulante_correo',$request->correo)->update([
+                            'curso_idcurso'=>null
+                        ]);
+                    }
+                }
+            return json_encode(array('status'=>0));
+        }catch(QueryException $ex){
+            return json_encode(array('status'=>1));
         }
     }
 }
