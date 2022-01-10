@@ -45,7 +45,15 @@ function BotonAlerta() {
 }
 
 const onClickGuardar = (handleClick,setTypeMsg) =>{
-    handleClick();
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    const arrayData = document.getElementsByClassName('dataNewUser');
+    const nombre = arrayData[0];
+    const correo = arrayData[1];
+    const cedula = arrayData[2];
+    const contrasena = arrayData[3];
+    const confContrasena = arrayData[4];
+    const rol = arrayData[5];
+    console.log(arrayData);
 }
 
 const styleBtn = {
