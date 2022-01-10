@@ -1,0 +1,19 @@
+.ContentMainDownload{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: inherit;
+    background-color: var(--color-forms);
+
+}
+.ContentComponentDownload{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    text-align: center;
+    width: inherit;
+    color: var(--color-primary);
+}
+.ContentComponentDownload > div{
+    margin: 10px auto;
+}

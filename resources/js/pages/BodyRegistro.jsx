@@ -6,6 +6,9 @@ import Welcome from "../components/Welcome";
 import {ProviderLogin} from '../components/ContextLogin';
 import FormIngreso from "../components/FormIngreso";
 import FormShowDate from "../components/FormShowDate";
+import FormDownload from "../components/FormDownload";
+import FormAddTyC from "../components/FormAddTyC";
+import FormNewUser from "../components/FormNewUser";
 const importConfig = (setConfigState,setDateJson) =>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     fetch('/registro',{
@@ -38,6 +41,17 @@ const findJson = (matriz,element) =>{
     });
     return state;
 }
+const cerrarSession = () =>{
+    fetch('/logout',{
+        method: 'GET', 
+    }).then(res => {return res.text()})
+    .then(respuesta => {
+        document.open();
+        document.write(respuesta);
+        document.close();
+
+    });
+}
 export default function BodyRegistro(){
     const [dateJson,setDateJson] = React.useState(null);
     const [configSate,setConfigState] = React.useState(null);
@@ -49,15 +63,21 @@ export default function BodyRegistro(){
         if(stateForm==0){
             return (<Welcome></Welcome>);
         }
+        if(stateForm==100){
+            cerrarSession();
+            return (<Welcome></Welcome>);
+        }
         const selectNav = () =>{
             if(stateForm==1){
                 return (<FormIngreso id={stateForm}></FormIngreso>);
             }else if(stateForm==2){
                 return (<FormShowDate id={stateForm}></FormShowDate>);
             }else if(stateForm==3){
-                return (<Welcome></Welcome>);
+                return (<FormDownload id={stateForm}></FormDownload>);
             }else if(stateForm==4){
-                return (<Welcome></Welcome>);
+                return (<FormAddTyC id={stateForm}></FormAddTyC>);
+            }else if(stateForm==1000){
+                return (<FormNewUser></FormNewUser>);
             }
         } 
         return configSate?findJson(configSate,stateForm)?selectNav():<></>:<></>;

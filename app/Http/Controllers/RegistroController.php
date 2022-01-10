@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrera;
+use App\Models\Curso;
 use App\Models\User;
 use App\Models\CursoHasCarrera;
 use App\Models\Postulante;
@@ -44,6 +46,10 @@ class RegistroController extends Controller
             return $this->filterRegistro($request);
         }else if($query==='delect'){
             return $this->deleteRegistro($request);
+        }else if($query==='download'){
+            return $this->downloadRegister($request);
+        }else if($query==='addTyC'){
+            return $this->addTyC($request);
         }
     }
     protected function insertRegistro($request){
@@ -88,12 +94,12 @@ class RegistroController extends Controller
             if($parametro==0){
                 $result = Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.updated_at","postulante.nombre","postulante.correo","postulante.numero",
                 "postulante.observacion","postulante.estado_idestado","postulante.ciudad_idciudad","curso_has_carrera.curso_idcurso",
-                "curso_has_carrera.carrera_idcarrera")->orderBy('postulante.correo')->get();
+                "curso_has_carrera.carrera_idcarrera")->orderBy('postulante.updated_at')->get();
                 return json_encode($result);
             }else{
                 $result = Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.updated_at","postulante.nombre","postulante.correo","postulante.numero",
                 "postulante.observacion","postulante.estado_idestado","postulante.ciudad_idciudad","curso_has_carrera.curso_idcurso",
-                "curso_has_carrera.carrera_idcarrera")->where('postulante.nombre','LIKE','%'.$parametro.'%')->orderBy('postulante.correo')->get();
+                "curso_has_carrera.carrera_idcarrera")->where('postulante.nombre','LIKE','%'.$parametro.'%')->orderBy('postulante.updated_at')->get();
                 return json_encode($result);
             }
 
@@ -148,5 +154,50 @@ class RegistroController extends Controller
             Postulante::where('correo',$value)->delete();
         }
         return json_encode(array('status'=>true));
+    }
+    protected function downloadRegister($request){
+        if($request->typeInteres==1){
+            $result = $request->correoValido==0?Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.nombre","postulante.correo","postulante.numero")
+            ->where('curso_has_carrera.carrera_idcarrera',$request->interes)
+            ->get()
+            :
+            Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.nombre","postulante.correo","postulante.numero")
+            ->where([['curso_has_carrera.carrera_idcarrera','=',$request->interes],['postulante.correo','NOT LIKE','%randon%']])
+            ->get();
+            return json_encode($result);
+        }else if($request->typeInteres==2){
+            $result = $request->correoValido==0?Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.nombre","postulante.correo","postulante.numero")
+            ->where('curso_has_carrera.curso_idcurso',$request->interes)
+            ->get()
+            :
+            Postulante::join("curso_has_carrera","curso_has_carrera.postulante_correo", "=", "postulante.correo")->select("postulante.nombre","postulante.correo","postulante.numero")
+            ->where([['curso_has_carrera.curso_idcurso','=',$request->interes],['postulante.correo','NOT LIKE','%randon%']])
+            ->get();
+            return json_encode($result);
+        }
+    }
+    protected function addTyC($request){
+        $urlJson = strtoupper(substr(PHP_OS, 0, 3))==='WIN'?dirname(__DIR__).'\ConfigJson\config.json':dirname(__DIR__).'/ConfigJson/config.json';
+        $jsonString = file_get_contents($urlJson);
+        $data = json_decode($jsonString, true);
+        $exportData = array();
+        if($request->typeInteres==1){
+            $temp = sizeof($data['listInteresC'])+1;
+            array_push($data['listInteresC'],array('id'=>$temp,'name'=>$request->name));
+            $carrera = new Carrera();
+            $carrera->idcarrera = $temp;
+            $carrera->nombre = $request->name;
+            $carrera->save();
+        }else if($request->typeInteres==2){
+            $temp = sizeof($data['listInteresT'])+1;
+            array_push($data['listInteresT'],array('id'=>$temp,'name'=>$request->name));
+            $curso = new Curso();
+            $curso->idcurso = $temp;
+            $curso->nombre = $request->name;
+            $curso->save();
+        }
+        $newJsonString = json_encode($data);
+        file_put_contents($urlJson, $newJsonString);
+        return json_encode($data);
     }
 }

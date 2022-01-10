@@ -4,6 +4,8 @@
     height: 50px;
     font-size: 90%;
     border: none;
+    margin-top: 2px;
+    margin-bottom: 2px;
     /*border-top: solid 1px white;
     border-bottom: solid 1px white;*/
 }

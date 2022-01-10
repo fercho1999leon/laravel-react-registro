@@ -551,12 +551,12 @@ function AlertDialog(props) {
           props.selected.map((elS)=>{
             props.rows.map((elR,index)=>{
               if(elR['correo']==elS){
-                props.rows.splice(index,index);
+                props.rows.splice(index,1);
               }
             });
           })
-          props.setSelected([]);
           props.setBandera(true);
+          props.setSelected([]);
         }
       } catch (error) {
         document.open();

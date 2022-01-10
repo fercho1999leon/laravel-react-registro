@@ -1,0 +1,8 @@
+.ContentConponentAddTyC{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: inherit;
+    color: var(--color-primary);
+    background-color: var(--color-forms);
+}
