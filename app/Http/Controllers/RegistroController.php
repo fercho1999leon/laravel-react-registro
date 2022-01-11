@@ -22,8 +22,8 @@ class RegistroController extends Controller
         $arrayExport = array();
         $ci = Auth::user()->getAuthIdentifier();
         $rol = User::select('rol')->where('id',$ci)->first();
-        $urlJsonConfigNav = dirname(__DIR__).'\ConfigJson\configNav.json';
-        $urlJsonConfig = dirname(__DIR__).'\ConfigJson\config.json';
+        $urlJsonConfigNav = strtoupper(substr(PHP_OS, 0, 3))==='WIN'?dirname(__DIR__).'\ConfigJson\configNav.json':dirname(__DIR__).'/ConfigJson/configNav.json';
+        $urlJsonConfig = strtoupper(substr(PHP_OS, 0, 3))==='WIN'?dirname(__DIR__).'\ConfigJson\config.json':dirname(__DIR__).'/ConfigJson/config.json';
         $jsonStringNav = file_get_contents($urlJsonConfigNav);
         $jsonString = file_get_contents($urlJsonConfig);
         $array = json_decode($jsonStringNav, true);
