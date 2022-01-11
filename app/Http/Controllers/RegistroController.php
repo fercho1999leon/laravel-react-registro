@@ -53,7 +53,17 @@ class RegistroController extends Controller
             return $this->addTyC($request);
         }else if($query==='addNewUser'){
             return $this->addNewUser($request);
+        }else if($query==='users'){
+            return $this->storeUsers($request);
+        }else if($query==='updateUser'){
+            return $this->updateUser($request);
+        }else if($query==='delectUser'){
+            return $this->delectUser($request);
         }
+    }
+    public function storeUsers($request){
+        $user = User::select('ci','name','rol','email')->get();
+        return $user;
     }
     protected function insertRegistro($request){
         try { 
@@ -211,6 +221,23 @@ class RegistroController extends Controller
         $user->rol = $request->rol;
         $user->password = Hash::make($request->contrasena);
         $user->save();
-        return json_encode(array('status'=>true));
+        return json_encode(array('status'=>true,'data'=>User::select('ci','name','rol','email')->get()));
+    }
+    protected function updateUser($request){
+        User::where('email',$request->correo)->update(
+            [
+                'ci'=>$request->cedula,
+                'name'=>$request->nombre,
+                'email'=>$request->correo,
+                'active'=>1,
+                'rol'=>$request->rol,
+                'password'=>Hash::make($request->contrasena)
+            ]
+        );
+        return json_encode(array('status'=>true,'data'=>User::select('ci','name','rol','email')->get()));
+    }
+    protected function delectUser($request){
+        User::where('email',$request->correo)->delete();
+        return json_encode(User::select('ci','name','rol','email')->get());
     }
 }

@@ -1,182 +1,175 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import FormHelperText from '@mui/material/FormHelperText';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Edit from '@mui/icons-material/Edit';
+import TableModel from './TableModel';
 import ContextLogin from './ContextLogin';
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-function BotonAlerta(props) {
-    const configSate = React.useContext(ContextLogin);
-    const [typeMsg, setTypeMsg] = React.useState(true);
-    const [open, setOpen] = React.useState(false);
-  
-    const handleClick = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setOpen(false);
-    };
-  
-    return (
-        <Stack spacing={2} direction="row">
-          <Button sx={styleBtn} variant="contained" onClick={(e)=>{
-              onClickGuardar(configSate['configSate'],props.id,handleClick,setTypeMsg);
-          }}>Guardar</Button>
-          <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity={typeMsg?"success":"error"} sx={{ width: '100%' }}>
-              {typeMsg?'INGRESO CORRECTO':'ERROR COMPLETE LOS CAMPOS'}
-            </Alert>
-          </Snackbar>
-        </Stack>
-    );
-}
-
-const onClickGuardar = (configSate,id,handleClick,setTypeMsg) =>{
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    const form = document.querySelector('form');
-    const valid = form.reportValidity();
-    if(valid){
-        const arrayData = document.getElementsByClassName('dataNewUser');
-        const nombre = arrayData[0].childNodes[1].childNodes[0].value;
-        const correo = arrayData[1].childNodes[1].childNodes[0].value;
-        const cedula = arrayData[2].childNodes[1].childNodes[0].value;
-        const contrasena = arrayData[3].childNodes[1].childNodes[0].value;
-        const rol = arrayData[4].childNodes[1].value;
-        let archivoDatos={
-            nombre,
-            correo,
-            cedula,
-            contrasena,
-            rol,
-            configSate,
-            id,
-        }
-        archivoDatos = JSON.stringify(archivoDatos);
-        fetch('/registro/addNewUser',{
-            headers:{
-                'X-CSRF-TOKEN':token,
-                'Content-Type':'application/json'
-            },
-            method:'POST',
-            body:archivoDatos,
-        }).then(res =>{
-            return res.text();
-        }).then(respuesta =>{
-            try {
-                const state = JSON.parse(respuesta);
-                if(state['status']){
-                    setTypeMsg(true);
-                    handleClick();
-                }
-            } catch (error) {
-                setTypeMsg(false);
-                handleClick();
-            }
-        });
-    }
-}
-
-const styleBtn = {
-    fontSize: '16px',
-    fontWeight: 'bold',
-    padding: '5px 20px',
-    margin: '8px auto',
-    borderRadius: '10px',
-    backgroundColor: '#22376D',
-    border: 'solid 2px var(--color-primary)',
-    color: 'white',
-    "&:hover":{
-        backgroundColor: 'white',
-        color: 'var(--color-primary)',
-    }
+import VtnModalModel from './VtnModalModel';
+import FormularioNewUser from "../components/FormularioNewUser";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    minWidth: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
 };
-export default function FormNewUser(props){
-    const [age, setAge] = React.useState(0);
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
-    const styleText = {
-        width: '80%',
+function VtnModalEdit(props) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return (
+    <>
+        <IconButton onClick={handleOpen}>
+            <Edit />
+        </IconButton>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+        >
+            <Box sx={style}>
+                {props.component}
+            </Box>
+        </Modal>
+    </>
+  );
+}
+
+function createData(ci, name, rol, action) {
+    return { ci, name, rol, action };
+}
+const columnsModel = [
+    { id: 'ci', label: 'Cedula', minWidth: '10%' },
+    { id: 'name', label: 'Nombre', minWidth: '10%' },
+    { id: 'rol', label: 'Rol', minWidth: '10%' },
+    { id: 'action', label: 'Edicion', minWidth: '10%' }
+];
+const importData = (setRows,configSate,id,insertDataRows) =>{
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    let archivoDatos={
+        configSate,
+        id,
     }
+    archivoDatos = JSON.stringify(archivoDatos);
+    fetch('/registro/users',{
+        headers:{
+            'X-CSRF-TOKEN':token,
+            'Content-Type':'application/json',
+        },
+        method:'POST',
+        body:archivoDatos,
+    }).then(res => {
+        return res.text();
+    }).then(res =>{
+        try {
+            const data = JSON.parse(res);
+            insertDataRows(data);
+        } catch (error) {
+            document.open();
+            document.write(res);
+            document.close();
+        }
+    });
+
+}
+
+const delectUser = (configSate,id,insertDataRows,correo) =>{
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    let archivoDatos={
+        correo,
+        configSate,
+        id,
+    }
+    archivoDatos = JSON.stringify(archivoDatos);
+    fetch('/registro/delectUser',{
+        headers:{
+            'X-CSRF-TOKEN':token,
+            'Content-Type':'application/json',
+        },
+        method:'POST',
+        body:archivoDatos,
+    }).then(res => {
+        return res.text();
+    }).then(res =>{
+        try {
+            const data = JSON.parse(res);
+            insertDataRows(data);
+        } catch (error) {
+            document.open();
+            document.write(res);
+            document.close();
+        }
+    });
+}
+export default function FormNewUser(props){
+    const [rows,setRows] = React.useState([]);
+    const configSate = React.useContext(ContextLogin);
+    const insertDataRows = (data) =>{
+        const arrayData = [];
+        data.map((el)=>{
+            let valueRol;
+            switch (el['rol']){
+                case 1:
+                    valueRol = 'Usuario';
+                    break;
+                case 2:
+                    valueRol = 'Consultor';
+                    break;
+                case 3:
+                    valueRol = 'Especial';
+                    break;
+                case 1000:
+                    valueRol = 'Administrador';
+                    break;
+            }
+            arrayData.push(createData(el['ci'],el['name'],valueRol,
+                <>
+                    <VtnModalEdit component={<FormularioNewUser update={true} insertDataRows={insertDataRows} name={el['name']} email={el['email']} ci={el['ci']} rol={el['rol']} />} />
+                    <IconButton onClick={(e)=>{
+                        delectUser(configSate['configSate'],props.id,insertDataRows,el['email']);
+                    }}>
+                        <DeleteIcon/>
+                    </IconButton>
+                </>
+            ))
+        });
+        setRows(arrayData);
+    }
+    React.useEffect(()=>{
+        importData(setRows,configSate['configSate'],props.id,insertDataRows);
+    },[]);
     return (
-        <div style={{backgroundColor: 'var(--color-forms)'}}>
-            <FormControl component="fieldset" >
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 6, sm: 6, md: 12 }}
-                    component="form"
-                    autoComplete="off"
-                    sx={{
-                        m: 1,textAlign: 'center',
-                    }}
-                >
-                    <Grid item xs={12}>
-                        <h3 style={{
+        <>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 6, sm: 6, md: 12 }}
+                sx={{
+                    m: 1,textAlign: 'center',
+                }}
+            > 
+                <Grid item xs={12}>
+                    <h2 style={{
                             color: 'var(--color-primary)',
                             marginTop:'10px'
-                        }}>Registro de Usuarios en la plataforma</h3>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="idName" label="Nombre" variant="outlined" required/>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="idEmail" label="Correo" variant="outlined" required/>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="idCi" label="Cedula" variant="outlined" type="number" required/>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="idPass" label="Contraseña" variant="outlined" type="password" required/>
-                    </Grid>
-                    <Grid item xs={1}>
-                        <div></div>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <FormControl sx={{minWidth: 120 }}>
-                            <Select
-                                className='dataNewUser'
-                                value={age}
-                                onChange={handleChange}
-                                displayEmpty
-                                inputProps={{ 'aria-label': 'Without label' }}
-                            >
-                            <MenuItem value={0}>
-                                None
-                            </MenuItem>
-                            <MenuItem value={1}>Usuario</MenuItem>
-                            <MenuItem value={2}>Consultor</MenuItem>
-                            <MenuItem value={3}>Especial</MenuItem>
-                            <MenuItem value={1000}>Administrador</MenuItem>
-                            </Select>
-                            <FormHelperText>Seleccione Rol</FormHelperText>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <div></div>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Stack spacing={2} direction="row" sx={{
-                            justifyContent: 'center'
-                        }}>
-                            <BotonAlerta id={props.id}></BotonAlerta>
-                        </Stack>
-                    </Grid>
+                    }}>Usuarios de la plataforma</h2>
                 </Grid>
-            </FormControl>
-        </div>
+                <Grid item xs={4}>
+                    <VtnModalModel title={'NUEVO USUARIO'} component={<FormularioNewUser update={false} insertDataRows={insertDataRows} ></FormularioNewUser>}></VtnModalModel>
+                </Grid>
+                <Grid item xs={11} sx={{
+                    m: 'auto'
+                }}>
+                    <TableModel  columns={columnsModel} rows={rows} xs={11}></TableModel>
+                </Grid>
+            </Grid>
+        </>
     );
 }
