@@ -9,12 +9,14 @@ import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import ContextLogin from './ContextLogin';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function BotonAlerta() {
+function BotonAlerta(props) {
+    const configSate = React.useContext(ContextLogin);
     const [typeMsg, setTypeMsg] = React.useState(true);
     const [open, setOpen] = React.useState(false);
   
@@ -33,7 +35,7 @@ function BotonAlerta() {
     return (
         <Stack spacing={2} direction="row">
           <Button sx={styleBtn} variant="contained" onClick={(e)=>{
-              onClickGuardar(handleClick,setTypeMsg);
+              onClickGuardar(configSate['configSate'],props.id,handleClick,setTypeMsg);
           }}>Guardar</Button>
           <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
             <Alert onClose={handleClose} severity={typeMsg?"success":"error"} sx={{ width: '100%' }}>
@@ -44,16 +46,49 @@ function BotonAlerta() {
     );
 }
 
-const onClickGuardar = (handleClick,setTypeMsg) =>{
+const onClickGuardar = (configSate,id,handleClick,setTypeMsg) =>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    const arrayData = document.getElementsByClassName('dataNewUser');
-    const nombre = arrayData[0];
-    const correo = arrayData[1];
-    const cedula = arrayData[2];
-    const contrasena = arrayData[3];
-    const confContrasena = arrayData[4];
-    const rol = arrayData[5];
-    console.log(arrayData);
+    const form = document.querySelector('form');
+    const valid = form.reportValidity();
+    if(valid){
+        const arrayData = document.getElementsByClassName('dataNewUser');
+        const nombre = arrayData[0].childNodes[1].childNodes[0].value;
+        const correo = arrayData[1].childNodes[1].childNodes[0].value;
+        const cedula = arrayData[2].childNodes[1].childNodes[0].value;
+        const contrasena = arrayData[3].childNodes[1].childNodes[0].value;
+        const rol = arrayData[4].childNodes[1].value;
+        let archivoDatos={
+            nombre,
+            correo,
+            cedula,
+            contrasena,
+            rol,
+            configSate,
+            id,
+        }
+        archivoDatos = JSON.stringify(archivoDatos);
+        fetch('/registro/addNewUser',{
+            headers:{
+                'X-CSRF-TOKEN':token,
+                'Content-Type':'application/json'
+            },
+            method:'POST',
+            body:archivoDatos,
+        }).then(res =>{
+            return res.text();
+        }).then(respuesta =>{
+            try {
+                const state = JSON.parse(respuesta);
+                if(state['status']){
+                    setTypeMsg(true);
+                    handleClick();
+                }
+            } catch (error) {
+                setTypeMsg(false);
+                handleClick();
+            }
+        });
+    }
 }
 
 const styleBtn = {
@@ -70,7 +105,7 @@ const styleBtn = {
         color: 'var(--color-primary)',
     }
 };
-export default function FormNewUser(){
+export default function FormNewUser(props){
     const [age, setAge] = React.useState(0);
 
     const handleChange = (event) => {
@@ -80,11 +115,10 @@ export default function FormNewUser(){
         width: '80%',
     }
     return (
-        <>
-            <FormControl component="fieldset">
+        <div style={{backgroundColor: 'var(--color-forms)'}}>
+            <FormControl component="fieldset" >
                 <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 6, sm: 6, md: 12 }}
                     component="form"
-                    noValidate
                     autoComplete="off"
                     sx={{
                         m: 1,textAlign: 'center',
@@ -92,26 +126,27 @@ export default function FormNewUser(){
                 >
                     <Grid item xs={12}>
                         <h3 style={{
-                            color: 'var(--color-primary)'
+                            color: 'var(--color-primary)',
+                            marginTop:'10px'
                         }}>Registro de Usuarios en la plataforma</h3>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="outlined-basic" label="Nombre" variant="outlined" />
+                        <TextField className='dataNewUser' sx={styleText} id="idName" label="Nombre" variant="outlined" required/>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="outlined-basic" label="Correo" variant="outlined" />
+                        <TextField className='dataNewUser' sx={styleText} id="idEmail" label="Correo" variant="outlined" required/>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="outlined-basic" label="Cedula" variant="outlined" />
+                        <TextField className='dataNewUser' sx={styleText} id="idCi" label="Cedula" variant="outlined" type="number" required/>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="outlined-basic" label="Contraseña" variant="outlined" />
+                        <TextField className='dataNewUser' sx={styleText} id="idPass" label="Contraseña" variant="outlined" type="password" required/>
                     </Grid>
-                    <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="outlined-basic" label="Confirma Contraseña" variant="outlined" />
+                    <Grid item xs={1}>
+                        <div></div>
                     </Grid>
                     <Grid item xs={3}>
-                        <FormControl sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl sx={{minWidth: 120 }}>
                             <Select
                                 className='dataNewUser'
                                 value={age}
@@ -130,18 +165,18 @@ export default function FormNewUser(){
                             <FormHelperText>Seleccione Rol</FormHelperText>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={8}>
                         <div></div>
                     </Grid>
                     <Grid item xs={12}>
                         <Stack spacing={2} direction="row" sx={{
                             justifyContent: 'center'
                         }}>
-                            <BotonAlerta></BotonAlerta>
+                            <BotonAlerta id={props.id}></BotonAlerta>
                         </Stack>
                     </Grid>
                 </Grid>
             </FormControl>
-        </>
+        </div>
     );
 }

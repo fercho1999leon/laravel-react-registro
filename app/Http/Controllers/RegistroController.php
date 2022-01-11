@@ -10,6 +10,7 @@ use App\Models\Postulante;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Hash;
 
 class RegistroController extends Controller
 {
@@ -50,6 +51,8 @@ class RegistroController extends Controller
             return $this->downloadRegister($request);
         }else if($query==='addTyC'){
             return $this->addTyC($request);
+        }else if($query==='addNewUser'){
+            return $this->addNewUser($request);
         }
     }
     protected function insertRegistro($request){
@@ -180,7 +183,6 @@ class RegistroController extends Controller
         $urlJson = strtoupper(substr(PHP_OS, 0, 3))==='WIN'?dirname(__DIR__).'\ConfigJson\config.json':dirname(__DIR__).'/ConfigJson/config.json';
         $jsonString = file_get_contents($urlJson);
         $data = json_decode($jsonString, true);
-        $exportData = array();
         if($request->typeInteres==1){
             $temp = sizeof($data['listInteresC'])+1;
             array_push($data['listInteresC'],array('id'=>$temp,'name'=>$request->name));
@@ -199,5 +201,16 @@ class RegistroController extends Controller
         $newJsonString = json_encode($data);
         file_put_contents($urlJson, $newJsonString);
         return json_encode($data);
+    }
+    protected function addNewUser($request){
+        $user = new User();
+        $user->ci = $request->cedula;
+        $user->name = $request->nombre;
+        $user->email = $request->correo;
+        $user->active = 1;
+        $user->rol = $request->rol;
+        $user->password = Hash::make($request->contrasena);
+        $user->save();
+        return json_encode(array('status'=>true));
     }
 }

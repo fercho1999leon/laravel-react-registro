@@ -269,11 +269,15 @@ const EnhancedTableToolbar = (props) => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <AlertDialog setBandera={props.setBandera} selected={props.selected} id={props.id} setSelected={props.setSelected} rows={rows} data={props.data} setData={props.setData}/>
+          <span>
+            <AlertDialog setBandera={props.setBandera} selected={props.selected} id={props.id} setSelected={props.setSelected} rows={rows} data={props.data} setData={props.setData}/>
+          </span>
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
-          <BasicMenu setData={props.setData} id={props.id} setBandera={props.setBandera}></BasicMenu>
+          <span>
+            <BasicMenu setData={props.setData} id={props.id} setBandera={props.setBandera}></BasicMenu>
+          </span>
         </Tooltip>
       )}
     </Toolbar>

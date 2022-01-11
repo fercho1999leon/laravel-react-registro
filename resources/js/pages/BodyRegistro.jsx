@@ -77,7 +77,7 @@ export default function BodyRegistro(){
             }else if(stateForm==4){
                 return (<FormAddTyC id={stateForm}></FormAddTyC>);
             }else if(stateForm==1000){
-                return (<FormNewUser></FormNewUser>);
+                return (<FormNewUser id={stateForm}></FormNewUser>);
             }
         } 
         return configSate?findJson(configSate,stateForm)?selectNav():<></>:<></>;
