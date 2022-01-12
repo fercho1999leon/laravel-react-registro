@@ -138,13 +138,13 @@ export default function FormularioNewUser(props){
                         }}>Registro de Usuarios en la plataforma</h3>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="idName" label="Nombre" value={props.name?props.name:null} variant="outlined" required/>
+                        <TextField className='dataNewUser' sx={styleText} id="idName" label="Nombre" defaultValue={props.name?props.name:null} variant="outlined" required/>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="idEmail" label="Correo" value={props.email?props.email:null} variant="outlined" required/>
+                        <TextField className='dataNewUser' sx={styleText} id="idEmail" label="Correo" defaultValue={props.email?props.email:null} variant="outlined" required/>
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField className='dataNewUser' sx={styleText} id="idCi" label="Cedula" value={props.ci?props.ci:null} variant="outlined" type="number" required/>
+                        <TextField className='dataNewUser' sx={styleText} id="idCi" label="Cedula" defaultValue={props.ci?props.ci:null} variant="outlined" type="number" required/>
                     </Grid>
                     <Grid item xs={6}>
                         <TextField className='dataNewUser' sx={styleText} id="idPass" label="Contraseña" variant="outlined" type="password" required/>
