@@ -23,18 +23,18 @@ function loginDB(handleClose){
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const user = document.getElementById('user').value;
     const pass = document.getElementById('password').value;
-    let archivoDatos = {
+    let archiveDates = {
         user,
         pass
     }
-    archivoDatos = JSON.stringify(archivoDatos);
+    archiveDates = JSON.stringify(archiveDates);
     fetch('/',{
         headers: {
             'X-CSRF-TOKEN': token,
             'Content-Type': 'application/json'
         },
-        method: 'POST', 
-        body: archivoDatos, 
+        method: 'POST',
+        body: archiveDates,
     })
     .then(res => {
         return res.text();
@@ -49,12 +49,12 @@ function loginDB(handleClose){
         console.log(err);
     });
 }
-export default function Login(props) {
+export default function Login() {
     return (
         <>
             <div className="BodyLogin">
                 <div className="content-login content-left">
-                    <img src={logoSPS} style={{ "width": "40%", "height": "200px" }} />
+                    <img src={logoSPS} style={{ "width": "40%", "height": "200px" }}  alt={'logo'}/>
                     <p className="titulo">INSTITUTO SUPERIOR</p>
                     <p className="titulo">REY DAVID</p>
                     <p id="descripcion" style={{ fontSize: "90%", "margin": "0 5%", marginTop: "5%" }}>
@@ -69,8 +69,8 @@ export default function Login(props) {
                     <main>
                         <TextField id="user" label="Cedula/Pasaporte" variant="standard" />
                         <TextField type="password" id="password" label="Password" variant="standard" />
-                        <p id="messageError" style={{ "color": "red", fontSize: "90%" }}></p>
-                        <BasicModal></BasicModal>
+                        <p id="messageError" style={{"color": "red", fontSize: "90%"}}/>
+                        <BasicModal/>
                         <a id="btnAbrir" style={{ textDecoration: "none", alignSelf: "flex-start", marginLeft: "5%" }}>Recuperar Contraseña</a>
                     </main>
                 </div>
@@ -78,11 +78,11 @@ export default function Login(props) {
         </>
     );
 }
-function BasicModal(props) {
+function BasicModal() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-  
+
     return (
       <div>
         <Stack spacing={2} direction="row">
