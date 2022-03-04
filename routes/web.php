@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CpanelApiController;
 use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::get('/registro', [RegistroController::class,'create'])->middleware(['auth
 Route::post('/registro', [RegistroController::class,'store'])->middleware(['auth']);
 Route::post('/registro/{query}', [RegistroController::class,'action'])->middleware(['auth','rolAuth']);
 Route::get('/logout',[AuthController::class,'destroy'])->name('logout');
+
+Route::post('/addEmail',[CpanelApiController::class,'create']);
