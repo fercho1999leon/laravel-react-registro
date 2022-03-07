@@ -32,9 +32,9 @@ const importConfig = (setConfigState,setDateJson) =>{
         }
     });
 };
-const findJson = (matriz,element) =>{
+const findJson = (matrix,element) =>{
     let state = false;
-    matriz.map(el =>{
+    matrix.map(el =>{
         if(el['id']==element){
             state = true;
         }
@@ -43,7 +43,7 @@ const findJson = (matriz,element) =>{
 }
 const cerrarSession = () =>{
     fetch('/logout',{
-        method: 'GET', 
+        method: 'GET',
     }).then(res => {return res.text()})
     .then(respuesta => {
         document.open();
@@ -60,33 +60,33 @@ export default function BodyRegistro(){
         importConfig(setConfigState,setDateJson);
     }, []);
     const formSelection =()=>{
-        if(stateForm==0){
-            return (<Welcome></Welcome>);
+        if(stateForm===0){
+            return (<Welcome/>);
         }
-        if(stateForm==100){
+        if(stateForm===100){
             cerrarSession();
-            return (<Welcome></Welcome>);
+            return (<Welcome/>);
         }
         const selectNav = () =>{
-            if(stateForm==1){
-                return (<FormIngreso id={stateForm}></FormIngreso>);
-            }else if(stateForm==2){
-                return (<FormShowDate id={stateForm}></FormShowDate>);
-            }else if(stateForm==3){
-                return (<FormDownload id={stateForm}></FormDownload>);
-            }else if(stateForm==4){
-                return (<FormAddTyC id={stateForm}></FormAddTyC>);
-            }else if(stateForm==1000){
-                return (<FormNewUser id={stateForm}></FormNewUser>);
+            if(stateForm===1){
+                return (<FormIngreso id={stateForm}/>);
+            }else if(stateForm===2){
+                return (<FormShowDate id={stateForm}/>);
+            }else if(stateForm===3){
+                return (<FormDownload id={stateForm}/>);
+            }else if(stateForm===4){
+                return (<FormAddTyC id={stateForm} />);
+            }else if(stateForm===1000){
+                return (<FormNewUser id={stateForm} />);
             }
-        } 
+        }
         return configSate?findJson(configSate,stateForm)?selectNav():<></>:<></>;
     }
     return (
         <ProviderLogin value = {{dateJson,setDateJson,configSate}}>
             <section className="contentMainBody">
                 <div className="BodyContainer">
-                    <NavMain setStateForm={setStateForm} configSate = {configSate}></NavMain>
+                    <NavMain setStateForm={setStateForm} configSate = {configSate}/>
                     {
                         formSelection()
                     }
