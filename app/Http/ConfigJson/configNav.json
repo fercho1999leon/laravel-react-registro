@@ -21,14 +21,14 @@
             "rol":3
         },
         {
+            "id":5,
+            "name":"CITAS",
+            "rol":1
+        },
+        {
             "id":1000,
             "name":"NEW USER",
             "rol":1000
-        },
-        {
-            "id":100,
-            "name":"CERRAR SESION",
-            "rol":0
         }
     ]
 }

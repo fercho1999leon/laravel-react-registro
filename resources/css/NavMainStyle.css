@@ -1,11 +1,10 @@
 .NavContiner{
     display: flex;
     flex-direction: column;
-    background-color: var(--color-primary);
     color: white;
     padding: auto;
     border-radius: 10px 0 0 10px;
-    width: 25%;
+    width: 100%;
 }
 .NavContiner > #divH3{
     text-align: center;

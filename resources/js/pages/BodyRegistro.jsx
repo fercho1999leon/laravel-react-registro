@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import NavMain from "../components/NavMain";
 import "../../css/BodyContainerStyle.css";
 import Welcome from "../components/Welcome";
@@ -9,6 +11,9 @@ import FormShowDate from "../components/FormShowDate";
 import FormDownload from "../components/FormDownload";
 import FormAddTyC from "../components/FormAddTyC";
 import FormNewUser from "../components/FormNewUser";
+import HeaderMain from "../components/head/HeaderMain";
+import ShowClendar from "../components/ShowClendar";
+
 const importConfig = (setConfigState,setDateJson) =>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     fetch('/registro',{
@@ -41,18 +46,9 @@ const findJson = (matriz,element) =>{
     });
     return state;
 }
-const cerrarSession = () =>{
-    fetch('/logout',{
-        method: 'GET', 
-    }).then(res => {return res.text()})
-    .then(respuesta => {
-        document.open();
-        document.write(respuesta);
-        document.close();
 
-    });
-}
 export default function BodyRegistro(){
+    const [openNav,setOpenNav]=React.useState(false);
     const [dateJson,setDateJson] = React.useState(null);
     const [configSate,setConfigState] = React.useState(null);
     const [stateForm,setStateForm] = React.useState(0);
@@ -61,10 +57,6 @@ export default function BodyRegistro(){
     }, []);
     const formSelection =()=>{
         if(stateForm==0){
-            return (<Welcome></Welcome>);
-        }
-        if(stateForm==100){
-            cerrarSession();
             return (<Welcome></Welcome>);
         }
         const selectNav = () =>{
@@ -76,23 +68,54 @@ export default function BodyRegistro(){
                 return (<FormDownload id={stateForm}></FormDownload>);
             }else if(stateForm==4){
                 return (<FormAddTyC id={stateForm}></FormAddTyC>);
+            }else if(stateForm==5){
+                return (<ShowClendar></ShowClendar>);
             }else if(stateForm==1000){
                 return (<FormNewUser id={stateForm}></FormNewUser>);
             }
-        } 
+        }
         return configSate?findJson(configSate,stateForm)?selectNav():<></>:<></>;
     }
     return (
-        <ProviderLogin value = {{dateJson,setDateJson,configSate}}>
-            <section className="contentMainBody">
-                <div className="BodyContainer">
-                    <NavMain setStateForm={setStateForm} configSate = {configSate}></NavMain>
-                    {
-                        formSelection()
-                    }
-                </div>
-            </section>
-        </ProviderLogin>
+        <>
+            <Grid container spacing={0} direction="row" wrap="nowrap">
+                <Grid item xs="auto">
+                    <Box
+                        sx={{
+                            width: openNav?"80px":"180px",
+                            height: "96.5vh",
+                            margin:"10px",
+                            backgroundColor: 'var(--color-primary)',
+                            borderRadius:5,
+                            transition: "width 0.5s",
+                        }}
+                    >
+                        <NavMain openNav={openNav} setStateForm={setStateForm} configSate = {configSate}></NavMain>
+                    </Box>
+                </Grid>
+                <Grid item xs maxWidth={500}>
+                    <Grid container spacing={0} direction="column" >
+                        <HeaderMain openNav={openNav} setOpenNav={setOpenNav} ></HeaderMain>
+                        <Box
+                            sx={{
+                                width: "100%",
+                                height: "90vh",
+                            }}
+                        >
+                            <ProviderLogin value = {{dateJson,setDateJson,configSate}}>
+                                <section className="contentMainBody">
+                                    <div className="BodyContainer">
+                                        {
+                                            formSelection()
+                                        }
+                                    </div>
+                                </section>
+                            </ProviderLogin>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </>
     );
 }
 if (document.getElementById('Registro')) {

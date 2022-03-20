@@ -7,7 +7,6 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <header><div id="head"></div></header>
     <main>@yield('content')</main>
     <script src="{{ asset('js/app.js') }}" ></script>
 </body>

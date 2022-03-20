@@ -1,14 +1,16 @@
 import React,{Component} from "react";
 import "../../css/BntNavStyle.css";
+
 export default class BntNav extends Component{
     constructor (props){
         super(props);
     }
     render(){
         return (
-            <>
-                <input id={this.props.id} key={this.props.id} className="StyleBtn" type="button" value={this.props.name} onClick={this.props.eventClik}/>
-            </>
+            <div className="StyleBtn" >
+                <label htmlFor={this.props.id}>-</label>
+                <input hidden={this.props.openNav} id={this.props.id} key={this.props.id} type="button" value={this.props.name} onClick={this.props.eventClik}/>
+            </div>
         );
     }
 }

@@ -35,14 +35,14 @@ import ContextLogin from './ContextLogin';
 let dateJson;
 function createData(fecha, nombre, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
   return {
-    fecha, 
-    nombre, 
+    fecha,
+    nombre,
     correo,
-    numero, 
-    observacion, 
-    estado_idestado, 
-    ciudad_idciudad, 
-    curso_idcurso, 
+    numero,
+    observacion,
+    estado_idestado,
+    ciudad_idciudad,
+    curso_idcurso,
     carrera_idcarrera
   };
 }
@@ -464,8 +464,8 @@ function BasicMenu(props) {
         'X-CSRF-TOKEN':token,
         'Content-Type':'application/json',
       },
-      method: 'POST', 
-      body: archivoDatos, 
+      method: 'POST',
+      body: archivoDatos,
     })
     .then(res => {return res.text()})
     .then(response => {
@@ -539,8 +539,8 @@ function AlertDialog(props) {
         'X-CSRF-TOKEN':token,
         'Content-Type':'application/json',
       },
-      method: 'POST', 
-      body: archivoDatos, 
+      method: 'POST',
+      body: archivoDatos,
     })
     .then(res => {return res.text()})
     .then(response => {

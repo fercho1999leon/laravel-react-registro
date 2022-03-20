@@ -2,8 +2,8 @@ import React, {useState } from 'react';
 import EnhancedTable from './EnhancedTable';
 import ShearchComponent from './shearch/ShearchComponent'
 const style = {
-    margin: 'auto 5px',
-    width:'inherit',
+    margin: 'auto',
+    width:'98%',
     minWidth: '200px'
 }
 export default function FormShowDate(props){

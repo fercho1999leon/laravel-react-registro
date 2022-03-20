@@ -3,21 +3,31 @@
     --color-secondary:#475a7e;
     --color-forms:rgb(230, 230, 230);
 }
+
+*{
+    /*border: solid 1px #000;*/
+    margin: 0;
+    padding: 0;
+}
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
 .contentMainBody{
     display:flex;
     flex-direction: row;
     justify-content: center;
-    min-height: 60vh;
+    width: auto;
 }
 .BodyContainer{
-    margin-top: 2%;
-    margin-bottom: 2%;
     display:flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: stretch;
-    width: 80%;
     min-width: 500px;
+    width:95%;
     height: auto;
     border: solid 3px var(--color-primary);
     border-radius: 15px;
