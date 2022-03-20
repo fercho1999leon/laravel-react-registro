@@ -3,6 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import BntNav from "./BntNav";
 import "../../css/NavMainStyle.css"
 import logo from "../../../public/images/LOGO-BLANCO.svg"
+
 export default function NavMain(props){
     const [idBtnPreviousState,setIdBtnPreviousState] = React.useState(1);
     function eventBtnNav(e){
@@ -19,7 +20,6 @@ export default function NavMain(props){
                 {props.openNav?<img height="50px" src={logo} />:<h3 hidden={props.openNav} style={{
                     margin:5
                 }}>Menu Principal</h3>}
-
             </div>
             {
                 props.configSate?props.configSate.map((el)=>(

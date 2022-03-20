@@ -28,7 +28,7 @@
     align-items: stretch;
     min-width: 500px;
     width:95%;
-    height: auto;
+    min-height: 85vh;
     border: solid 3px var(--color-primary);
     border-radius: 15px;
 }

@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 const styleBtn = {
     fontSize: '14px',
@@ -51,9 +52,15 @@ export default function HeaderMain (props){
                             props.openNav?props.setOpenNav(false):props.setOpenNav(true);
                         }}
                     >
-                        <MenuIcon sx={{
-                            color:"#22376D",
-                        }}/>
+                        {props.openNav?
+                            <MenuIcon sx={{
+                                color: "#22376D",
+                            }}/>
+                            :
+                            <CloseRoundedIcon sx={{
+                                color:"#22376D",
+                            }}/>
+                        }
                     </IconButton>
                 </Toolbar>
                 <Stack direction="row" spacing={2} sx={{

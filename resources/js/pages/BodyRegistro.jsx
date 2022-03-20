@@ -7,7 +7,7 @@ import "../../css/BodyContainerStyle.css";
 import Welcome from "../components/Welcome";
 import {ProviderLogin} from '../components/ContextLogin';
 import FormIngreso from "../components/FormIngreso";
-import FormShowDate from "../components/FormShowDate";
+import FormRegisterDate from "../components/FormRegisterDate";
 import FormDownload from "../components/FormDownload";
 import FormAddTyC from "../components/FormAddTyC";
 import FormNewUser from "../components/FormNewUser";
@@ -51,27 +51,27 @@ export default function BodyRegistro(){
     const [openNav,setOpenNav]=React.useState(false);
     const [dateJson,setDateJson] = React.useState(null);
     const [configSate,setConfigState] = React.useState(null);
-    const [stateForm,setStateForm] = React.useState(0);
+    const [stateForm,setStateForm] = React.useState("0");
     React.useEffect(() => {
         importConfig(setConfigState,setDateJson);
     }, []);
-    const formSelection =()=>{
-        if(stateForm==0){
+    const formSelection =(opc)=>{
+        if(opc===0){
             return (<Welcome></Welcome>);
         }
         const selectNav = () =>{
-            if(stateForm==1){
-                return (<FormIngreso id={stateForm}></FormIngreso>);
-            }else if(stateForm==2){
-                return (<FormShowDate id={stateForm}></FormShowDate>);
-            }else if(stateForm==3){
-                return (<FormDownload id={stateForm}></FormDownload>);
-            }else if(stateForm==4){
-                return (<FormAddTyC id={stateForm}></FormAddTyC>);
-            }else if(stateForm==5){
-                return (<ShowClendar></ShowClendar>);
-            }else if(stateForm==1000){
-                return (<FormNewUser id={stateForm}></FormNewUser>);
+            if(opc===1){
+                return (<FormIngreso id={opc}/>);
+            }else if(opc===2){
+                return (<FormRegisterDate id={opc}/>);
+            }else if(opc===3){
+                return (<FormDownload id={opc}/>);
+            }else if(opc===4){
+                return (<FormAddTyC id={opc}/>);
+            }else if(opc===5){
+                return (<ShowClendar/>);
+            }else if(opc===1000){
+                return (<FormNewUser id={opc}/>);
             }
         }
         return configSate?findJson(configSate,stateForm)?selectNav():<></>:<></>;
@@ -106,7 +106,7 @@ export default function BodyRegistro(){
                                 <section className="contentMainBody">
                                     <div className="BodyContainer">
                                         {
-                                            formSelection()
+                                            formSelection(parseInt(stateForm))
                                         }
                                     </div>
                                 </section>

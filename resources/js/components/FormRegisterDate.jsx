@@ -6,7 +6,7 @@ const style = {
     width:'98%',
     minWidth: '200px'
 }
-export default function FormShowDate(props){
+export default function FormRegisterDate(props){
     const [dataTable,setDataTable] = useState("");
     const [banderaUp,setBanderaUp] = useState(true);
     return(
