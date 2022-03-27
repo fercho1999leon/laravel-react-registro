@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import {motion} from 'framer-motion';
 import Grid from '@mui/material/Grid';
 import Notification from './Notification';
 import data from '../rowsTable/notificationJson.json';
@@ -35,17 +35,39 @@ export default function Rows (props){
     React.useEffect(()=>{
         setTemp(data);
     },[]);
+    const variants={
+        onStart:{
+            backgroundColor:calculateColor(),
+            textAlign:'center',
+            borderRadius:'10px',
+            minHeight:'150px',
+            minWidth:'140px',
+            padding:'5px',
+            scale:1,
+            transition:{
+                duration:2
+            }
+        },
+        onHover:{
+            scale:1.06,
+            transition: { duration: 0.5 },
+        }
+    }
     return(
         <>
-            <Box sx={{textAlign:'center',backgroundColor:calculateColor(), borderRadius:'10px',}}>
-                <Grid container spacing={0} sx={{height: '9.5rem' , padding: '10px', color:'#2C2C2C', transition: 'height 0.5s ease-out 0.2s', '&:hover':{height:'12rem'}}}>
+            <motion.div
+                variants={variants}
+                initial={'onStart'}
+                whileHover={'onHover'}
+            >
+                <Grid container spacing={0}>
                     <Grid item xs={12} >
                         <h2>{props.id}</h2>
                         <h2>{props.day}</h2>
                     </Grid>
                     <Notification notifications={showNotify(props.day, temp)}/>
                 </Grid>
-            </Box>
+            </motion.div>
         </>
     );
 }

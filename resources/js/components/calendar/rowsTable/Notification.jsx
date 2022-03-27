@@ -26,7 +26,7 @@ function TransitionsModal(props) {
 
   return (
     <div style={{width:'100%'}}>
-      <h3 onClick={handleOpen}>{props.leabelBtn}</h3>
+      <h4 onClick={handleOpen}>{props.leabelBtn}</h4>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -66,7 +66,7 @@ export default function Notification(props){
                 :
                 null
             }
-            
+
         </>
     );
 }

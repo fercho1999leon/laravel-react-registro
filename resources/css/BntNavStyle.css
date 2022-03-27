@@ -10,25 +10,17 @@
     align-items:center;
 }
 .FontStyleNav{
-    background-color: var(--color-primary);
     color: white;
-    transition: background-color 0.5s;
+    cursor: pointer;
 }
 .StyleBtn input{
     width: 100%;
     font-size: 90%;
     border: none;
+    background-color: transparent;
 }
 
 .StyleBtn label{
     margin-left:10%;
     margin-right:10%;
-}
-.FontStyleNav:hover{
-    cursor: pointer;
-    background-color: var(--color-secondary);
-}
-.FontStyleNav:hover *{
-    cursor: pointer;
-    background-color: var(--color-secondary);
 }
