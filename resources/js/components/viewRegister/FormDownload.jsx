@@ -5,8 +5,8 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
-import '../../css/FromDownloadStyle.css';
-import ContextLogin from './ContextLogin';
+import '../../../css/FromDownloadStyle.css';
+import ContextLogin from '../ContextLogin';
 import  XLSX  from  'xlsx' ;
 const styleRadio = {
     margin: "auto 10px"
@@ -45,8 +45,8 @@ const download = (e,configSate,id) =>{
             'X-CSRF-TOKEN':token,
             'Content-Type':'application/json',
         },
-        method: 'POST', 
-        body: archivoDatos, 
+        method: 'POST',
+        body: archivoDatos,
     }).then(response => {
         return response.text();
     }).then(respuesta =>{

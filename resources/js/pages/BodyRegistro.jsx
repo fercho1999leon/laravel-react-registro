@@ -6,13 +6,11 @@ import NavMain from "../components/NavMain";
 import "../../css/BodyContainerStyle.css";
 import Welcome from "../components/Welcome";
 import {ProviderLogin} from '../components/ContextLogin';
-import FormIngreso from "../components/FormIngreso";
-import FormRegisterDate from "../components/FormRegisterDate";
-import FormDownload from "../components/FormDownload";
 import FormAddTyC from "../components/FormAddTyC";
 import FormNewUser from "../components/FormNewUser";
 import HeaderMain from "../components/head/HeaderMain";
 import ShowClendar from "../components/ShowClendar";
+import View from "../components/viewRegister/View";
 
 const importConfig = (setConfigState,setDateJson) =>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -61,14 +59,10 @@ export default function BodyRegistro(){
         }
         const selectNav = () =>{
             if(opc===1){
-                return (<FormIngreso id={opc}/>);
+                return (<View id={opc}/>);
             }else if(opc===2){
-                return (<FormRegisterDate id={opc}/>);
-            }else if(opc===3){
-                return (<FormDownload id={opc}/>);
-            }else if(opc===4){
                 return (<FormAddTyC id={opc}/>);
-            }else if(opc===5){
+            }else if(opc===3){
                 return (<ShowClendar/>);
             }else if(opc===1000){
                 return (<FormNewUser id={opc}/>);

@@ -58,8 +58,37 @@ function importData(setRows,dateChange){
     setRows(data);
 }
 
+const importNotification = (year,month,setNotify) =>{
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    fetch('url',{
+        headers:{
+            'X-CSRF-TOKEN':token,
+            'Content-Type':'application/json',
+        },
+        method:'POST',
+        body:JSON.stringify({
+            year,
+            month
+        })
+    })
+    .then(res => {
+        return res.text();
+    })
+    .then(result => {
+        try {
+            const data = JSON.parse(result);
+            console.log(result);
+        } catch (error) {
+            document.open();
+            document.write(result);
+            document.close();
+        }
+    });
+}
+
 export default function ShowClendar() {
     const [rows,setRows] = React.useState([]);
+    const [notify,setNotify] = React.useState([]);
     const [dateChange,setDateChange] = React.useState({
         year:new Date(Date.now()).getFullYear(),
         month:new Date(Date.now()).getMonth(),
@@ -67,10 +96,11 @@ export default function ShowClendar() {
     });
     React.useEffect(()=>{
         importData(setRows,dateChange);
+        //importNotification(dateChange.year,dateChange.month,setNotify);
     },[dateChange]);
     return (
         <>
-            <TableModel key={1} columns={columns} rows={rows} setDateChange={setDateChange} dateChange={dateChange}/>
+            <TableModel notify={notify} key={1} columns={columns} rows={rows} setDateChange={setDateChange} dateChange={dateChange}/>
         </>
     );
 }

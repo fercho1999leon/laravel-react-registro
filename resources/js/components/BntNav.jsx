@@ -10,12 +10,8 @@ const selectIcon = (opc=0) =>{
     if(opc===1){
         return (<AssignmentRoundedIcon/>);
     }else if(opc===2){
-        return null;
-    }else if(opc===3){
-        return null;
-    }else if(opc===4){
         return (<SettingsRoundedIcon/>);
-    }else if(opc===5){
+    }else if(opc===3){
         return (<CalendarTodayRoundedIcon/>);
     }else if(opc===1000){
         return (<AddCircleOutlineRoundedIcon/>);

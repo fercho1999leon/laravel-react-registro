@@ -30,8 +30,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import BasicModalUpDate from './vtnModalUpDate/BasicModalUpDate';
-import ContextLogin from './ContextLogin';
+import BasicModalUpDate from '../vtnModalUpDate/BasicModalUpDate';
+import ContextLogin from '../ContextLogin';
 let dateJson;
 function createData(fecha, nombre, correo, numero, observacion, estado_idestado, ciudad_idciudad, curso_idcurso, carrera_idcarrera) {
   return {
@@ -355,7 +355,7 @@ export default function EnhancedTable(props) {
         <EnhancedTableToolbar selected={selected} id={props.id} setSelected={setSelected} numSelected={selected.length} data={props.data} setData={props.setData} setBandera={props.setBandera}/>
         <TableContainer>
           <Table
-            sx={{ minWidth: 'auto' }}
+            sx={{ minWidth: 'auto', minHeight:'200px' }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
           >

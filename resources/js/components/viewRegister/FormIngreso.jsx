@@ -6,9 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
-import "../../css/FormIngresoStyle.css";
-import ContextLogin from "../components/ContextLogin";
-//import $ from 'jquery'; 
+import "../../../css/FormIngresoStyle.css";
+import ContextLogin from "../ContextLogin";
 const style = {
     position: 'absolute',
     top: '50%',
@@ -63,8 +62,8 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
             'X-CSRF-TOKEN':token,
             'Content-type':'application/json',
         },
-        method: 'POST', 
-        body: archivoDatos, 
+        method: 'POST',
+        body: archivoDatos,
     }).then(response => {
         return response.text();
     }).then(respuesta =>{

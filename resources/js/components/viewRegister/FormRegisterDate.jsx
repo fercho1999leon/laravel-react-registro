@@ -1,6 +1,6 @@
 import React, {useState } from 'react';
 import EnhancedTable from './EnhancedTable';
-import ShearchComponent from './shearch/ShearchComponent'
+import ShearchComponent from '../shearch/ShearchComponent'
 const style = {
     margin: 'auto',
     width:'98%',

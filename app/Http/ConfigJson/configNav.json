@@ -7,21 +7,11 @@
         },
         {
             "id":2,
-            "name":"MOSTRAR",
-            "rol":1
-        },
-        {
-            "id":3,
-            "name":"DESCARGA USER",
+            "name":"ADD T & C",
             "rol":2
         },
         {
-            "id":4,
-            "name":"ADD T & C",
-            "rol":3
-        },
-        {
-            "id":5,
+            "id":3,
             "name":"CITAS",
             "rol":1
         },
