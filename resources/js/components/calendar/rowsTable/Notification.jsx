@@ -4,7 +4,6 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Typography from '@mui/material/Typography';
 
 const style = {
   position: 'absolute',
@@ -12,12 +11,47 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 600,
-  bgcolor: 'background.paper',
   border: '1px solid #000',
+  backgroundColor: 'white',
   borderRadius:'10px',
   boxShadow: 24,
   p: 4,
+  overflow:'scroll',
+  overflowY:'auto',
+  overflowX:'hidden',
+  height:'400px'
 };
+
+const formatNofify = (id,nombre,correo,msg,time_data) =>{
+    return(
+        <div key={id} style={{
+            border: '1.5px solid var(--color-primary)',
+            borderRadius:'10px',
+            marginTop:'5px',
+            marginBottom:'5px',
+            padding:'15px',
+        }}>
+            <Grid content>
+                <Grid item xs={12}>
+                    <h3>x</h3>
+                </Grid>
+                <Grid item xs={12}>
+                    <h3>Nombre: {nombre}</h3>
+                </Grid>
+                <Grid item xs={12}>
+                    <h4>Correo: {correo}</h4>
+                </Grid>
+                <Grid item xs={12}>
+                    <textarea rows="5" style={{width:'90%',margin:'5px', border:'none'}} disabled={true}>{msg}</textarea>
+                </Grid>
+                <Grid item xs={10}>
+                    <h5>Hora: {time_data}</h5>
+                </Grid>
+
+            </Grid>
+        </div>
+    );
+}
 
 function TransitionsModal(props) {
   const [open, setOpen] = React.useState(false);
@@ -40,9 +74,7 @@ function TransitionsModal(props) {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </Typography>
+              {props.notifications.map((el,index)=>(formatNofify(index,el.nombre,el.correo,el.observacion,el.time_data)))}
           </Box>
         </Fade>
       </Modal>
@@ -57,7 +89,7 @@ export default function Notification(props){
                 props.notifications.length>0?
                     <>
                         <Grid item xs={12} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center',minHeight:'30px', maxHeight:'80px',cursor: 'pointer', width:'100px',borderRadius:'10px', backgroundColor:'#6C64A0', transition: 'background-color 0.5s ease-out 0s', color:'white', '&:hover':{backgroundColor:'#5FBFAF'}}}>
-                            <TransitionsModal leabelBtn={props.notifications.length > 0 ? props.notifications[0].msg.length > 50 ? props.notifications[0].msg.substr(0, 50) + '...' : props.notifications[0].msg : null}/>
+                            <TransitionsModal notifications={props.notifications} leabelBtn={props.notifications.length > 0 ? props.notifications[0].observacion.length > 50 ? props.notifications[0].observacion.substr(0, 50) + '...' : props.notifications[0].observacion : null}/>
                         </Grid>
                         <Grid item xs={12}>
                             <h3>{props.notifications?props.notifications.length>1?'+'+(props.notifications.length-1):null:null}</h3>

@@ -11,6 +11,16 @@ const columns = [
     { id: 'Sun', label: 'DOMINGO', minWidth: '6rem'},
 ];
 
+function zeroFill( number, width )
+{
+    width -= number.toString().length;
+    if ( width > 0 )
+    {
+        return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+    }
+    return number + ""; // siempre devuelve tipo cadena
+}
+
 function createData(arreglo) {
     return {
         Mon:arreglo.length>0?arreglo[0]:0,
@@ -51,7 +61,6 @@ function importData(setRows,dateChange){
             }
 
         }
-        console.log(control);
         control++;
         data.push(createData(arrDay));
     }
@@ -60,7 +69,9 @@ function importData(setRows,dateChange){
 
 const importNotification = (year,month,setNotify) =>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-    fetch('url',{
+    month++;
+    month = zeroFill(month,2);
+    fetch('/import/notify',{
         headers:{
             'X-CSRF-TOKEN':token,
             'Content-Type':'application/json',
@@ -77,7 +88,7 @@ const importNotification = (year,month,setNotify) =>{
     .then(result => {
         try {
             const data = JSON.parse(result);
-            console.log(result);
+            setNotify(data);
         } catch (error) {
             document.open();
             document.write(result);
@@ -86,7 +97,7 @@ const importNotification = (year,month,setNotify) =>{
     });
 }
 
-export default function ShowClendar() {
+export default function ShowCalendar() {
     const [rows,setRows] = React.useState([]);
     const [notify,setNotify] = React.useState([]);
     const [dateChange,setDateChange] = React.useState({
@@ -96,7 +107,7 @@ export default function ShowClendar() {
     });
     React.useEffect(()=>{
         importData(setRows,dateChange);
-        //importNotification(dateChange.year,dateChange.month,setNotify);
+        importNotification(dateChange.year,dateChange.month,setNotify);
     },[dateChange]);
     return (
         <>

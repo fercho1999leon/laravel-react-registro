@@ -2,7 +2,16 @@ import * as React from 'react';
 import {motion} from 'framer-motion';
 import Grid from '@mui/material/Grid';
 import Notification from './Notification';
-import data from '../rowsTable/notificationJson.json';
+
+function zeroFill( number, width )
+{
+    width -= number.toString().length;
+    if ( width > 0 )
+    {
+        return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+    }
+    return number + ""; // siempre devuelve tipo cadena
+}
 
 const colorList = [
     {id:1, color:'#6874CD'},
@@ -19,8 +28,11 @@ const showNotify = (day,importData) =>{
     let arrayRows = [];
     // eslint-disable-next-line array-callback-return
     importData.map(el => {
-        if (el.day === day) {
-            arrayRows.push(el);
+        if(el!=null){
+            const temp = el.time_data.split(' ')[0].split('-')[2];
+            if (temp === zeroFill( day, 2 )) {
+                arrayRows.push(el);
+            }
         }
     });
     return arrayRows;
@@ -31,10 +43,6 @@ const calculateColor = () => {
 }
 
 export default function Rows (props){
-    const [temp,setTemp]=React.useState([]);
-    React.useEffect(()=>{
-        setTemp(data);
-    },[]);
     const variants={
         onStart:{
             backgroundColor:calculateColor(),
@@ -65,7 +73,7 @@ export default function Rows (props){
                         <h2>{props.id}</h2>
                         <h2>{props.day}</h2>
                     </Grid>
-                    <Notification notifications={showNotify(props.day, temp)}/>
+                    <Notification notifications={showNotify(props.day, props.notify)}/>
                 </Grid>
             </motion.div>
         </>

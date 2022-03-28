@@ -34090,16 +34090,16 @@ function NavMain(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/ShowClendar.jsx":
-/*!*************************************************!*\
-  !*** ./resources/js/components/ShowClendar.jsx ***!
-  \*************************************************/
+/***/ "./resources/js/components/ShowCalendar.jsx":
+/*!**************************************************!*\
+  !*** ./resources/js/components/ShowCalendar.jsx ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ShowClendar)
+/* harmony export */   "default": () => (/* binding */ ShowCalendar)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _calendar_bodyCalendar_TableModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calendar/bodyCalendar/TableModel */ "./resources/js/components/calendar/bodyCalendar/TableModel.jsx");
@@ -34150,6 +34150,16 @@ var columns = [{
   minWidth: '6rem'
 }];
 
+function zeroFill(number, width) {
+  width -= number.toString().length;
+
+  if (width > 0) {
+    return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
+  }
+
+  return number + ""; // siempre devuelve tipo cadena
+}
+
 function createData(arreglo) {
   return {
     Mon: arreglo.length > 0 ? arreglo[0] : 0,
@@ -34197,7 +34207,6 @@ function importData(setRows, dateChange) {
       _loop2(j);
     }
 
-    console.log(control);
     control++;
     data.push(createData(arrDay));
   };
@@ -34209,26 +34218,61 @@ function importData(setRows, dateChange) {
   setRows(data);
 }
 
-function ShowClendar() {
+var importNotification = function importNotification(year, month, setNotify) {
+  var token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+  month++;
+  month = zeroFill(month, 2);
+  fetch('/import/notify', {
+    headers: {
+      'X-CSRF-TOKEN': token,
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      year: year,
+      month: month
+    })
+  }).then(function (res) {
+    return res.text();
+  }).then(function (result) {
+    try {
+      var data = JSON.parse(result);
+      setNotify(data);
+    } catch (error) {
+      document.open();
+      document.write(result);
+      document.close();
+    }
+  });
+};
+
+function ShowCalendar() {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState([]),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       rows = _React$useState2[0],
       setRows = _React$useState2[1];
 
-  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState({
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0__.useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      notify = _React$useState4[0],
+      setNotify = _React$useState4[1];
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState({
     year: new Date(Date.now()).getFullYear(),
     month: new Date(Date.now()).getMonth(),
     day: 0
   }),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      dateChange = _React$useState4[0],
-      setDateChange = _React$useState4[1];
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      dateChange = _React$useState6[0],
+      setDateChange = _React$useState6[1];
 
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
     importData(setRows, dateChange);
+    importNotification(dateChange.year, dateChange.month, setNotify);
   }, [dateChange]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_calendar_bodyCalendar_TableModel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      notify: notify,
       columns: columns,
       rows: rows,
       setDateChange: setDateChange,
@@ -34643,6 +34687,7 @@ function TableModel(props) {
                   },
                   align: column.align,
                   children: value ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_rowsTable_Rows__WEBPACK_IMPORTED_MODULE_1__["default"], {
+                    notify: props.notify,
                     day: value,
                     id: new Date(props.dateChange.year, props.dateChange.month, value).toString().split(' ')[0]
                   }) : null
@@ -34736,12 +34781,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Notification)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
-/* harmony import */ var _mui_material_Backdrop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Backdrop */ "./node_modules/@mui/material/Backdrop/Backdrop.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Modal */ "./node_modules/@mui/material/Modal/Modal.js");
-/* harmony import */ var _mui_material_Fade__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Fade */ "./node_modules/@mui/material/Fade/Fade.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
+/* harmony import */ var _mui_material_Backdrop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Backdrop */ "./node_modules/@mui/material/Backdrop/Backdrop.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Modal */ "./node_modules/@mui/material/Modal/Modal.js");
+/* harmony import */ var _mui_material_Fade__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Fade */ "./node_modules/@mui/material/Fade/Fade.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -34764,18 +34808,74 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 600,
-  bgcolor: 'background.paper',
   border: '1px solid #000',
+  backgroundColor: 'white',
   borderRadius: '10px',
   boxShadow: 24,
-  p: 4
+  p: 4,
+  overflow: 'scroll',
+  overflowY: 'auto',
+  overflowX: 'hidden',
+  height: '400px'
+};
+
+var formatNofify = function formatNofify(id, nombre, correo, msg, time_data) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    style: {
+      border: '1.5px solid var(--color-primary)',
+      borderRadius: '10px',
+      marginTop: '5px',
+      marginBottom: '5px',
+      padding: '15px'
+    },
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      content: true,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+          children: "x"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h3", {
+          children: ["Nombre: ", nombre]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h4", {
+          children: ["Correo: ", correo]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        item: true,
+        xs: 12,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("textarea", {
+          rows: "5",
+          style: {
+            width: '90%',
+            margin: '5px',
+            border: 'none'
+          },
+          disabled: true,
+          children: msg
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        item: true,
+        xs: 10,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h5", {
+          children: ["Hora: ", time_data]
+        })
+      })]
+    })
+  }, id);
 };
 
 function TransitionsModal(props) {
@@ -34799,26 +34899,22 @@ function TransitionsModal(props) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
       onClick: handleOpen,
       children: props.leabelBtn
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Modal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], {
       "aria-labelledby": "transition-modal-title",
       "aria-describedby": "transition-modal-description",
       open: open,
       onClose: handleClose,
       closeAfterTransition: true,
-      BackdropComponent: _mui_material_Backdrop__WEBPACK_IMPORTED_MODULE_3__["default"],
+      BackdropComponent: _mui_material_Backdrop__WEBPACK_IMPORTED_MODULE_4__["default"],
       BackdropProps: {
         timeout: 500
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Fade__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Fade__WEBPACK_IMPORTED_MODULE_5__["default"], {
         "in": open,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
           sx: style,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            id: "transition-modal-description",
-            sx: {
-              mt: 2
-            },
-            children: "Duis mollis, est non commodo luctus, nisi erat porttitor ligula."
+          children: props.notifications.map(function (el, index) {
+            return formatNofify(index, el.nombre, el.correo, el.observacion, el.time_data);
           })
         })
       })
@@ -34829,7 +34925,7 @@ function TransitionsModal(props) {
 function Notification(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: props.notifications.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
         item: true,
         xs: 12,
         sx: {
@@ -34850,9 +34946,10 @@ function Notification(props) {
           }
         },
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TransitionsModal, {
-          leabelBtn: props.notifications.length > 0 ? props.notifications[0].msg.length > 50 ? props.notifications[0].msg.substr(0, 50) + '...' : props.notifications[0].msg : null
+          notifications: props.notifications,
+          leabelBtn: props.notifications.length > 0 ? props.notifications[0].observacion.length > 50 ? props.notifications[0].observacion.substr(0, 50) + '...' : props.notifications[0].observacion : null
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
         item: true,
         xs: 12,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
@@ -34877,22 +34974,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Rows)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
-/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
+/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
 /* harmony import */ var _Notification__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Notification */ "./resources/js/components/calendar/rowsTable/Notification.jsx");
-/* harmony import */ var _rowsTable_notificationJson_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../rowsTable/notificationJson.json */ "./resources/js/components/calendar/rowsTable/notificationJson.json");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -34901,6 +34986,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+function zeroFill(number, width) {
+  width -= number.toString().length;
+
+  if (width > 0) {
+    return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
+  }
+
+  return number + ""; // siempre devuelve tipo cadena
+}
 
 var colorList = [{
   id: 1,
@@ -34932,8 +35026,12 @@ var showNotify = function showNotify(day, importData) {
   var arrayRows = []; // eslint-disable-next-line array-callback-return
 
   importData.map(function (el) {
-    if (el.day === day) {
-      arrayRows.push(el);
+    if (el != null) {
+      var temp = el.time_data.split(' ')[0].split('-')[2];
+
+      if (temp === zeroFill(day, 2)) {
+        arrayRows.push(el);
+      }
     }
   });
   return arrayRows;
@@ -34944,14 +35042,6 @@ var calculateColor = function calculateColor() {
 };
 
 function Rows(props) {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState([]),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      temp = _React$useState2[0],
-      setTemp = _React$useState2[1];
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    setTemp(_rowsTable_notificationJson_json__WEBPACK_IMPORTED_MODULE_2__);
-  }, []);
   var variants = {
     onStart: {
       backgroundColor: calculateColor(),
@@ -34972,24 +35062,24 @@ function Rows(props) {
       }
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(framer_motion__WEBPACK_IMPORTED_MODULE_4__.motion.div, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(framer_motion__WEBPACK_IMPORTED_MODULE_3__.motion.div, {
       variants: variants,
       initial: 'onStart',
       whileHover: 'onHover',
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
         container: true,
         spacing: 0,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
           item: true,
           xs: 12,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
             children: props.id
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
             children: props.day
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Notification__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          notifications: showNotify(props.day, temp)
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Notification__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          notifications: showNotify(props.day, props.notify)
         })]
       })
     })
@@ -36553,13 +36643,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _VtnModalModel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../VtnModalModel */ "./resources/js/components/VtnModalModel.jsx");
 /* harmony import */ var _FormIngreso__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FormIngreso */ "./resources/js/components/viewRegister/FormIngreso.jsx");
-/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
-/* harmony import */ var _FormularioNewUser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormularioNewUser */ "./resources/js/components/FormularioNewUser.jsx");
-/* harmony import */ var _TableModel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../TableModel */ "./resources/js/components/TableModel.jsx");
-/* harmony import */ var _FormRegisterDate__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FormRegisterDate */ "./resources/js/components/viewRegister/FormRegisterDate.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
+/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
+/* harmony import */ var _FormRegisterDate__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormRegisterDate */ "./resources/js/components/viewRegister/FormRegisterDate.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -36569,8 +36655,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function View() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
       container: true,
       spacing: {
         xs: 1,
@@ -36586,23 +36672,23 @@ function View() {
         textAlign: 'center',
         paddingTop: '0px'
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
         item: true,
         xs: 12,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
           style: {
             color: 'var(--color-primary)'
           },
           children: "REGISTROS"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
         item: true,
         xs: 4,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_VtnModalModel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_VtnModalModel__WEBPACK_IMPORTED_MODULE_1__["default"], {
           title: "Nuevo Registro",
-          component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_FormIngreso__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+          component: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_FormIngreso__WEBPACK_IMPORTED_MODULE_2__["default"], {})
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
         item: true,
         xs: 6,
         sm: 6,
@@ -36610,7 +36696,7 @@ function View() {
         sx: {
           m: 'auto'
         },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_FormRegisterDate__WEBPACK_IMPORTED_MODULE_5__["default"], {})
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_FormRegisterDate__WEBPACK_IMPORTED_MODULE_3__["default"], {})
       })]
     })
   });
@@ -37251,7 +37337,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_FormAddTyC__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/FormAddTyC */ "./resources/js/components/FormAddTyC.jsx");
 /* harmony import */ var _components_FormNewUser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/FormNewUser */ "./resources/js/components/FormNewUser.jsx");
 /* harmony import */ var _components_head_HeaderMain__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/head/HeaderMain */ "./resources/js/components/head/HeaderMain.jsx");
-/* harmony import */ var _components_ShowClendar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/ShowClendar */ "./resources/js/components/ShowClendar.jsx");
+/* harmony import */ var _components_ShowCalendar__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/ShowCalendar */ "./resources/js/components/ShowCalendar.jsx");
 /* harmony import */ var _components_viewRegister_View__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/viewRegister/View */ "./resources/js/components/viewRegister/View.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -37357,7 +37443,7 @@ function BodyRegistro() {
           id: opc
         });
       } else if (opc === 3) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_ShowClendar__WEBPACK_IMPORTED_MODULE_9__["default"], {});
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_ShowCalendar__WEBPACK_IMPORTED_MODULE_9__["default"], {});
       } else if (opc === 1000) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components_FormNewUser__WEBPACK_IMPORTED_MODULE_7__["default"], {
           id: opc
@@ -37717,7 +37803,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".StyleBtn{\n    width: 100%;\n    height: 50px;\n    font-size: 90%;\n    border: none;\n    display:flex;\n    flexDirection:row;\n    flex-wrap: nowrap;\n    justify-content: center;\n    align-items:center;\n}\n.FontStyleNav{\n    color: white;\n    cursor: pointer;\n}\n.StyleBtn input{\n    width: 100%;\n    font-size: 90%;\n    border: none;\n    background-color: transparent;\n    text-align:start;\n}\n\n.StyleBtn label{\n    margin-left:10%;\n    margin-right:10%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".StyleBtn{\r\n    width: 100%;\r\n    height: 50px;\r\n    font-size: 90%;\r\n    border: none;\r\n    display:flex;\r\n    flexDirection:row;\r\n    flex-wrap: nowrap;\r\n    justify-content: center;\r\n    align-items:center;\r\n}\r\n.FontStyleNav{\r\n    color: white;\r\n    cursor: pointer;\r\n}\r\n.StyleBtn input{\r\n    width: 100%;\r\n    font-size: 90%;\r\n    border: none;\r\n    background-color: transparent;\r\n    text-align:start;\r\n}\r\n\r\n.StyleBtn label{\r\n    margin-left:10%;\r\n    margin-right:10%;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37741,7 +37827,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    --color-primary:#22376D;\r\n    --color-secondary:#475a7e;\r\n    --color-forms:rgb(230, 230, 230);\r\n}\r\n\r\n*{\r\n    /*border: solid 1px #000;*/\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n*,\r\n*::before,\r\n*::after{\r\n    box-sizing: border-box;\r\n}\r\n\r\n.contentMainBody{\r\n    display:flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    width: auto;\r\n}\r\n.BodyContainer{\r\n    display:flex;\r\n    flex-direction: row;\r\n    flex-wrap: nowrap;\r\n    align-items: stretch;\r\n    min-width: 500px;\r\n    width:95%;\r\n    min-height: 85vh;\r\n    border: solid 3px var(--color-primary);\r\n    border-radius: 15px;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root{\n    --color-primary:#22376D;\n    --color-secondary:#475a7e;\n    --color-forms:rgb(230, 230, 230);\n}\n\n*{\n    /*border: solid 1px #000;*/\n    margin: 0;\n    padding: 0;\n}\n*,\n*::before,\n*::after{\n    box-sizing: border-box;\n}\n\n.contentMainBody{\n    display:flex;\n    flex-direction: row;\n    justify-content: center;\n    width: auto;\n}\n.BodyContainer{\n    display:flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    align-items: stretch;\n    min-width: 500px;\n    width:95%;\n    min-height: 85vh;\n    border: solid 3px var(--color-primary);\n    border-radius: 15px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37789,7 +37875,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".FormIngresoMain *{\n    margin: 0;\n    padding: 0;\n}\n.FormIngresoMain {\n    display: flex;\n    flex-direction: column;\n    text-align: center;\n    width: inherit;\n    color: var(--color-primary);\n}\n.FormIngreso{\n    flex-grow: 1;\n}\n.FormIngresoLeftAndRight{\n    display: flex;\n    flex-direction:row;\n}\n.FormIngresoLeftAndRight > div{\n    display: flex;\n    flex-direction:column;\n    width: 50%;\n}\n.FormIngresoStyleComponents{\n    width: 80%;\n    align-self: center;\n    border-radius: 10px;\n    height: 30px;\n    color: var(--color-secondary);\n    border: solid 2px var(--color-primary);\n    outline: none;\n    padding-left: 10px;\n}\n.FormIngresoRight > textarea{\n    color: var(--color-secondary);\n    border-radius: 10px;\n    padding-left: 10px;\n    align-self: center;\n    border: solid 2px var(--color-primary);\n    width: 80%;\n}\n.FormIngresoMain > div > button{\n    font-size: 16px;\n    font-weight: bold;\n    padding: 5px 20px ;\n    margin: 8px auto;\n    border-radius: 10px;\n    background-color: var(--color-primary);\n    border: solid 2px var(--color-primary);\n    color: white;\n}\n.FormIngresoMain > div > button:hover{\n    background-color: var(--color-secondary);\n    padding: 8px 25px;\n}\ninput[type=number]::-webkit-inner-spin-button,\ninput[type=number]::-webkit-outer-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\ninput[type=number] { -moz-appearance:textfield; }\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".FormIngresoMain *{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n.FormIngresoMain {\r\n    display: flex;\r\n    flex-direction: column;\r\n    text-align: center;\r\n    width: inherit;\r\n    color: var(--color-primary);\r\n}\r\n.FormIngreso{\r\n    flex-grow: 1;\r\n}\r\n.FormIngresoLeftAndRight{\r\n    display: flex;\r\n    flex-direction:row;\r\n}\r\n.FormIngresoLeftAndRight > div{\r\n    display: flex;\r\n    flex-direction:column;\r\n    width: 50%;\r\n}\r\n.FormIngresoStyleComponents{\r\n    width: 80%;\r\n    align-self: center;\r\n    border-radius: 10px;\r\n    height: 30px;\r\n    color: var(--color-secondary);\r\n    border: solid 2px var(--color-primary);\r\n    outline: none;\r\n    padding-left: 10px;\r\n}\r\n.FormIngresoRight > textarea{\r\n    color: var(--color-secondary);\r\n    border-radius: 10px;\r\n    padding-left: 10px;\r\n    align-self: center;\r\n    border: solid 2px var(--color-primary);\r\n    width: 80%;\r\n}\r\n.FormIngresoMain > div > button{\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n    padding: 5px 20px ;\r\n    margin: 8px auto;\r\n    border-radius: 10px;\r\n    background-color: var(--color-primary);\r\n    border: solid 2px var(--color-primary);\r\n    color: white;\r\n}\r\n.FormIngresoMain > div > button:hover{\r\n    background-color: var(--color-secondary);\r\n    padding: 8px 25px;\r\n}\r\ninput[type=number]::-webkit-inner-spin-button,\r\ninput[type=number]::-webkit-outer-spin-button {\r\n  -webkit-appearance: none;\r\n  margin: 0;\r\n}\r\n\r\ninput[type=number] { -moz-appearance:textfield; }\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37838,7 +37924,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".NavContiner{\n    display: flex;\n    flex-direction: column;\n    color: white;\n    padding: auto;\n    border-radius: 10px 0 0 10px;\n    width: 100%;\n}\n.NavContiner > #divH3{\n    text-align: center;\n    border-bottom: solid 1px white;\n    padding: 30px 0 ;\n}\n.NavContiner > #divH3:hover{\n    cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".NavContiner{\r\n    display: flex;\r\n    flex-direction: column;\r\n    color: white;\r\n    padding: auto;\r\n    border-radius: 10px 0 0 10px;\r\n    width: 100%;\r\n}\r\n.NavContiner > #divH3{\r\n    text-align: center;\r\n    border-bottom: solid 1px white;\r\n    padding: 30px 0 ;\r\n}\r\n.NavContiner > #divH3:hover{\r\n    cursor: pointer;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -85971,17 +86057,6 @@ function combine (array, callback) {
 	return array.map(callback).join('')
 }
 
-
-/***/ }),
-
-/***/ "./resources/js/components/calendar/rowsTable/notificationJson.json":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/calendar/rowsTable/notificationJson.json ***!
-  \**************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = JSON.parse('[{"id":0,"day":15,"month":"Feb","year":"2022","msg":"NOTIFY","time":"00:00:00"},{"id":1,"day":18,"month":"Feb","year":"2022","msg":"Viernes esto es una notificacion dsfdsfsdfds sdfdsfsdfsd dsfdsfsdfds sdfdsfsdfsd dsfdsfsdfds sdfdsfsdfsd dsfdsfsdfds sdfdsfsdfsd dsfdsfsdfds sdfdsfsdfsd","time":"00:00:00"},{"id":2,"day":20,"month":"Feb","year":"2022","msg":"NOTIFY","time":"00:00:00"},{"id":3,"day":20,"month":"Feb","year":"2022","msg":"NOTIFY2","time":"00:00:00"},{"id":4,"day":20,"month":"Feb","year":"2022","msg":"NOTIFY3","time":"00:00:00"},{"id":4,"day":20,"month":"Feb","year":"2022","msg":"NOTIFY3","time":"00:00:00"},{"id":4,"day":20,"month":"Feb","year":"2022","msg":"NOTIFY3","time":"00:00:00"},{"id":4,"day":20,"month":"Feb","year":"2022","msg":"NOTIFY3","time":"00:00:00"},{"id":5,"day":1,"month":"Feb","year":"2022","msg":"NOTIFY","time":"00:00:00"}]');
 
 /***/ })
 

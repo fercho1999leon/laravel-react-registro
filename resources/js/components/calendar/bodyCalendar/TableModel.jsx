@@ -62,7 +62,7 @@ export default function TableModel(props) {
                       return (
                         <TableCell key={column.id} sx={{padding:'0.5%'}} align={column.align}>
                           {
-                            value?<Rows day={value} id={(new Date(props.dateChange.year, props.dateChange.month, value)).toString().split(' ')[0]}/>:null
+                            value?<Rows notify={props.notify} day={value} id={(new Date(props.dateChange.year, props.dateChange.month, value)).toString().split(' ')[0]}/>:null
                           }
                         </TableCell>
                       );

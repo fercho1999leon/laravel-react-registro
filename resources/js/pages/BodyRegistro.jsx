@@ -9,7 +9,7 @@ import {ProviderLogin} from '../components/ContextLogin';
 import FormAddTyC from "../components/FormAddTyC";
 import FormNewUser from "../components/FormNewUser";
 import HeaderMain from "../components/head/HeaderMain";
-import ShowClendar from "../components/ShowClendar";
+import ShowCalendar from "../components/ShowCalendar";
 import View from "../components/viewRegister/View";
 
 const importConfig = (setConfigState,setDateJson) =>{
@@ -63,7 +63,7 @@ export default function BodyRegistro(){
             }else if(opc===2){
                 return (<FormAddTyC id={opc}/>);
             }else if(opc===3){
-                return (<ShowClendar/>);
+                return (<ShowCalendar/>);
             }else if(opc===1000){
                 return (<FormNewUser id={opc}/>);
             }

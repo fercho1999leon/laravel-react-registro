@@ -2,8 +2,6 @@ import React from "react";
 import VtnModalModel from "../VtnModalModel";
 import FormIngreso from "./FormIngreso";
 import Grid from "@mui/material/Grid";
-import FormularioNewUser from "../FormularioNewUser";
-import TableModel from "../TableModel";
 import FormRegisterDate from "./FormRegisterDate";
 
 export default function View (){
