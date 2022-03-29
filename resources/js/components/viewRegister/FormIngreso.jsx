@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {motion} from "framer-motion";
 import { Component } from 'react';
 import {useRef} from 'react';
 import Box from '@mui/material/Box';
@@ -153,8 +154,27 @@ class RenderListInteres extends Component {
         );
     }
 }
+
+const variants = {
+    haidenLabel:{
+        opacity:0,
+        height:0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    showLabel:{
+        opacity:1,
+        height:'40px',
+        transition:{
+            duration:1
+        }
+    }
+}
+
 export default function FormIngreso(props){
     const dateJson = React.useContext(ContextLogin);
+    const [showInputDate,setShowInputDate] = React.useState(false);
     return(
         <div className="FormIngresoMain">
             <div className="FormIngreso">
@@ -190,11 +210,24 @@ export default function FormIngreso(props){
                 <div>
                     <h3>Estado</h3>
                     <label htmlFor="idStatusContactado">Contactado</label>
-                    <input type="radio" className="dataOut" style={styleRadio} id="idStatusContactado" name="estado" value="contactado" defaultChecked/>
+                    <input type="radio" className="dataOut" style={styleRadio} id="idStatusContactado" name="estado" value="contactado" onMouseUp={(e)=>{setShowInputDate(false)}} defaultChecked/>
                     <label htmlFor="idStatusSinContactar"> Sin Contactar</label>
-                    <input type="radio" className="dataOut" style={styleRadio} id="idStatusSinContactar" name="estado" value="SinContactar" />
+                    <input type="radio" className="dataOut" style={styleRadio} id="idStatusSinContactar" name="estado" value="SinContactar" onMouseUp={(e)=>{setShowInputDate(false)}}/>
                     <label htmlFor="idStatusCita"> Cita</label>
-                    <input type="radio" className="dataOut" style={styleRadio} id="idStatusCita" name="estado" value="Cita" />
+                    <input type="radio" className="dataOut" style={styleRadio} id="idStatusCita" name="estado" value="Cita" onMouseUp={(e)=>{setShowInputDate(true)}}/>
+                    {
+                        showInputDate?
+                            <motion.div
+                                variants={variants}
+                                initial={'haidenLabel'}
+                                animate={showInputDate?'showLabel':'haidenLabel'}
+                            >
+                                <label htmlFor={'idAgendar'} style={{marginRight:'5px'}}>Agendar</label>
+                                <input style={{color:'#787878',border: '1.5px solid #787878', borderRadius:'5px'}} type={'datetime-local'} className={'dataOut'} id={'idAgendar'} name="estado" required={true}/>
+                            </motion.div>
+                        :
+                        null
+                    }
                 </div>
             </div>
             <div className="FormIngreso">
