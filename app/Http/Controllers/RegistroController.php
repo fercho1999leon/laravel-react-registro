@@ -11,11 +11,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
+use App\Models\NotificacionAgenda;
 
 class RegistroController extends Controller
 {
     public function create(){
-        setcookie("__token", csrf_token()); 
+        setcookie("__token", csrf_token());
         return view('registro');
     }
     public function store(){
@@ -66,7 +67,7 @@ class RegistroController extends Controller
         return $user;
     }
     protected function insertRegistro($request){
-        try { 
+        try {
             $correo = $request->correo;
                 //Cuando el correo esta vacio
                 $tempCorreo = $correo==''?('randon'.(Postulante::all()->count()+1).'@hotmail.com'):($correo);
@@ -96,8 +97,11 @@ class RegistroController extends Controller
                 }
                 $postulante->save();
                 $cursoHasCarrera->save();
+                if($request->estado===3){
+                    $notificacion = new NotificacionAgenda();
+                }
                 return json_encode(array('code'=>0));
-        } catch(QueryException $ex){ 
+        } catch(QueryException $ex){
             return json_encode(array('code'=>1));
         }
     }

@@ -34822,7 +34822,7 @@ var style = {
   overflow: 'scroll',
   overflowY: 'auto',
   overflowX: 'hidden',
-  height: '400px'
+  maxHeight: '400px'
 };
 
 var formatNofify = function formatNofify(id, nombre, correo, msg, time_data) {
@@ -36189,7 +36189,6 @@ var style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4
@@ -36235,35 +36234,37 @@ var eventBtnGuardar = function eventBtnGuardar(e, refVtnModal, handleOpen, confi
     observacion: arrayData[7].value,
     ciudad: arrayData[8].selectedIndex,
     estado: estadoUsuario,
+    timeData: arrayData.length > 12 ? arrayData[12].value : null,
     configSate: configSate,
     id: id
   };
   archivoDatos = JSON.stringify(archivoDatos);
-  fetch('/registro/insert', {
-    headers: {
-      'X-CSRF-TOKEN': token,
-      'Content-type': 'application/json'
-    },
-    method: 'POST',
-    body: archivoDatos
-  }).then(function (response) {
-    return response.text();
-  }).then(function (respuesta) {
-    try {
-      respuesta = JSON.parse(respuesta);
-
-      if (respuesta['code'] == 0 && respuesta != "") {
-        refVtnModal.current.textContent = "USUARIO CREADO CORRECTAMENTE";
-      } else if (respuesta['code'] == 1) {
-        refVtnModal.current.textContent = "Error en insert";
+  console.log(archivoDatos);
+  /*
+  fetch('/registro/insert',{
+      headers:{
+          'X-CSRF-TOKEN':token,
+          'Content-type':'application/json',
+      },
+      method: 'POST',
+      body: archivoDatos,
+  }).then(response => {
+      return response.text();
+  }).then(respuesta =>{
+      try {
+          respuesta = JSON.parse(respuesta);
+          if(respuesta['code']==0 && respuesta!=""){
+              refVtnModal.current.textContent="USUARIO CREADO CORRECTAMENTE";
+          }else if(respuesta['code']==1){
+              refVtnModal.current.textContent="Error en insert";
+          }
+      } catch (error) {
+          document.open();
+          document.write(respuesta);
+          document.close();
       }
-    } catch (error) {
-      document.open();
-      document.write(respuesta);
-      document.close();
-    }
   });
-  handleOpen();
+  handleOpen();*/
 };
 
 var RenderListInteres = /*#__PURE__*/function (_Component) {
@@ -36868,6 +36869,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
 /* harmony import */ var _css_FormIngresoStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../css/FormIngresoStyle.css */ "./resources/css/FormIngresoStyle.css");
 /* harmony import */ var _ContextLogin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ContextLogin */ "./resources/js/components/ContextLogin.jsx");
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! framer-motion */ "./node_modules/framer-motion/dist/es/render/dom/motion.mjs");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -36920,8 +36922,37 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var styleRadio = {
   margin: "auto 10px"
+};
+var style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 'auto',
+  border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3
+};
+var variants = {
+  haidenLabel: {
+    opacity: 0,
+    height: 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  showLabel: {
+    opacity: 1,
+    height: '40px',
+    transition: {
+      duration: 1
+    }
+  }
 };
 
 var packageData = function packageData(dataUpDate, setSatateConsulta, configSate, id) {
@@ -36978,20 +37009,6 @@ var packageData = function packageData(dataUpDate, setSatateConsulta, configSate
       document.close();
     }
   });
-};
-
-var style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 'auto',
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3
 };
 
 function ChildModal(props) {
@@ -37215,6 +37232,11 @@ var RenderListInteres = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 function FormUpDate(props) {
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      showInputDate = _React$useState6[0],
+      setShowInputDate = _React$useState6[1];
+
   var dateJson = react__WEBPACK_IMPORTED_MODULE_0__.useContext(_ContextLogin__WEBPACK_IMPORTED_MODULE_2__["default"]);
   var valorCiudad = -1;
 
@@ -37332,7 +37354,10 @@ function FormUpDate(props) {
           id: "idStatusContactado",
           name: "estado",
           value: "Contactado",
-          defaultChecked: valorState == 1 ? true : false
+          onMouseUp: function onMouseUp(e) {
+            setShowInputDate(false);
+          },
+          defaultChecked: true
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           htmlFor: "idStatusSinContactar",
           children: " Sin Contactar"
@@ -37343,7 +37368,9 @@ function FormUpDate(props) {
           id: "idStatusSinContactar",
           name: "estado",
           value: "SinContactar",
-          defaultChecked: valorState == 2 ? true : false
+          onMouseUp: function onMouseUp(e) {
+            setShowInputDate(false);
+          }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           htmlFor: "idStatusCita",
           children: " Cita"
@@ -37354,8 +37381,32 @@ function FormUpDate(props) {
           id: "idStatusCita",
           name: "estado",
           value: "Cita",
-          defaultChecked: valorState == 3 ? true : false
-        })]
+          onMouseUp: function onMouseUp(e) {
+            setShowInputDate(true);
+          }
+        }), showInputDate ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(framer_motion__WEBPACK_IMPORTED_MODULE_8__.motion.div, {
+          variants: variants,
+          initial: 'haidenLabel',
+          animate: showInputDate ? 'showLabel' : 'haidenLabel',
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+            htmlFor: 'idAgendar',
+            style: {
+              marginRight: '5px'
+            },
+            children: "Agendar"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+            style: {
+              color: '#787878',
+              border: '1.5px solid #787878',
+              borderRadius: '5px'
+            },
+            type: 'datetime-local',
+            className: 'dataOut',
+            id: 'idAgendar',
+            name: "estado",
+            required: true
+          })]
+        }) : null]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "FormIngreso",
@@ -37858,7 +37909,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".StyleBtn{\n    width: 100%;\n    height: 50px;\n    font-size: 90%;\n    border: none;\n    display:flex;\n    flexDirection:row;\n    flex-wrap: nowrap;\n    justify-content: center;\n    align-items:center;\n}\n.FontStyleNav{\n    color: white;\n    cursor: pointer;\n}\n.StyleBtn input{\n    width: 100%;\n    font-size: 90%;\n    border: none;\n    background-color: transparent;\n    text-align:start;\n}\n\n.StyleBtn label{\n    margin-left:10%;\n    margin-right:10%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".StyleBtn{\r\n    width: 100%;\r\n    height: 50px;\r\n    font-size: 90%;\r\n    border: none;\r\n    display:flex;\r\n    flexDirection:row;\r\n    flex-wrap: nowrap;\r\n    justify-content: center;\r\n    align-items:center;\r\n}\r\n.FontStyleNav{\r\n    color: white;\r\n    cursor: pointer;\r\n}\r\n.StyleBtn input{\r\n    width: 100%;\r\n    font-size: 90%;\r\n    border: none;\r\n    background-color: transparent;\r\n    text-align:start;\r\n}\r\n\r\n.StyleBtn label{\r\n    margin-left:10%;\r\n    margin-right:10%;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37882,7 +37933,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ":root{\r\n    --color-primary:#22376D;\r\n    --color-secondary:#475a7e;\r\n    --color-forms:rgb(230, 230, 230);\r\n}\r\n\r\n*{\r\n    /*border: solid 1px #000;*/\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n*,\r\n*::before,\r\n*::after{\r\n    box-sizing: border-box;\r\n}\r\n\r\n.contentMainBody{\r\n    display:flex;\r\n    flex-direction: row;\r\n    justify-content: center;\r\n    width: auto;\r\n}\r\n.BodyContainer{\r\n    display:flex;\r\n    flex-direction: row;\r\n    flex-wrap: nowrap;\r\n    align-items: stretch;\r\n    min-width: 500px;\r\n    width:95%;\r\n    min-height: 85vh;\r\n    border: solid 3px var(--color-primary);\r\n    border-radius: 15px;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root{\n    --color-primary:#22376D;\n    --color-secondary:#475a7e;\n    --color-forms:rgb(230, 230, 230);\n}\n\n*{\n    /*border: solid 1px #000;*/\n    margin: 0;\n    padding: 0;\n}\n*,\n*::before,\n*::after{\n    box-sizing: border-box;\n}\n\n.contentMainBody{\n    display:flex;\n    flex-direction: row;\n    justify-content: center;\n    width: auto;\n}\n.BodyContainer{\n    display:flex;\n    flex-direction: row;\n    flex-wrap: nowrap;\n    align-items: stretch;\n    min-width: 500px;\n    width:95%;\n    min-height: 85vh;\n    border: solid 3px var(--color-primary);\n    border-radius: 15px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37930,7 +37981,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".FormIngresoMain *{\n    margin: 0;\n    padding: 0;\n}\n.FormIngresoMain {\n    display: flex;\n    flex-direction: column;\n    text-align: center;\n    width: inherit;\n    color: var(--color-primary);\n}\n.FormIngreso{\n    flex-grow: 1;\n}\n.FormIngresoLeftAndRight{\n    display: flex;\n    flex-direction:row;\n}\n.FormIngresoLeftAndRight > div{\n    display: flex;\n    flex-direction:column;\n    width: 50%;\n}\n.FormIngresoStyleComponents{\n    width: 80%;\n    align-self: center;\n    border-radius: 10px;\n    height: 30px;\n    color: var(--color-secondary);\n    border: solid 2px var(--color-primary);\n    outline: none;\n    padding-left: 10px;\n}\n.FormIngresoRight > textarea{\n    color: var(--color-secondary);\n    border-radius: 10px;\n    padding-left: 10px;\n    align-self: center;\n    border: solid 2px var(--color-primary);\n    width: 80%;\n}\n.FormIngresoMain > div > button{\n    font-size: 16px;\n    font-weight: bold;\n    padding: 5px 20px ;\n    margin: 8px auto;\n    border-radius: 10px;\n    background-color: var(--color-primary);\n    border: solid 2px var(--color-primary);\n    color: white;\n}\n.FormIngresoMain > div > button:hover{\n    background-color: var(--color-secondary);\n    padding: 8px 25px;\n}\ninput[type=number]::-webkit-inner-spin-button,\ninput[type=number]::-webkit-outer-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\ninput[type=number] { -moz-appearance:textfield; }\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".FormIngresoMain *{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n.FormIngresoMain {\r\n    display: flex;\r\n    flex-direction: column;\r\n    text-align: center;\r\n    width: inherit;\r\n    color: var(--color-primary);\r\n}\r\n.FormIngreso{\r\n    flex-grow: 1;\r\n}\r\n.FormIngresoLeftAndRight{\r\n    display: flex;\r\n    flex-direction:row;\r\n}\r\n.FormIngresoLeftAndRight > div{\r\n    display: flex;\r\n    flex-direction:column;\r\n    width: 50%;\r\n}\r\n.FormIngresoStyleComponents{\r\n    width: 80%;\r\n    align-self: center;\r\n    border-radius: 10px;\r\n    height: 30px;\r\n    color: var(--color-secondary);\r\n    border: solid 2px var(--color-primary);\r\n    outline: none;\r\n    padding-left: 10px;\r\n}\r\n.FormIngresoRight > textarea{\r\n    color: var(--color-secondary);\r\n    border-radius: 10px;\r\n    padding-left: 10px;\r\n    align-self: center;\r\n    border: solid 2px var(--color-primary);\r\n    width: 80%;\r\n}\r\n.FormIngresoMain > div > button{\r\n    font-size: 16px;\r\n    font-weight: bold;\r\n    padding: 5px 20px ;\r\n    margin: 8px auto;\r\n    border-radius: 10px;\r\n    background-color: var(--color-primary);\r\n    border: solid 2px var(--color-primary);\r\n    color: white;\r\n}\r\n.FormIngresoMain > div > button:hover{\r\n    background-color: var(--color-secondary);\r\n    padding: 8px 25px;\r\n}\r\ninput[type=number]::-webkit-inner-spin-button,\r\ninput[type=number]::-webkit-outer-spin-button {\r\n  -webkit-appearance: none;\r\n  margin: 0;\r\n}\r\n\r\ninput[type=number] { -moz-appearance:textfield; }\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -37979,7 +38030,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".NavContiner{\n    display: flex;\n    flex-direction: column;\n    color: white;\n    padding: auto;\n    border-radius: 10px 0 0 10px;\n    width: 100%;\n}\n.NavContiner > #divH3{\n    text-align: center;\n    border-bottom: solid 1px white;\n    padding: 30px 0 ;\n}\n.NavContiner > #divH3:hover{\n    cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".NavContiner{\r\n    display: flex;\r\n    flex-direction: column;\r\n    color: white;\r\n    padding: auto;\r\n    border-radius: 10px 0 0 10px;\r\n    width: 100%;\r\n}\r\n.NavContiner > #divH3{\r\n    text-align: center;\r\n    border-bottom: solid 1px white;\r\n    padding: 30px 0 ;\r\n}\r\n.NavContiner > #divH3:hover{\r\n    cursor: pointer;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

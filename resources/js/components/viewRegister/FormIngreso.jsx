@@ -15,7 +15,6 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -54,10 +53,13 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
         observacion:arrayData[7].value,
         ciudad:arrayData[8].selectedIndex,
         estado:estadoUsuario,
+        timeData:arrayData.length>12?arrayData[12].value:null,
         configSate,
         id,
     }
     archivoDatos = JSON.stringify(archivoDatos);
+    console.log(archivoDatos);
+    /*
     fetch('/registro/insert',{
         headers:{
             'X-CSRF-TOKEN':token,
@@ -81,7 +83,7 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
             document.close();
         }
     });
-    handleOpen();
+    handleOpen();*/
 }
 class RenderListInteres extends Component {
     constructor(props){

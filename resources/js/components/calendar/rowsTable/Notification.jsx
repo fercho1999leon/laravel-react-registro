@@ -19,7 +19,7 @@ const style = {
   overflow:'scroll',
   overflowY:'auto',
   overflowX:'hidden',
-  height:'400px'
+  maxHeight:'400px'
 };
 
 const formatNofify = (id,nombre,correo,msg,time_data) =>{

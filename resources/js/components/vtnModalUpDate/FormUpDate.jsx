@@ -6,9 +6,41 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import "../../../css/FormIngresoStyle.css";
 import ContextLogin from '../ContextLogin';
+import {motion} from "framer-motion";
 const styleRadio = {
     margin: "auto 10px"
 }
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 'auto',
+    border: '2px solid #000',
+    boxShadow: 24,
+    pt: 2,
+    px: 4,
+    pb: 3,
+};
+
+const variants = {
+    haidenLabel:{
+        opacity:0,
+        height:0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    showLabel:{
+        opacity:1,
+        height:'40px',
+        transition:{
+            duration:1
+        }
+    }
+}
+
 const packageData=(dataUpDate,setSatateConsulta,configSate,id)=>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const arrayData = document.getElementsByClassName('dataOut');
@@ -36,8 +68,8 @@ const packageData=(dataUpDate,setSatateConsulta,configSate,id)=>{
             'X-CSRF-TOKEN':token,
             'Content-Type':'application/json',
         },
-        method: 'POST', 
-        body: archivoDatos, 
+        method: 'POST',
+        body: archivoDatos,
     }).then(response => {
         return response.text();
     }).then(response =>{
@@ -57,20 +89,7 @@ const packageData=(dataUpDate,setSatateConsulta,configSate,id)=>{
         }
     });
 }
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 'auto',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    pt: 2,
-    px: 4,
-    pb: 3,
-  };
-  
+
   function ChildModal(props) {
     const [open, setOpen] = React.useState(false);
     const configSate = React.useContext(ContextLogin);
@@ -83,7 +102,7 @@ const style = {
         setOpen(false);
         props.setCloseParent(false);
     };
-  
+
     return (
       <React.Fragment>
         <Button onClick={handleOpen}>Actualizar</Button>
@@ -143,8 +162,8 @@ class RenderListInteres extends Component {
                         });
                     }
                 )
-            };   
-            statusCarrera();        
+            };
+            statusCarrera();
             return(
                 <>
                     <h3>Interes</h3>
@@ -176,8 +195,8 @@ class RenderListInteres extends Component {
                         });
                     }
                 )
-            };   
-            statusCurso();   
+            };
+            statusCurso();
             return(
                 <>
                     <h3>Interes</h3>
@@ -203,7 +222,9 @@ class RenderListInteres extends Component {
         return this.renderList();
     }
 }
+
 export default function FormUpDate(props){
+        const [showInputDate,setShowInputDate] = React.useState(false);
         const dateJson = React.useContext(ContextLogin);
         let valorCiudad = -1;
         const statusCiudad = () =>{
@@ -216,7 +237,7 @@ export default function FormUpDate(props){
                     });
                 }
             )
-        };   
+        };
         statusCiudad();
         let valorState = -1;
         const statusState = () =>{
@@ -267,11 +288,24 @@ export default function FormUpDate(props){
                     <div>
                         <h3>Estado</h3>
                         <label htmlFor="idStatusContactado">Contactado</label>
-                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusContactado" name="estado" value="Contactado" defaultChecked={valorState==1?true:false}/>
+                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusContactado" name="estado" value="Contactado" onMouseUp={(e)=>{setShowInputDate(false)}} defaultChecked/>
                         <label htmlFor="idStatusSinContactar"> Sin Contactar</label>
-                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusSinContactar" name="estado" value="SinContactar" defaultChecked={valorState==2?true:false}/>
+                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusSinContactar" name="estado" value="SinContactar" onMouseUp={(e)=>{setShowInputDate(false)}}/>
                         <label htmlFor="idStatusCita"> Cita</label>
-                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusCita" name="estado" value="Cita" defaultChecked={valorState==3?true:false}/>
+                        <input type="radio" className="dataOut" style={styleRadio} id="idStatusCita" name="estado" value="Cita" onMouseUp={(e)=>{setShowInputDate(true)}}/>
+                        {
+                            showInputDate?
+                                <motion.div
+                                    variants={variants}
+                                    initial={'haidenLabel'}
+                                    animate={showInputDate?'showLabel':'haidenLabel'}
+                                >
+                                    <label htmlFor={'idAgendar'} style={{marginRight:'5px'}}>Agendar</label>
+                                    <input style={{color:'#787878',border: '1.5px solid #787878', borderRadius:'5px'}} type={'datetime-local'} className={'dataOut'} id={'idAgendar'} name="estado" required={true}/>
+                                </motion.div>
+                                :
+                                null
+                        }
                     </div>
                 </div>
                 <div className="FormIngreso">
