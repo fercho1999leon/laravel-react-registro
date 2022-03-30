@@ -99,6 +99,9 @@ class RegistroController extends Controller
                 $cursoHasCarrera->save();
                 if($request->estado===3){
                     $notificacion = new NotificacionAgenda();
+                    $notificacion->postulante_correo = $tempCorreo;
+                    $notificacion->time_data = $request->timeData;
+                    $notificacion->save();
                 }
                 return json_encode(array('code'=>0));
         } catch(QueryException $ex){

@@ -35,6 +35,17 @@ const style = {
 const styleRadio = {
     margin: "auto 10px"
 }
+
+function zeroFill( number, width )
+{
+    width -= number.toString().length;
+    if ( width > 0 )
+    {
+        return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+    }
+    return number + ""; // siempre devuelve tipo cadena
+}
+
 const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const arrayData = document.getElementsByClassName('dataOut');
@@ -43,6 +54,8 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
     if(arrayData[9].checked){estadoUsuario=1}
     else if(arrayData[10].checked){estadoUsuario=2}
     else if(arrayData[11].checked){estadoUsuario=3}
+    let timeData = arrayData.length>12?new Date(arrayData[12].value):null;
+    timeData = timeData ? timeData.getFullYear()+"-"+zeroFill((timeData.getMonth() + 1),2)+ "-" + zeroFill(timeData.getDate(),2) + " " + zeroFill(timeData.getHours(),2) + ":" + zeroFill(timeData.getMinutes(),2) + ":" + zeroFill(timeData.getSeconds(),2) : null
     let archivoDatos={
         nombre:arrayData[0].value,
         apellido:arrayData[1].value,
@@ -53,13 +66,12 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
         observacion:arrayData[7].value,
         ciudad:arrayData[8].selectedIndex,
         estado:estadoUsuario,
-        timeData:arrayData.length>12?arrayData[12].value:null,
+        timeData,
         configSate,
         id,
     }
     archivoDatos = JSON.stringify(archivoDatos);
     console.log(archivoDatos);
-    /*
     fetch('/registro/insert',{
         headers:{
             'X-CSRF-TOKEN':token,
@@ -83,7 +95,7 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
             document.close();
         }
     });
-    handleOpen();*/
+    handleOpen();
 }
 class RenderListInteres extends Component {
     constructor(props){
