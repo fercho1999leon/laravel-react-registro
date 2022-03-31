@@ -67,7 +67,7 @@ class RegistroController extends Controller
         return $user;
     }
     protected function insertRegistro($request){
-        try {
+        /*try {*/
             $correo = $request->correo;
                 //Cuando el correo esta vacio
                 $tempCorreo = $correo==''?('randon'.(Postulante::all()->count()+1).'@hotmail.com'):($correo);
@@ -97,16 +97,16 @@ class RegistroController extends Controller
                 }
                 $postulante->save();
                 $cursoHasCarrera->save();
-                if($request->estado===3){
+                if($request->estado===3 && $request->timeData != null){
                     $notificacion = new NotificacionAgenda();
                     $notificacion->postulante_correo = $tempCorreo;
                     $notificacion->time_data = $request->timeData;
                     $notificacion->save();
                 }
                 return json_encode(array('code'=>0));
-        } catch(QueryException $ex){
+        /*} catch(QueryException $ex){
             return json_encode(array('code'=>1));
-        }
+        }*/
     }
     protected function shearchRegistro($request){
         $parametro = $request->parametro;
@@ -158,6 +158,12 @@ class RegistroController extends Controller
                         ]);
                     }
                 }
+            if($request->estado===3 && $request->timeData != null){
+                $notificacion = new NotificacionAgenda();
+                $notificacion->postulante_correo = $request->correo;
+                $notificacion->time_data = $request->timeData;
+                $notificacion->save();
+            }
             return json_encode(array('status'=>0));
         }catch(QueryException $ex){
             return json_encode(array('status'=>1));

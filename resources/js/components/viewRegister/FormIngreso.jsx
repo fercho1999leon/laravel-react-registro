@@ -15,6 +15,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
+    bgcolor: 'var(--color-forms)',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
@@ -55,7 +56,10 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
     else if(arrayData[10].checked){estadoUsuario=2}
     else if(arrayData[11].checked){estadoUsuario=3}
     let timeData = arrayData.length>12?new Date(arrayData[12].value):null;
-    timeData = timeData ? timeData.getFullYear()+"-"+zeroFill((timeData.getMonth() + 1),2)+ "-" + zeroFill(timeData.getDate(),2) + " " + zeroFill(timeData.getHours(),2) + ":" + zeroFill(timeData.getMinutes(),2) + ":" + zeroFill(timeData.getSeconds(),2) : null
+    timeData = timeData ? timeData.getFullYear()+"-"+zeroFill((timeData.getMonth() + 1),2)+ "-" + zeroFill(timeData.getDate(),2) + " " + zeroFill(timeData.getHours(),2) + ":" + zeroFill(timeData.getMinutes(),2) + ":" + zeroFill(timeData.getSeconds(),2) : null;
+    if(timeData){
+        timeData = timeData.includes('NaN')?null:timeData;
+    }
     let archivoDatos={
         nombre:arrayData[0].value,
         apellido:arrayData[1].value,
@@ -71,7 +75,6 @@ const eventBtnGuardar = (e,refVtnModal,handleOpen,configSate,id) =>{
         id,
     }
     archivoDatos = JSON.stringify(archivoDatos);
-    console.log(archivoDatos);
     fetch('/registro/insert',{
         headers:{
             'X-CSRF-TOKEN':token,

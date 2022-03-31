@@ -4,6 +4,8 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
 
 const style = {
   position: 'absolute',
@@ -22,6 +24,11 @@ const style = {
   maxHeight:'400px'
 };
 
+const removeNotify = (id) => {
+    const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+}
+
 const formatNofify = (id,nombre,correo,msg,time_data) =>{
     return(
         <div key={id} style={{
@@ -33,7 +40,20 @@ const formatNofify = (id,nombre,correo,msg,time_data) =>{
         }}>
             <Grid content>
                 <Grid item xs={12}>
-                    <h3>x</h3>
+                    <Toolbar>
+                        <IconButton
+                            sx={{
+                                fontSize:'1.1rem',
+                                padding: '6px 15px',
+                                margin:'0'
+                            }}
+                            onClick={(e)=>{
+                                removeNotify(id);
+                            }}
+                        >
+                            x
+                        </IconButton>
+                    </Toolbar>
                 </Grid>
                 <Grid item xs={12}>
                     <h3>Nombre: {nombre}</h3>

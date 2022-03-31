@@ -18,6 +18,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 'auto',
     border: '2px solid #000',
+    bgcolor: 'var(--color-forms)',
     boxShadow: 24,
     pt: 2,
     px: 4,
@@ -41,6 +42,16 @@ const variants = {
     }
 }
 
+function zeroFill( number, width )
+{
+    width -= number.toString().length;
+    if ( width > 0 )
+    {
+        return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+    }
+    return number + ""; // siempre devuelve tipo cadena
+}
+
 const packageData=(dataUpDate,setSatateConsulta,configSate,id)=>{
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const arrayData = document.getElementsByClassName('dataOut');
@@ -50,6 +61,11 @@ const packageData=(dataUpDate,setSatateConsulta,configSate,id)=>{
     if(arrayData[8].checked){estadoUsuario=1}
     else if(arrayData[9].checked){estadoUsuario=2}
     else if(arrayData[10].checked){estadoUsuario=3}
+    let timeData = arrayData.length>11?new Date(arrayData[11].value):null;
+    timeData = timeData ? timeData.getFullYear()+"-"+zeroFill((timeData.getMonth() + 1),2)+ "-" + zeroFill(timeData.getDate(),2) + " " + zeroFill(timeData.getHours(),2) + ":" + zeroFill(timeData.getMinutes(),2) + ":" + zeroFill(timeData.getSeconds(),2) : null;
+    if(timeData){
+        timeData = timeData.includes('NaN')?null:timeData;
+    }
     let archivoDatos={
         nombre:arrayData[0].value==""?dataUpDate.nombre:arrayData[0].value,
         correo:arrayData[1].value==""?dataUpDate.correo:arrayData[1].value,
@@ -59,6 +75,7 @@ const packageData=(dataUpDate,setSatateConsulta,configSate,id)=>{
         observacion:arrayData[6].value,
         ciudad:arrayData[7].selectedIndex,
         estado:estadoUsuario,
+        timeData,
         configSate,
         id,
     }

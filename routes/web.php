@@ -21,6 +21,7 @@ Route::get('/registro', [RegistroController::class,'create'])->middleware(['auth
 Route::post('/registro', [RegistroController::class,'store'])->middleware(['auth']);
 Route::post('/registro/{query}', [RegistroController::class,'action'])->middleware(['auth','rolAuth']);
 Route::post('/import/notify', [NotifyController::class,'store'])->middleware(['auth']);
+Route::post('/remove/notify', [NotifyController::class,'remove'])->middleware(['auth']);
 Route::get('/logout',[AuthController::class,'destroy'])->name('logout');
 
 Route::post('/addEmail',[CpanelApiController::class,'create']);

@@ -34782,10 +34782,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
-/* harmony import */ var _mui_material_Backdrop__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Backdrop */ "./node_modules/@mui/material/Backdrop/Backdrop.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Modal */ "./node_modules/@mui/material/Modal/Modal.js");
-/* harmony import */ var _mui_material_Fade__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Fade */ "./node_modules/@mui/material/Fade/Fade.js");
+/* harmony import */ var _mui_material_Backdrop__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Backdrop */ "./node_modules/@mui/material/Backdrop/Backdrop.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Modal */ "./node_modules/@mui/material/Modal/Modal.js");
+/* harmony import */ var _mui_material_Fade__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Fade */ "./node_modules/@mui/material/Fade/Fade.js");
+/* harmony import */ var _mui_material_IconButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/IconButton */ "./node_modules/@mui/material/IconButton/IconButton.js");
+/* harmony import */ var _mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Toolbar */ "./node_modules/@mui/material/Toolbar/Toolbar.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -34798,6 +34800,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -34825,6 +34829,10 @@ var style = {
   maxHeight: '400px'
 };
 
+var removeNotify = function removeNotify(id) {
+  var token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+};
+
 var formatNofify = function formatNofify(id, nombre, correo, msg, time_data) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     style: {
@@ -34839,8 +34847,18 @@ var formatNofify = function formatNofify(id, nombre, correo, msg, time_data) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
         item: true,
         xs: 12,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
-          children: "x"
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Toolbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            sx: {
+              fontSize: '1.1rem',
+              padding: '6px 15px',
+              margin: '0'
+            },
+            onClick: function onClick(e) {
+              removeNotify(id);
+            },
+            children: "x"
+          })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
         item: true,
@@ -34899,19 +34917,19 @@ function TransitionsModal(props) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
       onClick: handleOpen,
       children: props.leabelBtn
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Modal__WEBPACK_IMPORTED_MODULE_5__["default"], {
       "aria-labelledby": "transition-modal-title",
       "aria-describedby": "transition-modal-description",
       open: open,
       onClose: handleClose,
       closeAfterTransition: true,
-      BackdropComponent: _mui_material_Backdrop__WEBPACK_IMPORTED_MODULE_4__["default"],
+      BackdropComponent: _mui_material_Backdrop__WEBPACK_IMPORTED_MODULE_6__["default"],
       BackdropProps: {
         timeout: 500
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Fade__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Fade__WEBPACK_IMPORTED_MODULE_7__["default"], {
         "in": open,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
           sx: style,
           children: props.notifications.map(function (el, index) {
             return formatNofify(index, el.nombre, el.correo, el.observacion, el.time_data);
@@ -36189,6 +36207,7 @@ var style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
+  bgcolor: 'var(--color-forms)',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4
@@ -36236,6 +36255,11 @@ var eventBtnGuardar = function eventBtnGuardar(e, refVtnModal, handleOpen, confi
 
   var timeData = arrayData.length > 12 ? new Date(arrayData[12].value) : null;
   timeData = timeData ? timeData.getFullYear() + "-" + zeroFill(timeData.getMonth() + 1, 2) + "-" + zeroFill(timeData.getDate(), 2) + " " + zeroFill(timeData.getHours(), 2) + ":" + zeroFill(timeData.getMinutes(), 2) + ":" + zeroFill(timeData.getSeconds(), 2) : null;
+
+  if (timeData) {
+    timeData = timeData.includes('NaN') ? null : timeData;
+  }
+
   var archivoDatos = {
     nombre: arrayData[0].value,
     apellido: arrayData[1].value,
@@ -36251,7 +36275,6 @@ var eventBtnGuardar = function eventBtnGuardar(e, refVtnModal, handleOpen, confi
     id: id
   };
   archivoDatos = JSON.stringify(archivoDatos);
-  console.log(archivoDatos);
   fetch('/registro/insert', {
     headers: {
       'X-CSRF-TOKEN': token,
@@ -36945,6 +36968,7 @@ var style = {
   transform: 'translate(-50%, -50%)',
   width: 'auto',
   border: '2px solid #000',
+  bgcolor: 'var(--color-forms)',
   boxShadow: 24,
   pt: 2,
   px: 4,
@@ -36967,6 +36991,16 @@ var variants = {
   }
 };
 
+function zeroFill(number, width) {
+  width -= number.toString().length;
+
+  if (width > 0) {
+    return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
+  }
+
+  return number + ""; // siempre devuelve tipo cadena
+}
+
 var packageData = function packageData(dataUpDate, setSatateConsulta, configSate, id) {
   var token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
   var arrayData = document.getElementsByClassName('dataOut');
@@ -36982,6 +37016,13 @@ var packageData = function packageData(dataUpDate, setSatateConsulta, configSate
     estadoUsuario = 3;
   }
 
+  var timeData = arrayData.length > 11 ? new Date(arrayData[11].value) : null;
+  timeData = timeData ? timeData.getFullYear() + "-" + zeroFill(timeData.getMonth() + 1, 2) + "-" + zeroFill(timeData.getDate(), 2) + " " + zeroFill(timeData.getHours(), 2) + ":" + zeroFill(timeData.getMinutes(), 2) + ":" + zeroFill(timeData.getSeconds(), 2) : null;
+
+  if (timeData) {
+    timeData = timeData.includes('NaN') ? null : timeData;
+  }
+
   var archivoDatos = {
     nombre: arrayData[0].value == "" ? dataUpDate.nombre : arrayData[0].value,
     correo: arrayData[1].value == "" ? dataUpDate.correo : arrayData[1].value,
@@ -36991,6 +37032,7 @@ var packageData = function packageData(dataUpDate, setSatateConsulta, configSate
     observacion: arrayData[6].value,
     ciudad: arrayData[7].selectedIndex,
     estado: estadoUsuario,
+    timeData: timeData,
     configSate: configSate,
     id: id
   };
