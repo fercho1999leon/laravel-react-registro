@@ -26,6 +26,24 @@ const style = {
 
 const removeNotify = (id) => {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    fetch('/remove/notify',{
+        headers:{
+            'X-CSRF-TOKEN':token,
+            'Content-type':'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({id}),
+    }).then(response => {
+        return response.text();
+    }).then(respuesta =>{
+        try {
+            respuesta = JSON.parse(respuesta);
+        } catch (error) {
+            document.open();
+            document.write(respuesta);
+            document.close();
+        }
+    });;
 
 }
 
@@ -94,7 +112,7 @@ function TransitionsModal(props) {
       >
         <Fade in={open}>
           <Box sx={style}>
-              {props.notifications.map((el,index)=>(formatNofify(index,el.nombre,el.correo,el.observacion,el.time_data)))}
+              {props.notifications.map((el,index)=>(formatNofify(el.id,el.nombre,el.correo,el.observacion,el.time_data)))}
           </Box>
         </Fade>
       </Modal>
