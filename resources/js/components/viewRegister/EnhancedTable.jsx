@@ -297,14 +297,12 @@ export default function EnhancedTable(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   React.useEffect(()=>{
-    if(props.bandera){
       rows.splice(0, rows.length);
       insertData(props.data);
       props.setBandera(false);
       setSelected([]);
       setPage(0);
-    }
-  });
+  },[props.bandera]);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -378,7 +376,6 @@ export default function EnhancedTable(props) {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.correo)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -387,6 +384,7 @@ export default function EnhancedTable(props) {
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
+                            onClick={(event) => handleClick(event, row.correo)}
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{
@@ -524,6 +522,7 @@ function AlertDialog(props) {
   const handleClose = (e,configSate,id) => {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     const parametro = props.selected;
+    let newArray = props.rows;
     let archivoDatos = {
       parametro,
       configSate,
@@ -552,12 +551,9 @@ function AlertDialog(props) {
             estadoBTN:2
           });
           props.selected.map((elS)=>{
-            props.rows.map((elR,index)=>{
-              if(elR['correo']==elS){
-                props.rows.splice(index,1);
-              }
-            });
+              newArray=newArray.filter( (el) => el.correo != elS );
           })
+          props.setData(newArray);
           props.setBandera(true);
           props.setSelected([]);
         }
