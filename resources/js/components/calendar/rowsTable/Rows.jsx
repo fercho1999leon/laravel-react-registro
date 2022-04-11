@@ -73,7 +73,7 @@ export default function Rows (props){
                         <h2>{props.id}</h2>
                         <h2>{props.day}</h2>
                     </Grid>
-                    <Notification notifications={showNotify(props.day, props.notify)}/>
+                    <Notification setNotify={props.setNotify} notify={props.notify} notifications={showNotify(props.day, props.notify)}/>
                 </Grid>
             </motion.div>
         </>

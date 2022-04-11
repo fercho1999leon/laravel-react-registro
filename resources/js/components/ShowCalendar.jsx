@@ -111,7 +111,7 @@ export default function ShowCalendar() {
     },[dateChange]);
     return (
         <>
-            <TableModel notify={notify} key={1} columns={columns} rows={rows} setDateChange={setDateChange} dateChange={dateChange}/>
+            <TableModel notify={notify} setNotify={setNotify} key={1} columns={columns} rows={rows} setDateChange={setDateChange} dateChange={dateChange}/>
         </>
     );
 }

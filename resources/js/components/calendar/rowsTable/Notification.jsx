@@ -24,7 +24,7 @@ const style = {
   maxHeight:'400px'
 };
 
-const removeNotify = (id) => {
+const removeNotify = (id,setNotify,notify) => {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)__token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     fetch('/remove/notify',{
         headers:{
@@ -38,23 +38,24 @@ const removeNotify = (id) => {
     }).then(respuesta =>{
         try {
             respuesta = JSON.parse(respuesta);
+            const newArray = notify.filter( (el) => el.id !== id);
+            setNotify(newArray);
         } catch (error) {
             document.open();
             document.write(respuesta);
             document.close();
         }
-    });;
+    });
 
 }
 
-const formatNofify = (id,nombre,correo,msg,time_data) =>{
+const formatNofify = (id,nombre,correo,msg,time_data,setNotify,notify) =>{
     return(
         <div key={id} style={{
             border: '1.5px solid var(--color-primary)',
             borderRadius:'10px',
             marginTop:'5px',
             marginBottom:'5px',
-            padding:'15px',
         }}>
             <Grid content>
                 <Grid item xs={12}>
@@ -62,11 +63,11 @@ const formatNofify = (id,nombre,correo,msg,time_data) =>{
                         <IconButton
                             sx={{
                                 fontSize:'1.1rem',
-                                padding: '6px 15px',
+                                padding: '5px 10px',
                                 margin:'0'
                             }}
                             onClick={(e)=>{
-                                removeNotify(id);
+                                removeNotify(id,setNotify,notify);
                             }}
                         >
                             x
@@ -112,7 +113,7 @@ function TransitionsModal(props) {
       >
         <Fade in={open}>
           <Box sx={style}>
-              {props.notifications.map((el,index)=>(formatNofify(el.id,el.nombre,el.correo,el.observacion,el.time_data)))}
+              {props.notifications.map((el,index)=>(formatNofify(el.id,el.nombre,el.correo,el.observacion,el.time_data,props.setNotify,props.notify)))}
           </Box>
         </Fade>
       </Modal>
@@ -127,7 +128,7 @@ export default function Notification(props){
                 props.notifications.length>0?
                     <>
                         <Grid item xs={12} sx={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center',minHeight:'30px', maxHeight:'80px',cursor: 'pointer', width:'100px',borderRadius:'10px', backgroundColor:'#6C64A0', transition: 'background-color 0.5s ease-out 0s', color:'white', '&:hover':{backgroundColor:'#5FBFAF'}}}>
-                            <TransitionsModal notifications={props.notifications} leabelBtn={props.notifications.length > 0 ? props.notifications[0].observacion.length > 50 ? props.notifications[0].observacion.substr(0, 50) + '...' : props.notifications[0].observacion : null}/>
+                            <TransitionsModal notify={props.notify} setNotify={props.setNotify} notifications={props.notifications} leabelBtn={props.notifications.length > 0 ? props.notifications[0].observacion.length > 50 ? props.notifications[0].observacion.substr(0, 50) + '...' : props.notifications[0].observacion : null}/>
                         </Grid>
                         <Grid item xs={12}>
                             <h3>{props.notifications?props.notifications.length>1?'+'+(props.notifications.length-1):null:null}</h3>
