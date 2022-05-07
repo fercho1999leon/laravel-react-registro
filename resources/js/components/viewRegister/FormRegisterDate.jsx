@@ -4,7 +4,8 @@ import ShearchComponent from '../shearch/ShearchComponent'
 const style = {
     margin: 'auto',
     width:'98%',
-    minWidth: '200px'
+    minWidth: '200px',
+    maxWidth: '1080px',
 }
 export default function FormRegisterDate(props){
     const [dataTable,setDataTable] = useState("");

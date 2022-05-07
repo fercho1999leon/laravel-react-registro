@@ -97,7 +97,7 @@ export default function BodyRegistro(){
                             }}
                         >
                             <ProviderLogin value = {{dateJson,setDateJson,configSate}}>
-                                <section className="contentMainBody">
+                                <section id={"contentMainBodyId"} className="contentMainBody">
                                     <div className="BodyContainer">
                                         {
                                             formSelection(parseInt(stateForm))

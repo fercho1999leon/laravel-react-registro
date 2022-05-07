@@ -34332,7 +34332,7 @@ function TableModel(props) {
   /**
    * Props columns: [{ id: '*****', label: '*****', minWidth: ***** },{ id: 'name', label: 'Name', minWidth: 170 }]
    * Props rows: [{ column1, column2, column3 },{ column1, column2, column3 }]
-   * 
+   *
    */
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(0),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -34360,7 +34360,7 @@ function TableModel(props) {
     },
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_TableContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
       sx: {
-        maxHeight: 440,
+        maxHeight: 300,
         minHeight: 250
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_Table__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -36716,7 +36716,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var style = {
   margin: 'auto',
   width: '98%',
-  minWidth: '200px'
+  minWidth: '200px',
+  maxWidth: '1080px'
 };
 function FormRegisterDate(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
@@ -37688,6 +37689,7 @@ function BodyRegistro() {
                 configSate: configSate
               },
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("section", {
+                id: "contentMainBodyId",
                 className: "contentMainBody",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                   className: "BodyContainer",

@@ -11,23 +11,23 @@ export default function TableModel(props) {
     /**
      * Props columns: [{ id: '*****', label: '*****', minWidth: ***** },{ id: 'name', label: 'Name', minWidth: 170 }]
      * Props rows: [{ column1, column2, column3 },{ column1, column2, column3 }]
-     * 
+     *
      */
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  
+
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
-  
+
     const handleChangeRowsPerPage = (event) => {
       setRowsPerPage(+event.target.value);
       setPage(0);
     };
-  
+
     return (
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 440,minHeight:250 }}>
+        <TableContainer sx={{ maxHeight: 300,minHeight:250 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
